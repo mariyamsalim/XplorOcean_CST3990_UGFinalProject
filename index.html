@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XplorOcean - Marine Exploration</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <a-scene fog="type: exponential; color: #002b36; density: 0.1" cursor="rayOrigin: mouse">
+      
+      <a-assets>
+        <a-asset-item id="hammerhead-shark-model" src="assets/hammerhead_shark.glb"></a-asset-item>
+      </a-assets>
+
+     <a-sky color="#4db8ff"></a-sky> <a-entity environment="preset: goldmine; 
+        ground: hills; 
+        groundColor: #e6c35c; 
+        dressing: stones; 
+        dressingAmount: 50; 
+        dressingColor: #7d6e4a; 
+        grid: none; 
+        lighting: sunlight;
+        horizonColor: #4db8ff;
+        fog: 0.6">
+      </a-entity>
+
+      <a-cylinder position="0 10 -10" radius="20" height="20" side="double"
+          material="shader: standard; color: #ffffff; transparent: true; opacity: 0.1; fog: false"
+          animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true">
+      </a-cylinder>
+
+      <a-light type="ambient" color="#111"></a-light>
+      <a-light type="directional" position="1 10 1" intensity="0.4" color="#4db8ff"></a-light>
+
+      <a-entity position="0 5 -5" scanner data-info="Sunlight Zone: Home to 90% of marine life.">
+        <a-text value="Sunlight Zone" position="-1 2 0" align="center"></a-text>
+      </a-entity>
+
+      <a-entity position="0 2 -6" 
+        gltf-model="#hammerhead-shark-model" 
+        scale="1.5 1.5 1.5"
+        sinking-fish 
+        scanner 
+        data-info="CRITICAL: Shark finning causes sharks to sink and drown. Stop the practice.">
+      </a-entity>
+
+      <a-entity id="rig" position="0 1.6 0" 
+        animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; loop: true; to: 0 1.8 0">
+        <a-entity camera look-controls wasd-controls="acceleration: 20">
+         <a-cursor color="cyan" fuse="true" fuse-timeout="1500"></a-cursor>
+        </a-entity>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>

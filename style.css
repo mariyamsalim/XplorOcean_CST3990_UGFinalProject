@@ -1,21 +1,23 @@
 #scanner-modal {
     display: none; 
     position: fixed;
-    z-index: 1000;
+    z-index: 9999;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
+    width: 500px;
     background-color: rgba(0, 43, 54, 0.9); 
     color: white;
-    padding: 20px;
-    border: 2px solid #4db8ff;
-    border-radius: 10px;
+    padding: 25px;
+    border: 4px solid #4db8ff;
+    border-radius: 15px;
     font-family: sans-serif;
-    text-align: center;
+    pointer-events: auto;
 }
 #modal-close {
-    margin-top: 15px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
     background: #4db8ff;
     border: none;
     padding: 8px 15px;
@@ -23,4 +25,46 @@
     color: #002b36;
     font-weight: bold;
     border-radius: 5px;
+}
+/* #modal-close:hover {
+  color: #4db8ff;
+} */
+.modal-content {
+  display: flex;
+  gap: 20px; /* Space between the two columns */
+  margin-top: 10px;
+}
+
+/* Left Column (Image & Names) */
+.modal-left {
+  flex: 1; /* Takes up 1 part of the space */
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-left img {
+  width:125%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.modal-left p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Right Column (Facts & Impact) */
+.modal-right {
+  flex: 1.5; /* Takes up slightly more space than the left */
+  text-align: left;
+}
+
+.modal-right p {
+  margin: 5px 0 15px 0;
+  font-size: 14px;
+}
+
+.modal-right h4 {
+  margin: 0 0 5px 0;
+  color: #4db8ff;
 }

@@ -11,9 +11,23 @@
   </head>
   <body>
     <div id="scanner-modal">
-      <h3 id="modal-name" style="color: #4db8ff; margin-top: 0;">NAME</h3> 
-      <p id="modal-text">INFO</p>
       <button id="modal-close" onclick="closeModal()">X</button>
+      <div class="modal-content">
+        <div class="modal-left">
+          <img id="modal-img" src="" alt="image">
+          <p>Name: <span id="modal-name"></span></p>
+          <p>Scientific name: <span id="modal-sci"></span></p>
+          <p>Family: <span id="modal-fam"></span></p>
+        </div>
+        <div class="modal-right">
+          <div id="facts-container">
+            <h4>Fun facts:</h4>
+            <p id="modal-facts"></p>
+          </div>
+          <h4>Pollution impact:</h4>
+          <p id="modal-impact"></p>
+        </div>
+      </div>
     </div>
     <a-scene fog="type: exponential; color: #005f73; density: 0.05" cursor="rayOrigin: mouse">
       
@@ -22,6 +36,17 @@
       </a-assets>
 
      <a-sky color="#005f73"></a-sky> 
+     <a-entity environment="preset: goldmine; 
+        ground: hills; 
+        groundColor: #e6c35c; 
+        dressing: stones; 
+        dressingAmount: 50; 
+        dressingColor: #7d6e4a; 
+        grid: none; 
+        lighting: sunlight;
+        horizonColor: #4db8ff;
+        fog: 0.6">
+      </a-entity>
 
       <a-cylinder position="0 10 -10" radius="20" height="20" side="double"
           material="shader: standard; color: #ffffff; transparent: true; opacity: 0.; fog: false"
@@ -41,7 +66,11 @@
         sinking-fish 
         scanner 
         data-name="Hammerhead Shark"
-        data-info="CRITICAL: Shark finning causes sharks to sink and drown. Stop the practice.">
+        data-sci="Sphyrna mokarran"
+        data-fam="Sphyrnidae"
+        data-facts=""
+        data-impact="Millions are killed yearly due to shark finning. Without their fins, they sink to the bottom of the ocean and drown."
+        data-img="images/hammerhead.png">
       </a-entity>
 
       <a-entity id="moving-shark"
@@ -52,7 +81,13 @@
         animation-mixer
         scanner 
         data-name="Hammerhead Shark"
-        data-info="A healthy predator in its natural habitat."
+        data-sci="Sphyrna mokarran"
+        data-fam="Sphyrnidae"
+        data-facts="- Hammerheads have 360-degree vision, allowing them to see above and below them at all times.
+        - They use their wide heads to pin down prey like stingrays and small fish.
+        - Despite their fearsome appearance, hammerhead sharks are generally not aggressive towards humans."
+        data-impact="Millions are killed yearly due to shark finning. Without their fins, they sink to the bottom of the ocean and drown."
+        data-img="images/hammerhead.png"
         animation="property: position; from: -15 2 -12; to: 25 2 -12; dur: 25000; loop: true; easing: linear">
       </a-entity>
 

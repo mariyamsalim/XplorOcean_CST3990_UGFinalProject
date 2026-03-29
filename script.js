@@ -15,9 +15,24 @@ AFRAME.registerComponent('sinking-fish', {
 //testing scanner property
 AFRAME.registerComponent('scanner', {
   init: function () {
-    this.el.addEventListener('click', function () {
-      const info = this.getAttribute('data-info');
-      alert("SCANNER DATA: " + info); 
+    this.el.addEventListener('click', () => {
+      const fishName = this.el.getAttribute('data-name');
+      const fishInfo = this.el.getAttribute('data-info');
+
+      const modal = document.querySelector('#scanner-modal');
+      const nameHeading = document.querySelector('#modal-name');
+      const infoText = document.querySelector('#modal-text');
+
+      if (modal && nameHeading && infoText) {
+        nameHeading.innerText = fishName;
+        infoText.innerText = fishInfo;
+        
+        modal.style.display = 'block';
+      }
     });
   }
 });
+
+function closeModal() {
+  document.getElementById('scanner-modal').style.display = 'none';
+}

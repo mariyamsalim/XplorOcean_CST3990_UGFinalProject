@@ -45,6 +45,16 @@
         data-info="CRITICAL: Shark finning causes sharks to sink and drown. Stop the practice.">
       </a-entity>
 
+      <a-entity id="moving-shark"
+        position="-15 2 -12" 
+        gltf-model="#hammerhead-shark-model" 
+        scale="1.5 1.5 1.5"
+        rotation="0 90 0"
+        scanner 
+        data-info="Hammerhead Shark: A healthy predator in its natural habitat."
+          animation="property: position; from: -15 2 -12; to: 25 2 -12; dur: 25000; loop: true; easing: linear">
+      </a-entity>
+
       <a-entity id="rig" position="0 1.6 0" 
         animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; loop: true; to: 0 1.8 0">
         <a-entity camera look-controls wasd-controls="acceleration: 20">

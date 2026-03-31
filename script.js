@@ -22,7 +22,6 @@ AFRAME.registerComponent('scanner', {
       const facts = this.el.getAttribute('data-facts');
       const impact = this.el.getAttribute('data-impact');
       const imgSrc = this.el.getAttribute('data-img');
-
       const modal = document.getElementById('scanner-modal');
       const factsContainer = document.getElementById('facts-container');
 
@@ -38,7 +37,6 @@ AFRAME.registerComponent('scanner', {
         factsContainer.style.display = 'block';
         document.getElementById('modal-facts').innerText = facts;
       }
-
       modal.style.display = 'block';
     });
   }
@@ -50,4 +48,24 @@ window.closeModal = function() {
 
 function closeModal() {
   document.getElementById('scanner-modal').style.display = 'none';
+}
+
+function transport(zone) {
+  const scene = document.querySelector('a-scene');
+  const sky = document.querySelector('a-sky');
+  const menu = document.getElementById('main-menu');
+  menu.style.display = 'none'; 
+
+  if (zone === 'sunlight') {
+    sky.setAttribute('color', '#4db8ff');
+    scene.setAttribute('fog', 'type: exponential; color: #005f73; density: 0.05');
+  } 
+  else if (zone === 'twilight') {
+    sky.setAttribute('color', '#002b36');
+    scene.setAttribute('fog', 'type: exponential; color: #001a33; density: 0.12');
+  } 
+  else if (zone === 'midnight') {
+    sky.setAttribute('color', '#00050a');
+    scene.setAttribute('fog', 'type: exponential; color: #000000; density: 0.25');
+  }
 }

@@ -5,19 +5,28 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/c_frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
+    <div id="main-menu">
+      <h1>XPLOROCEAN</h1>
+      <p>Select a Zone to Explore</p>
+      <div class="menu-options">
+        <button onclick="transport('sunlight')">SUNLIGHT ZONE</button>
+        <button onclick="transport('twilight')">TWILIGHT ZONE</button>
+        <button onclick="transport('midnight')">MIDNIGHT ZONE</button>
+      </div>
+    </div>
+
     <div id="scanner-modal">
       <button id="modal-close" onclick="closeModal()">X</button>
       <div class="modal-content">
         <div class="modal-left">
-          <img id="modal-img" src="" alt="image">
-          <p>Name: <span id="modal-name"></span></p>
-          <p>Scientific name: <span id="modal-sci"></span></p>
-          <p>Family: <span id="modal-fam"></span></p>
+          <img id="modal-img" src="" alt="Marine Life">
+          <p><strong>Name:</strong> <span id="modal-name"></span></p>
+          <p><strong>Scientific name:</strong> <span id="modal-sci"></span></p>
+          <p><strong>Family:</strong> <span id="modal-fam"></span></p>
         </div>
         <div class="modal-right">
           <div id="facts-container">
@@ -29,72 +38,104 @@
         </div>
       </div>
     </div>
-    <a-scene fog="type: exponential; color: #005f73; density: 0.05" cursor="rayOrigin: mouse">
-      
+
+    <a-scene cursor="rayOrigin: mouse">
       <a-assets>
-        <a-asset-item id="hammerhead-shark-model" src="assets/hammerhead_shark.glb"></a-asset-item>
+        <a-asset-item id="blue-whale" src="assets/blue_whale.glb"></a-asset-item>
+        <a-asset-item id="bobtail-squid" src="assets/bobtail_squid.glb"></a-asset-item>
+        <a-asset-item id="brain-coral" src="assets/brain_coral.glb"></a-asset-item>
+        <a-asset-item id="clownfish" src="assets/clownfish.glb"></a-asset-item>
+        <a-asset-item id="firefly-squid" src="assets/firefly_squid.glb"></a-asset-item>
+        <a-asset-item id="octopus" src="assets/giant_pacific_octopus.glb"></a-asset-item>
+        <a-asset-item id="hammerhead-shark" src="assets/hammerhead_shark.glb"></a-asset-item>
+        <a-asset-item id="harbor-seal" src="assets/harbor_seal.glb"></a-asset-item>
+        <a-asset-item id="hawksbill-sea-turtle" src="assets/hawksbill_sea_turtle.glb"></a-asset-item>
+        <a-asset-item id="jelly-blubber" src="assets/jelly_blubber.glb"></a-asset-item>
+        <a-asset-item id="killer-whale" src="assets/killer_whale.glb"></a-asset-item>
+        <a-asset-item id="lanternfish" src="assets/lanternfish.glb"></a-asset-item>
+        <a-asset-item id="loggerhead-sea-turtle" src="assets/loggerhead_sea_turtle.glb"></a-asset-item>
+        <a-asset-item id="magnapinna-squid" src="assets/magnapinna_squid.glb"></a-asset-item>
+        <a-asset-item id="moorish-idol" src="assets/moorish_idol.glb"></a-asset-item>
+        <a-asset-item id="powder-blue-tang" src="assets/powder_blue_tang.glb"></a-asset-item>
+        <a-asset-item id="salp" src="assets/salp.glb"></a-asset-item>
+        <a-asset-item id="sperm-whale" src="assets/sperm_whale.glb"></a-asset-item>
+        <a-asset-item id="yellow-tang" src="assets/yellow_tang.glb"></a-asset-item>
+        <a-asset-item id="yellowfin-tuna" src="assets/yellowfin_tuna.glb"></a-asset-item>
       </a-assets>
 
-     <a-sky color="#005f73"></a-sky> 
-     <a-entity environment="preset: goldmine; 
-        ground: hills; 
-        groundColor: #e6c35c; 
-        dressing: stones; 
-        dressingAmount: 50; 
-        dressingColor: #7d6e4a; 
-        grid: none; 
-        lighting: sunlight;
-        horizonColor: #4db8ff;
-        fog: 0.6">
-      </a-entity>
-
-      <a-cylinder position="0 10 -10" radius="20" height="20" side="double"
-          material="shader: standard; color: #ffffff; transparent: true; opacity: 0.; fog: false"
-          animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true">
-      </a-cylinder>
-
+      <a-sky id="main-sky" color="#005f73"></a-sky> 
+      
       <a-light type="ambient" color="#111"></a-light>
       <a-light type="directional" position="1 10 1" intensity="0.4" color="#4db8ff"></a-light>
 
-      <a-entity position="0 5 -5" scanner data-info="Sunlight Zone: Home to 90% of marine life.">
-        <a-text value="Sunlight Zone" position="-1 2 0" align="center"></a-text>
+      <a-entity id="sunlight-zone">
+         <a-entity environment="preset: goldmine; dressing: stones; dressingAmount: 50; grid: none; lighting: sunlight; shadow: true; fog: 0.2"></a-entity>
+         
+         <a-entity 
+            position="-15 2 -12" 
+            gltf-model="#hammerhead-shark" 
+            scale="1.5 1.5 1.5"
+            rotation="0 90 0"
+            animation-mixer
+            scanner 
+            data-name="Hammerhead Shark"
+            data-sci="Sphyrna mokarran"
+            data-fam="Sphyrnidae"
+            data-facts="Hammerheads have 360-degree vision, allowing them to see above and below them at all times."
+            data-impact="Millions are killed yearly due to shark finning."
+            data-img="images/hammerhead.png"
+            animation="property: position; from: -15 2 -12; to: 25 2 -12; dur: 25000; loop: true; easing: linear">
+          </a-entity>
+          <a-entity 
+            position="-15 2 -12" 
+            gltf-model="#bobtail-squid" 
+            scale="1.5 1.5 1.5"
+            rotation="0 90 0"
+            animation-mixer
+            scanner 
+            data-name="Bobtail Squid"
+            data-sci="Sthenoteuthis oualaniensis"
+            data-fam="Sthenoteuthidae"
+            data-facts="Bobtail squids can produce light through a symbiotic relationship with bioluminescent bacteria."
+            data-impact="Pollution and climate change affect their habitat and food sources."
+            data-img="images/bobtail_squid.png"
+            animation="property: position; from: -15 12 -12; to: 25 12 -12; dur: 25000; loop: true; easing: linear">
+          </a-entity>
+          <a-entity 
+            gltf-model="#blue-whale" 
+            scale="25 25 25" 
+            position="0 15 -45" 
+            scanner 
+            data-name="Blue Whale" 
+            data-sci="Balaenoptera musculus" 
+            data-fam="Balaenopteridae"
+            data-facts="The largest animal known to have ever existed."
+            data-impact="Threatened by ship strikes and ocean noise pollution."
+            data-img="images/blue_whale.png" 
+            animation-mixer>
+          </a-entity>
       </a-entity>
 
-      <a-entity position="0 2 -6" 
-        gltf-model="#hammerhead-shark-model" 
-        scale="1.5 1.5 1.5"
-        sinking-fish 
-        scanner 
-        data-name="Hammerhead Shark"
-        data-sci="Sphyrna mokarran"
-        data-fam="Sphyrnidae"
-        data-facts=""
-        data-impact="Millions are killed yearly due to shark finning. Without their fins, they sink to the bottom of the ocean and drown."
-        data-img="images/hammerhead.png">
+      <a-entity id="deep-zones">
+          <a-entity position="0 -500 -8" 
+            gltf-model="#hammerhead-shark-model" 
+            scale="1.5 1.5 1.5"
+            sinking-fish 
+            scanner 
+            data-name="Finned Shark"
+            data-sci="Sphyrna mokarran"
+            data-fam="Sphyrnidae"
+            data-facts=""
+            data-impact="Without their fins, sharks sink to the Midnight Zone and drown."
+            data-img="images/hammerhead.png">
+            <a-light type="point" color="red" intensity="0.5" distance="5" animation="property: light.intensity; from: 0.2; to: 0.8; dir: alternate; dur: 1000; loop: true"></a-light>
+          </a-entity>
       </a-entity>
 
-      <a-entity id="moving-shark"
-        position="-15 2 -12" 
-        gltf-model="#hammerhead-shark-model" 
-        scale="1.5 1.5 1.5"
-        rotation="0 90 0"
-        animation-mixer
-        scanner 
-        data-name="Hammerhead Shark"
-        data-sci="Sphyrna mokarran"
-        data-fam="Sphyrnidae"
-        data-facts="- Hammerheads have 360-degree vision, allowing them to see above and below them at all times.
-        - They use their wide heads to pin down prey like stingrays and small fish.
-        - Despite their fearsome appearance, hammerhead sharks are generally not aggressive towards humans."
-        data-impact="Millions are killed yearly due to shark finning. Without their fins, they sink to the bottom of the ocean and drown."
-        data-img="images/hammerhead.png"
-        animation="property: position; from: -15 2 -12; to: 25 2 -12; dur: 25000; loop: true; easing: linear">
-      </a-entity>
-
-      <a-entity id="rig" position="0 1.6 0" 
-        animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; loop: true; to: 0 1.8 0">
+      <a-entity id="rig" position="0 1.6 0" animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; loop: true; to: 0 1.8 0">
         <a-entity camera look-controls wasd-controls="acceleration: 20">
-         <a-cursor color="cyan" fuse="false" fuse-timeout="1500"></a-cursor>
+          <a-cursor color="cyan" fuse="false"></a-cursor>
+          <a-entity id="flashlight" light="type: spot; intensity: 0; distance: 10; decay: 2" position="0 0 0"></a-entity>
         </a-entity>
       </a-entity>
 

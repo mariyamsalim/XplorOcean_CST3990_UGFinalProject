@@ -26,18 +26,15 @@
     font-weight: bold;
     border-radius: 5px;
 }
-/* #modal-close:hover {
-  color: #4db8ff;
-} */
+
 .modal-content {
   display: flex;
-  gap: 20px; /* Space between the two columns */
+  gap: 20px; 
   margin-top: 10px;
 }
 
-/* Left Column (Image & Names) */
 .modal-left {
-  flex: 1; /* Takes up 1 part of the space */
+  flex: 1; 
   display: flex;
   flex-direction: column;
 }
@@ -53,9 +50,8 @@
   font-size: 14px;
 }
 
-/* Right Column (Facts & Impact) */
 .modal-right {
-  flex: 1.5; /* Takes up slightly more space than the left */
+  flex: 1.5;
   text-align: left;
 }
 
@@ -67,4 +63,36 @@
 .modal-right h4 {
   margin: 0 0 5px 0;
   color: #4db8ff;
+}
+
+#main-menu {
+  position: fixed;
+  z-index: 10000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 10, 20, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #4db8ff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.menu-options button {
+  display: block;
+  width: 250px;
+  margin: 15px;
+  padding: 15px;
+  background: transparent;
+  border: 2px solid #4db8ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu-options button:hover {
+  background: #4db8ff;
+  color: #001a33;
 }

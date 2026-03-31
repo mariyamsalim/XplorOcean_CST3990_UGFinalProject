@@ -9,6 +9,8 @@
     <script src="script.js"></script>
   </head>
   <body>
+
+    <!-- main menu -->
     <div id="main-menu">
       <h1>XPLOROCEAN</h1>
       <p>Select a Zone to Explore</p>
@@ -19,6 +21,10 @@
       </div>
     </div>
 
+    <!-- back to menu button -->
+    <button id="back-btn" onclick="backToMenu()" style="display:none">&#8592; MAIN MENU</button>
+
+    <!-- scanner modal -->
     <div id="scanner-modal">
       <button id="modal-close" onclick="closeModal()">X</button>
       <div class="modal-content">
@@ -39,93 +45,423 @@
       </div>
     </div>
 
-    <a-scene cursor="rayOrigin: mouse">
+    <!-- a-frame scene -->
+    <a-scene fog="type: exponential; color: #0077B6; density: 0.04" cursor="rayOrigin: mouse">
+
+      <!-- assets -->
       <a-assets>
-        <a-asset-item id="blue-whale" src="assets/blue_whale.glb"></a-asset-item>
-        <a-asset-item id="bobtail-squid" src="assets/bobtail_squid.glb"></a-asset-item>
-        <a-asset-item id="brain-coral" src="assets/brain_coral.glb"></a-asset-item>
-        <a-asset-item id="clownfish" src="assets/clownfish.glb"></a-asset-item>
-        <a-asset-item id="firefly-squid" src="assets/firefly_squid.glb"></a-asset-item>
-        <a-asset-item id="octopus" src="assets/giant_pacific_octopus.glb"></a-asset-item>
-        <a-asset-item id="hammerhead-shark" src="assets/hammerhead_shark.glb"></a-asset-item>
-        <a-asset-item id="harbor-seal" src="assets/harbor_seal.glb"></a-asset-item>
-        <a-asset-item id="hawksbill-sea-turtle" src="assets/hawksbill_sea_turtle.glb"></a-asset-item>
-        <a-asset-item id="jelly-blubber" src="assets/jelly_blubber.glb"></a-asset-item>
-        <a-asset-item id="killer-whale" src="assets/killer_whale.glb"></a-asset-item>
-        <a-asset-item id="lanternfish" src="assets/lanternfish.glb"></a-asset-item>
+        <a-asset-item id="blue-whale"            src="assets/blue_whale.glb"></a-asset-item>
+        <a-asset-item id="bobtail-squid"         src="assets/bobtail_squid.glb"></a-asset-item>
+        <a-asset-item id="brain-coral"           src="assets/brain_coral.glb"></a-asset-item>
+        <a-asset-item id="clownfish"             src="assets/clownfish.glb"></a-asset-item>
+        <a-asset-item id="firefly-squid"         src="assets/firefly_squid.glb"></a-asset-item>
+        <a-asset-item id="octopus"               src="assets/giant_pacific_octopus.glb"></a-asset-item>
+        <a-asset-item id="hammerhead-shark"      src="assets/hammerhead_shark.glb"></a-asset-item>
+        <a-asset-item id="harbor-seal"           src="assets/harbor_seal.glb"></a-asset-item>
+        <a-asset-item id="hawksbill-sea-turtle"  src="assets/hawksbill_sea_turtle.glb"></a-asset-item>
+        <a-asset-item id="jelly-blubber"         src="assets/jelly_blubber.glb"></a-asset-item>
+        <a-asset-item id="killer-whale"          src="assets/killer_whale.glb"></a-asset-item>
+        <a-asset-item id="lanternfish"           src="assets/lanternfish.glb"></a-asset-item>
         <a-asset-item id="loggerhead-sea-turtle" src="assets/loggerhead_sea_turtle.glb"></a-asset-item>
-        <a-asset-item id="magnapinna-squid" src="assets/magnapinna_squid.glb"></a-asset-item>
-        <a-asset-item id="moorish-idol" src="assets/moorish_idol.glb"></a-asset-item>
-        <a-asset-item id="powder-blue-tang" src="assets/powder_blue_tang.glb"></a-asset-item>
-        <a-asset-item id="salp" src="assets/salp.glb"></a-asset-item>
-        <a-asset-item id="sperm-whale" src="assets/sperm_whale.glb"></a-asset-item>
-        <a-asset-item id="yellow-tang" src="assets/yellow_tang.glb"></a-asset-item>
-        <a-asset-item id="yellowfin-tuna" src="assets/yellowfin_tuna.glb"></a-asset-item>
+        <a-asset-item id="magnapinna-squid"      src="assets/magnapinna_squid.glb"></a-asset-item>
+        <a-asset-item id="moorish-idol"          src="assets/moorish_idol.glb"></a-asset-item>
+        <a-asset-item id="powder-blue-tang"      src="assets/powder_blue_tang.glb"></a-asset-item>
+        <a-asset-item id="salp"                  src="assets/salp.glb"></a-asset-item>
+        <a-asset-item id="sperm-whale"           src="assets/sperm_whale.glb"></a-asset-item>
+        <a-asset-item id="yellow-tang"           src="assets/yellow_tang.glb"></a-asset-item>
+        <a-asset-item id="yellowfin-tuna"        src="assets/yellowfin_tuna.glb"></a-asset-item>
       </a-assets>
 
-      <a-sky id="main-sky" color="#005f73"></a-sky> 
-      
-      <a-light type="ambient" color="#111"></a-light>
-      <a-light type="directional" position="1 10 1" intensity="0.4" color="#4db8ff"></a-light>
+      <!-- sky -->
+      <a-sky id="main-sky" color="#004C6D"></a-sky>
 
-      <a-entity id="sunlight-zone">
-         <a-entity environment="preset: goldmine; dressing: stones; dressingAmount: 50; grid: none; lighting: sunlight; shadow: true; fog: 0.2"></a-entity>
-         
-         <a-entity 
-            position="-15 2 -12" 
-            gltf-model="#hammerhead-shark" 
-            scale="1.5 1.5 1.5"
-            rotation="0 90 0"
-            animation-mixer
-            scanner 
-            data-name="Hammerhead Shark"
-            data-sci="Sphyrna mokarran"
-            data-fam="Sphyrnidae"
-            data-facts="Hammerheads have 360-degree vision, allowing them to see above and below them at all times."
-            data-impact="Millions are killed yearly due to shark finning."
-            data-img="images/hammerhead.png"
-            animation="property: position; from: -15 2 -12; to: 25 2 -12; dur: 25000; loop: true; easing: linear">
-          </a-entity>
-          <a-entity 
-            position="-15 2 -12" 
-            gltf-model="#bobtail-squid" 
-            scale="1.5 1.5 1.5"
-            rotation="0 90 0"
-            animation-mixer
-            scanner 
-            data-name="Bobtail Squid"
-            data-sci="Sthenoteuthis oualaniensis"
-            data-fam="Sthenoteuthidae"
-            data-facts="Bobtail squids can produce light through a symbiotic relationship with bioluminescent bacteria."
-            data-impact="Pollution and climate change affect their habitat and food sources."
-            data-img="images/bobtail_squid.png"
-            animation="property: position; from: -15 12 -12; to: 25 12 -12; dur: 25000; loop: true; easing: linear">
-          </a-entity>
+      <!-- sunlight zone -->
+      <a-entity id="sunlight-zone" visible="false">
+
+        <!-- light -->
+        <a-light type="ambient"     color="#0096C7" intensity="0.6"></a-light>
+        <a-light type="directional" color="#CAF0F8" intensity="1.5" position="1 10 -2"></a-light>
+        <a-light type="point"       color="#6B9E8C" intensity="0.8" position="0 5 0"></a-light>
+
+        <!-- ray cones -->
+        <a-entity
+          geometry="primitive: cone; height: 25; radiusBottom: 5; radiusTop: 0.2"
+          material="color: #ADE8F4; opacity: 0.07; transparent: true"
+          position="-2 12 -8" rotation="15 0 -10">
+        </a-entity>
+        <a-entity
+          geometry="primitive: cone; height: 20; radiusBottom: 3; radiusTop: 0.1"
+          material="color: #CAF0F8; opacity: 0.05; transparent: true"
+          position="3 10 -6" rotation="5 0 8">
+        </a-entity>
+
+        <!-- seafloor -->
+        <a-plane width="200" height="200" rotation="-90 0 0" position="0 -8 0" color="#1A6B8A"></a-plane>
+
+        <!-- coral -->
+        <a-entity position="4 -7.5 -8"   gltf-model="#brain-coral" scale="2 2 2"     rotation="0 30 0"></a-entity>
+        <a-entity position="-6 -7.5 -10" gltf-model="#brain-coral" scale="1.5 1.5 1.5" rotation="0 120 0"></a-entity>
+
+        <!-- particles -->
+        <a-entity particle-system="preset: dust; particleCount: 300;
+          color: #90E0EF; size: 0.04; opacity: 0.3; velocityValue: 0 0.05 0">
+        </a-entity>
+
+        <a-entity
+          position="-15 2 -12"
+          gltf-model="#hammerhead-shark"
+          scale="1.5 1.5 1.5" rotation="0 90 0"
+          animation-mixer scanner
+          data-name="Hammerhead Shark" data-sci="Sphyrna mokarran" data-fam="Sphyrnidae"
+          data-facts="Hammerheads have 360-degree vision, letting them see above and below simultaneously."
+          data-impact="Millions are killed yearly due to shark finning for shark fin soup."
+          data-img="images/hammerhead.png"
+          animation="property: position; from: -15 2 -12; to: 25 2 -12; dur: 25000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="30 5 -20"
+          gltf-model="#blue-whale"
+          scale="2 2 2" rotation="0 -90 0"
+          animation-mixer scanner
+          data-name="Blue Whale" data-sci="Balaenoptera musculus" data-fam="Balaenopteridae"
+          data-facts="Blue whales are the largest animals ever known to have lived on Earth, reaching up to 30 m long."
+          data-impact="Ship strikes and entanglement in fishing gear are leading causes of death."
+          data-img="images/blue_whale.png"
+          animation="property: position; from: 30 5 -20; to: -30 5 -20; dur: 40000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="-20 4 -15"
+          gltf-model="#killer-whale"
+          scale="1.5 1.5 1.5" rotation="0 90 0"
+          animation-mixer scanner
+          data-name="Killer Whale (Orca)" data-sci="Orcinus orca" data-fam="Delphinidae"
+          data-facts="Orcas are highly social and each pod has its own unique dialect of calls."
+          data-impact="Noise pollution and prey depletion from overfishing disrupt orca hunting and communication."
+          data-img="images/killer_whale.png"
+          animation="property: position; from: -20 4 -15; to: 20 4 -15; dur: 20000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="10 0 -8"
+          gltf-model="#hawksbill-sea-turtle"
+          scale="1.2 1.2 1.2" rotation="0 180 0"
+          animation-mixer scanner
+          data-name="Hawksbill Sea Turtle" data-sci="Eretmochelys imbricata" data-fam="Cheloniidae"
+          data-facts="Hawksbill turtles are critically endangered and play a key role in maintaining coral reef health."
+          data-impact="Plastic pollution causes starvation when turtles mistake bags for jellyfish."
+          data-img="images/hawksbill_sea_turtle.png"
+          animation="property: position; from: 10 0 -8; to: -10 1 -8; dur: 18000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="3 -5 -7"
+          gltf-model="#clownfish"
+          scale="0.5 0.5 0.5" rotation="0 45 0"
+          animation-mixer scanner
+          data-name="Clownfish" data-sci="Amphiprioninae" data-fam="Pomacentridae"
+          data-facts="All clownfish are born male. The dominant fish in a group will change sex to become female."
+          data-impact="Ocean acidification bleaches the coral reefs they depend on."
+          data-img="images/clownfish.png"
+          animation="property: position; from: 3 -5 -7; to: 5 -4 -7; dur: 4000; loop: true; dir: alternate; easing: easeInOutSine">
+        </a-entity>
+
+        <a-entity
+          position="-3 -4 -6"
+          gltf-model="#moorish-idol"
+          scale="0.6 0.6 0.6" rotation="0 -30 0"
+          animation-mixer scanner
+          data-name="Moorish Idol" data-sci="Zanclus cornutus" data-fam="Zanclidae"
+          data-facts="The Moorish Idol inspired the character Gill in Finding Nemo. They are notoriously difficult to keep in captivity."
+          data-impact="Coral reef bleaching destroys their habitat and food sources."
+          data-img="images/moorish_idol.png"
+          animation="property: position; from: -3 -4 -6; to: -5 -3 -6; dur: 5000; loop: true; dir: alternate; easing: easeInOutSine">
+        </a-entity>
+
+        <a-entity
+          position="6 -3 -9"
+          gltf-model="#powder-blue-tang"
+          scale="0.5 0.5 0.5" rotation="0 90 0"
+          animation-mixer scanner
+          data-name="Powder Blue Tang" data-sci="Acanthurus leucosternon" data-fam="Acanthuridae"
+          data-facts="The powder blue tang uses a scalpel-like spine near its tail as a defence against predators."
+          data-impact="Cyanide fishing for the aquarium trade poisons entire reefs."
+          data-img="images/powder_blue_tang.png"
+          animation="property: position; from: 6 -3 -9; to: -6 -3 -9; dur: 12000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="-8 -2 -8"
+          gltf-model="#yellow-tang"
+          scale="0.5 0.5 0.5" rotation="0 -90 0"
+          animation-mixer scanner
+          data-name="Yellow Tang" data-sci="Zebrasoma flavescens" data-fam="Acanthuridae"
+          data-facts="Yellow tangs lose their bright yellow colour at night and regain it when daylight returns."
+          data-impact="Overharvesting for the aquarium trade has significantly reduced wild populations."
+          data-img="images/yellow_tang.png"
+          animation="property: position; from: -8 -2 -8; to: 8 -2 -8; dur: 14000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="5 -6 -5"
+          gltf-model="#harbor-seal"
+          scale="1 1 1" rotation="0 200 0"
+          animation-mixer scanner
+          data-name="Harbor Seal" data-sci="Phoca vitulina" data-fam="Phocidae"
+          data-facts="Harbor seals can dive up to 500 m and hold their breath for up to 30 minutes."
+          data-impact="Microplastics accumulate in seal tissue through the fish they eat, causing organ damage."
+          data-img="images/harbor_seal.png"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 10000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="-12 1 -14"
+          gltf-model="#loggerhead-sea-turtle"
+          scale="1.2 1.2 1.2" rotation="0 60 0"
+          animation-mixer scanner
+          data-name="Loggerhead Sea Turtle" data-sci="Caretta caretta" data-fam="Cheloniidae"
+          data-facts="Loggerheads navigate using Earth's magnetic field and return to the exact beach where they were born to nest."
+          data-impact="Beach pollution and artificial lighting disorient hatchlings, preventing them from reaching the sea."
+          data-img="images/loggerhead_sea_turtle.png"
+          animation="property: position; from: -12 1 -14; to: 12 1 -14; dur: 22000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="-18 3 -16"
+          gltf-model="#yellowfin-tuna"
+          scale="1 1 1" rotation="0 90 0"
+          animation-mixer scanner
+          data-name="Yellowfin Tuna" data-sci="Thunnus albacares" data-fam="Scombridae"
+          data-facts="Yellowfin tuna can swim faster than 75 km/h, making them one of the fastest fish in the ocean."
+          data-impact="Overfishing has caused significant population declines; many stocks are now considered vulnerable."
+          data-img="images/yellowfin_tuna.png"
+          animation="property: position; from: -18 3 -16; to: 18 3 -16; dur: 8000; loop: true; easing: linear">
+        </a-entity>
+
       </a-entity>
 
-      <a-entity id="deep-zones">
-          <a-entity position="0 -500 -8" 
-            gltf-model="#hammerhead-shark-model" 
-            scale="1.5 1.5 1.5"
-            sinking-fish 
-            scanner 
-            data-name="Finned Shark"
-            data-sci="Sphyrna mokarran"
-            data-fam="Sphyrnidae"
-            data-facts=""
-            data-impact="Without their fins, sharks sink to the Midnight Zone and drown."
-            data-img="images/hammerhead.png">
-            <a-light type="point" color="red" intensity="0.5" distance="5" animation="property: light.intensity; from: 0.2; to: 0.8; dir: alternate; dur: 1000; loop: true"></a-light>
-          </a-entity>
+      <!-- twilight zone -->
+      <a-entity id="twilight-zone" visible="false">
+
+        <!-- light -->
+        <a-light type="ambient" color="#0A2240" intensity="0.2"></a-light>
+        <a-light type="point"   color="#003366" intensity="0.4" position="0 5 0"></a-light>
+
+        <!-- seafloor -->
+        <a-plane width="200" height="200" rotation="-90 0 0" position="0 -10 0" color="#071320"></a-plane>
+
+        <!-- particles -->
+        <a-entity particle-system="preset: dust; particleCount: 200;
+          color: #00FFFF; size: 0.06; opacity: 0.4; velocityValue: 0 0.03 0">
+        </a-entity>
+
+        <!-- assets -->
+        <a-entity
+          position="-8 2 -10"
+          gltf-model="#bobtail-squid"
+          scale="1.2 1.2 1.2" rotation="0 90 0"
+          animation-mixer scanner
+          data-name="Bobtail Squid" data-sci="Sthenoteuthis oualaniensis" data-fam="Sthenoteuthidae"
+          data-facts="Bobtail squids glow through a symbiosis with bioluminescent bacteria housed in their mantle."
+          data-impact="Pollution and ocean warming disrupt their bacterial partners, affecting their camouflage."
+          data-img="images/bobtail_squid.png"
+          animation="property: position; from: -8 2 -10; to: 8 2 -10; dur: 14000; loop: true; dir: alternate; easing: easeInOutSine">
+          <a-light type="point" color="#00FFEE" intensity="0.6" distance="4"
+            animation="property: light.intensity; from: 0.3; to: 0.9; dir: alternate; dur: 1500; loop: true">
+          </a-light>
+        </a-entity>
+
+        <a-entity
+          position="5 0 -12"
+          gltf-model="#firefly-squid"
+          scale="1 1 1" rotation="0 -60 0"
+          animation-mixer scanner
+          data-name="Firefly Squid" data-sci="Watasenia scintillans" data-fam="Enoploteuthidae"
+          data-facts="Firefly squids are the only cephalopod known to have true colour vision, despite being colour-blind in daylight."
+          data-impact="Light pollution near the surface disrupts their migration patterns."
+          data-img="images/firefly_squid.png"
+          animation="property: position; from: 5 0 -12; to: -10 3 -8; dur: 16000; loop: true; dir: alternate; easing: easeInOutSine">
+          <a-light type="point" color="#7DF9FF" intensity="0.5" distance="3"
+            animation="property: light.intensity; from: 0.2; to: 0.8; dir: alternate; dur: 800; loop: true">
+          </a-light>
+        </a-entity>
+
+        <a-entity
+          position="0 4 -9"
+          gltf-model="#jelly-blubber"
+          scale="1.2 1.2 1.2" rotation="0 0 0"
+          animation-mixer scanner
+          data-name="Jelly Blubber" data-sci="Catostylus mosaicus" data-fam="Catostylidae"
+          data-facts="Jelly blubbers have no brain, heart or bones — their body is 95% water."
+          data-impact="Plastic bags floating in water are easily mistaken for jellyfish and cause fatal blockages in predators."
+          data-img="images/jelly_blubber.png"
+          animation="property: position; from: 0 4 -9; to: 0 1 -9; dur: 5000; loop: true; dir: alternate; easing: easeInOutSine">
+          <a-light type="point" color="#FF88FF" intensity="0.4" distance="3"
+            animation="property: light.intensity; from: 0.2; to: 0.6; dir: alternate; dur: 2000; loop: true">
+          </a-light>
+        </a-entity>
+
+        <a-entity
+          position="-10 1 -14"
+          gltf-model="#lanternfish"
+          scale="0.8 0.8 0.8" rotation="0 90 0"
+          animation-mixer scanner
+          data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
+          data-facts="Lanternfish make up the largest portion of deep-sea fish biomass and perform the ocean's greatest daily migration."
+          data-impact="Deep-sea trawling destroys lanternfish populations that are critical to the ocean's carbon cycle."
+          data-img="images/lanternfish.png"
+          animation="property: position; from: -10 1 -14; to: 10 1 -14; dur: 12000; loop: true; easing: linear">
+          <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
+        </a-entity>
+        <a-entity
+          position="-10 3 -13"
+          gltf-model="#lanternfish"
+          scale="0.8 0.8 0.8" rotation="0 90 0"
+          animation-mixer
+          animation="property: position; from: -10 3 -13; to: 10 3 -13; dur: 13000; loop: true; easing: linear">
+          <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
+        </a-entity>
+
+        <a-entity
+          position="3 5 -11"
+          gltf-model="#salp"
+          scale="1 1 1" rotation="0 0 0"
+          animation-mixer scanner
+          data-name="Salp" data-sci="Thaliacea" data-fam="Salpidae"
+          data-facts="Salps pump water through their gelatinous bodies to move and are among the ocean's most efficient swimmers."
+          data-impact="Microplastic pollution clogs salps' feeding apparatus, threatening their vital role in carbon sequestration."
+          data-img="images/salp.png"
+          animation="property: position; from: 3 5 -11; to: -3 2 -11; dur: 10000; loop: true; dir: alternate; easing: easeInOutSine">
+        </a-entity>
+
+        <a-entity
+          position="20 8 -20"
+          gltf-model="#sperm-whale"
+          scale="2 2 2" rotation="0 -90 15"
+          animation-mixer scanner
+          data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+          data-facts="Sperm whales can dive to 3,000 m and hold their breath for over 90 minutes hunting giant squid."
+          data-impact="Ingesting plastic debris causes intestinal blockages and starvation in sperm whales."
+          data-img="images/sperm_whale.png"
+          animation="property: position; from: 20 8 -20; to: -20 -2 -20; dur: 30000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="-5 -8 -7"
+          gltf-model="#octopus"
+          scale="1.5 1.5 1.5" rotation="0 45 0"
+          animation-mixer scanner
+          data-name="Giant Pacific Octopus" data-sci="Enteroctopus dofleini" data-fam="Octopodidae"
+          data-facts="The giant Pacific octopus can change colour and texture in milliseconds, and has three hearts pumping blue blood."
+          data-impact="Chemical pollution accumulates in octopus tissue and disrupts their reproduction."
+          data-img="images/giant_pacific_octopus.png"
+          animation="property: position; from: -5 -8 -7; to: 5 -8 -7; dur: 9000; loop: true; dir: alternate; easing: easeInOutSine">
+        </a-entity>
+
       </a-entity>
 
-      <a-entity id="rig" position="0 1.6 0" animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; loop: true; to: 0 1.8 0">
-        <a-entity camera look-controls wasd-controls="acceleration: 20">
+      <!-- midnight zone -->
+      <a-entity id="midnight-zone" visible="false">
+
+        <!-- light -->
+        <a-light type="ambient" color="#050005" intensity="0.05"></a-light>
+
+        <!-- seafloor -->
+        <a-plane width="200" height="200" rotation="-90 0 0" position="0 -12 0" color="#000000"></a-plane>
+
+        <!-- particles -->
+        <a-entity particle-system="preset: snow; particleCount: 150;
+          color: #CCCCFF; size: 0.03; opacity: 0.2; velocityValue: 0 -0.02 0">
+        </a-entity>
+
+        <!-- assets -->
+        <a-entity
+          position="0 2 -10"
+          gltf-model="#magnapinna-squid"
+          scale="1.5 1.5 1.5" rotation="0 0 0"
+          animation-mixer scanner
+          data-name="Magnapinna Squid" data-sci="Magnapinna sp." data-fam="Magnapinnidae"
+          data-facts="Magnapinna squids have elbowed tentacles that can be 15 times their own body length. First filmed in 2001."
+          data-impact="Deep-sea mining destroys the habitat they live in — environment that takes thousands of years to form."
+          data-img="images/magnapinna_squid.png"
+          animation="property: position; from: 0 2 -10; to: -6 5 -10; dur: 20000; loop: true; dir: alternate; easing: easeInOutSine">
+          <a-light type="point" color="#FF00FF" intensity="0.5" distance="5"
+            animation="property: light.intensity; from: 0.2; to: 0.7; dir: alternate; dur: 2500; loop: true">
+          </a-light>
+        </a-entity>
+
+        <a-entity
+          position="15 0 -18"
+          gltf-model="#sperm-whale"
+          scale="2 2 2" rotation="0 -90 0"
+          animation-mixer scanner
+          data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+          data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey."
+          data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
+          data-img="images/sperm_whale.png"
+          animation="property: position; from: 15 0 -18; to: -15 0 -18; dur: 35000; loop: true; easing: linear">
+        </a-entity>
+
+        <a-entity
+          position="0 5 -8"
+          gltf-model="#hammerhead-shark"
+          scale="1.5 1.5 1.5" rotation="15 0 5"
+          sinking-fish scanner
+          data-name="Finned Shark" data-sci="Sphyrna mokarran" data-fam="Sphyrnidae"
+          data-facts="Sharks thrown back after finning cannot swim and slowly sink into the abyss, drowning or starving."
+          data-impact="Up to 100 million sharks are killed every year by shark finning, driven by demand for shark fin soup."
+          data-img="images/hammerhead.png">
+          <a-light type="point" color="#FF0000" intensity="0.5" distance="5"
+            animation="property: light.intensity; from: 0.2; to: 0.8; dir: alternate; dur: 1000; loop: true">
+          </a-light>
+        </a-entity>
+
+        <a-entity
+          position="7 3 -12"
+          gltf-model="#jelly-blubber"
+          scale="1 1 1" rotation="0 0 0"
+          animation-mixer scanner
+          data-name="Jelly Blubber" data-sci="Catostylus mosaicus" data-fam="Catostylidae"
+          data-facts="Some jellyfish species in the midnight zone are completely transparent and nearly invisible without light."
+          data-impact="Jellyfish populations boom when overfishing removes their predators, destabilising entire ecosystems."
+          data-img="images/jelly_blubber.png"
+          animation="property: position; from: 7 3 -12; to: 7 0 -12; dur: 6000; loop: true; dir: alternate; easing: easeInOutSine">
+          <a-light type="point" color="#8800FF" intensity="0.4" distance="3"
+            animation="property: light.intensity; from: 0.2; to: 0.6; dir: alternate; dur: 2200; loop: true">
+          </a-light>
+        </a-entity>
+
+        <a-entity
+          position="-12 1 -15"
+          gltf-model="#lanternfish"
+          scale="0.8 0.8 0.8" rotation="0 90 0"
+          animation-mixer scanner
+          data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
+          data-facts="At night lanternfish rise toward the surface to feed, then descend back into darkness before dawn."
+          data-impact="Deep-sea trawling kills vast numbers of lanternfish, undermining their role in ocean carbon storage."
+          data-img="images/lanternfish.png"
+          animation="property: position; from: -12 1 -15; to: 12 1 -15; dur: 14000; loop: true; easing: linear">
+          <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
+        </a-entity>
+
+      </a-entity>
+
+
+
+      <!-- camera rig -->
+      <a-entity id="rig" position="0 1.6 0">
+        <a-entity camera look-controls wasd-controls>
           <a-cursor color="cyan" fuse="false"></a-cursor>
-          <a-entity id="flashlight" light="type: spot; intensity: 0; distance: 10; decay: 2" position="0 0 0"></a-entity>
+          <a-entity
+            id="flashlight"
+            light="type: spot; intensity: 0; distance: 25; angle: 25; penumbra: 0.8; decay: 1.5"
+            position="0 0 0">
+          </a-entity>
         </a-entity>
       </a-entity>
 
     </a-scene>
+
   </body>
 </html>

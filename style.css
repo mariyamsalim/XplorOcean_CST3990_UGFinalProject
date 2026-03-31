@@ -96,3 +96,29 @@
   background: #4db8ff;
   color: #001a33;
 }
+
+#back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+
+  background: rgba(0, 20, 40, 0.75);
+  color: #90E0EF;
+  border: 1px solid #0096C7;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+#back-btn:hover {
+  background: rgba(0, 150, 199, 0.3);
+  color: #CAF0F8;
+  border-color: #CAF0F8;
+}

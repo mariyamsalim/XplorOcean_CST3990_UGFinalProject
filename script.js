@@ -43,7 +43,14 @@ function transport(zoneName) {
 
   // show new zone
   const next = document.getElementById(zoneName + '-zone');
-  if (next) next.setAttribute('visible', true);
+  if (next) {
+    next.setAttribute('visible', true);
+
+    // restart all animations in this zone
+    next.querySelectorAll('[animation]').forEach(el => {
+      el.components.animation && el.components.animation.beginAnimation();
+    });
+  }
 
   // sky colour
   document.getElementById('main-sky').setAttribute('color', config.skyColor);
@@ -118,4 +125,36 @@ AFRAME.registerComponent('sinking-fish', {
     const pos = this.el.getAttribute('position');
     this.el.setAttribute('position', { x: pos.x, y: pos.y - this.data.speed, z: pos.z });
   },
+});
+
+AFRAME.registerComponent('floating', {
+  schema: {
+    amplitude: { type: 'number', default: 0.3 },
+    speed:     { type: 'number', default: 0.001 },
+    wobble:    { type: 'number', default: 2 },
+  },
+  init: function () {
+    this.baseY    = null; // defer — position not ready yet in init
+    this.baseRotZ = null;
+    this.t        = Math.random() * Math.PI * 2;
+  },
+  tick: function (time, delta) {
+    // capture base values on first tick, when position is actually set
+    if (this.baseY === null) {
+      this.baseY    = this.el.object3D.position.y;
+      this.baseRotZ = this.el.object3D.rotation.z;
+    }
+
+    this.t += delta * this.data.speed;
+    const sine = Math.sin(this.t);
+
+    this.el.object3D.position.y = this.baseY + sine * this.data.amplitude;
+    this.el.object3D.rotation.z = this.baseRotZ + (sine * this.data.wobble * Math.PI / 180);
+  },
+});
+document.querySelector('a-assets').addEventListener('timeout', () => {
+  console.warn('A-Frame assets timed out!');
+});
+document.querySelector('a-assets').addEventListener('loaded', () => {
+  console.log('All assets loaded successfully.');
 });

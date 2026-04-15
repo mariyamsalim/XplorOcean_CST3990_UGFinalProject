@@ -6,8 +6,9 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
-    <script src="script.js"></script>
+    
   </head>
+
   <body>
 
     <!-- main menu -->
@@ -46,10 +47,10 @@
     </div>
 
     <!-- a-frame scene -->
-    <a-scene fog="type: exponential; color: #0077B6; density: 0.04" cursor="rayOrigin: mouse">
+    <a-scene fog="type: exponential; color: #005F8A; density: 0.06" cursor="rayOrigin: mouse">
 
       <!-- assets -->
-      <a-assets>
+      <a-assets timeout="60000">
         <a-asset-item id="blue-whale"            src="assets/blue_whale.glb"></a-asset-item>
         <a-asset-item id="bobtail-squid"         src="assets/bobtail_squid_compressed.glb"></a-asset-item>
         <a-asset-item id="bottlenose-dolphin"    src="assets/bottlenose_dolphin.glb"></a-asset-item>
@@ -62,7 +63,6 @@
         <a-asset-item id="green-sea-turtle"      src="assets/green_sea_turtle_compressed.glb"></a-asset-item>
         <a-asset-item id="hammerhead-shark"      src="assets/hammerhead_shark.glb"></a-asset-item>
         <a-asset-item id="harbor-seal"           src="assets/harbor_seal.glb"></a-asset-item>
-        <!-- <a-asset-item id="hawksbill-sea-turtle"  src="assets/hawksbill_sea_turtle.glb"></a-asset-item> -->
         <a-asset-item id="jelly-blubber"         src="assets/jelly_blubber.glb"></a-asset-item>
         <a-asset-item id="killer-whale"          src="assets/killer_whale.glb"></a-asset-item>
         <a-asset-item id="lanternfish"           src="assets/lanternfish.glb"></a-asset-item>
@@ -72,35 +72,30 @@
         <a-asset-item id="moorish-idol"          src="assets/moorish_idol.glb"></a-asset-item>
         <a-asset-item id="powder-blue-tang"      src="assets/powder_blue_tang.glb"></a-asset-item>
         <a-asset-item id="rock-crab"             src="assets/rock_crab_compressed.glb"></a-asset-item>
-        <a-asset-item id="salp"                  src="assets/salp.glb"></a-asset-item>
+        <a-asset-item id="salp"                  src="assets/salp_compressed.glb"></a-asset-item>
         <a-asset-item id="sperm-whale"           src="assets/sperm_whale.glb"></a-asset-item>
         <a-asset-item id="whale-shark"           src="assets/whale_shark_compressed.glb"></a-asset-item>
         <a-asset-item id="yellow-tang"           src="assets/yellow_tang.glb"></a-asset-item>
         <a-asset-item id="yellowfin-tuna"        src="assets/yellowfin_tuna_compressed.glb"></a-asset-item>
         <!-- corals & shells -->
-        <a-asset-item id="brain-coral"           src="assets/brain_coral_compressed.glb"></a-asset-item>
-        <a-asset-item id="fan-coral"             src="assets/fan_coral.glb"></a-asset-item>
-        <a-asset-item id="lambis-shell"          src="assets/lambis_shell.glb"></a-asset-item>
-        <a-asset-item id="lettuce-coral"         src="assets/lettuce_coral.glb"></a-asset-item>
-        <a-asset-item id="pavona-coral"          src="assets/pavona_coral.glb"></a-asset-item>
         <a-asset-item id="pocillopora"           src="assets/pocillopora_eydouxi_compressed.glb"></a-asset-item>
-        <a-asset-item id="rainbow-coral"         src="assets/rainbow_haven_reef_coral_compressed.glb"></a-asset-item>
         <a-asset-item id="venus-basket"          src="assets/venus_flower_basket.glb"></a-asset-item>
         <!-- pollution -->
         <a-asset-item id="black-plastic-bag"     src="assets/black_plastic_bag.glb"></a-asset-item>
         <a-asset-item id="clear-plastic-bag"     src="assets/clear_plastic_bag.glb"></a-asset-item>
-        <a-asset-item id="dirty-plastic-bottle"  src="assets/dirty_plastic_bottle.glb"></a-asset-item>
+        <a-asset-item id="dirty-plastic-bottle"  src="assets/dirty_plastic_bottle_compressed.glb"></a-asset-item>
         <a-asset-item id="plastic-bottle"        src="assets/plastic_bottle.glb"></a-asset-item>
         <a-asset-item id="fishing-net"           src="assets/fishing_net.glb"></a-asset-item>
         <a-asset-item id="triangle-net"          src="assets/triangle_net.glb"></a-asset-item>
         <a-asset-item id="foam-pollution"        src="assets/foam_pollution.glb"></a-asset-item>
-        <a-asset-item id="entangled-turtle"      src="assets/entangled_turtle.glb"></a-asset-item>
+        <a-asset-item id="entangled-turtle"      src="assets/entangled_turtle_compressed.glb"></a-asset-item>
         <a-asset-item id="nofin-shark"           src="assets/nofin_great_white_shark.glb"></a-asset-item>
         <a-asset-item id="sickly-clownfish"      src="assets/sickly_clownfish.glb"></a-asset-item>
+        <a-asset-item id="seabed-terrain" src="assets/underwater_terrain_-_agisoftnaturechallenge.glb"></a-asset-item>
       </a-assets>
 
       <!-- sky -->
-      <a-sky id="main-sky" color="#004C6D"></a-sky>
+      <a-sky id="main-sky" color="#003A52"></a-sky>
 
       <!-- sunlight zone -->
       <a-entity id="sunlight-zone" visible="false">
@@ -113,123 +108,100 @@
         <!-- light rays -->
         <a-entity geometry="primitive: cone; height: 25; radiusBottom: 5; radiusTop: 0.2"
           material="color: #ADE8F4; opacity: 0.07; transparent: true"
-          position="-2 12 -8" rotation="15 0 -10"></a-entity>
+          position="-2 12 -22" rotation="15 0 -10"></a-entity>
         <a-entity geometry="primitive: cone; height: 20; radiusBottom: 3; radiusTop: 0.1"
           material="color: #CAF0F8; opacity: 0.05; transparent: true"
-          position="3 10 -6" rotation="5 0 8"></a-entity>
+          position="3 10 -22" rotation="5 0 8"></a-entity>
         <a-entity geometry="primitive: cone; height: 18; radiusBottom: 2.5; radiusTop: 0.1"
           material="color: #CAF0F8; opacity: 0.04; transparent: true"
-          position="-5 9 -12" rotation="8 0 5"></a-entity>
+          position="-5 9 -22" rotation="8 0 5"></a-entity>
 
-        <!-- seafloor -->
-        <a-plane width="200" height="200" rotation="-90 0 0" position="0 -8 0" color="#1A6B8A"></a-plane>
-
-        <!-- coral placement -->
-
-        <!-- coral right foreground -->
-        <a-entity position=" 4.0 -7.5  -7.5" gltf-model="#brain-coral"   scale="0.01 0.01 0.01" rotation="0  30 0"></a-entity>
-        <a-entity position=" 5.5 -7.5  -8.0" gltf-model="#pocillopora"   scale="0.01 0.01 0.01" rotation="0  80 0"></a-entity>
-        <a-entity position=" 3.0 -7.5  -9.0" gltf-model="#fan-coral"     scale="0.01 0.01 0.01" rotation="0  15 0"></a-entity>
-        <a-entity position=" 6.5 -7.5  -7.0" gltf-model="#lettuce-coral" scale="0.01 0.01 0.01" rotation="0 140 0"></a-entity>
-        <a-entity position=" 4.8 -7.8  -6.5" gltf-model="#lambis-shell"  scale="0.01 0.01 0.01" rotation="0  55 0"></a-entity>
-
-        <!-- coral left midground -->
-        <a-entity position="-6.0 -7.5 -10.0" gltf-model="#brain-coral"   scale="0.01 0.01 0.01" rotation="0 120 0"></a-entity>
-        <a-entity position="-7.5 -7.5  -9.5" gltf-model="#rainbow-coral" scale="0.01 0.01 0.01" rotation="0 200 0"></a-entity>
-        <a-entity position="-5.0 -7.5  -9.0" gltf-model="#fan-coral"     scale="0.01 0.01 0.01" rotation="0 310 0"></a-entity>
-        <a-entity position="-8.0 -7.5 -11.0" gltf-model="#pavona-coral"  scale="0.01 0.01 0.01" rotation="0  70 0"></a-entity>
-        <a-entity position="-6.8 -7.8 -10.5" gltf-model="#lambis-shell"  scale="0.01 0.01 0.01" rotation="0 230 0"></a-entity>
-
-        <!-- coral centre background -->
-        <a-entity position=" 1.5 -7.5 -13.0" gltf-model="#brain-coral"   scale="0.01 0.01 0.01" rotation="0 200 0"></a-entity>
-        <a-entity position=" 0.0 -7.5 -14.0" gltf-model="#rainbow-coral" scale="0.01 0.01 0.01" rotation="0  90 0"></a-entity>
-        <a-entity position=" 3.0 -7.5 -12.5" gltf-model="#lettuce-coral" scale="0.01 0.01 0.01" rotation="0 175 0"></a-entity>
-        <a-entity position="-1.5 -7.5 -12.0" gltf-model="#pocillopora"   scale="0.01 0.01 0.01" rotation="0 330 0"></a-entity>
-
-        <!-- coral left foreground -->
-        <a-entity position="-3.0 -7.5  -6.0" gltf-model="#brain-coral"   scale="0.01 0.01 0.01" rotation="0  75 0"></a-entity>
-        <a-entity position="-4.5 -7.5  -6.5" gltf-model="#fan-coral"     scale="0.01 0.01 0.01" rotation="0 260 0"></a-entity>
-        <a-entity position="-2.0 -7.5  -5.5" gltf-model="#pavona-coral"  scale="0.01 0.01 0.01" rotation="0 110 0"></a-entity>
-        <a-entity position="-3.8 -7.8  -5.8" gltf-model="#lambis-shell"  scale="0.01 0.01 0.01" rotation="0  40 0"></a-entity>
-
-        <!-- coral far right background -->
-        <a-entity position="10.0 -7.5 -16.0" gltf-model="#rainbow-coral" scale="0.01 0.01 0.01" rotation="0  20 0"></a-entity>
-        <a-entity position="11.5 -7.5 -15.5" gltf-model="#pocillopora"   scale="0.01 0.01 0.01" rotation="0 160 0"></a-entity>
-        <a-entity position=" 9.0 -7.5 -17.0" gltf-model="#fan-coral"     scale="0.01 0.01 0.01" rotation="0 290 0"></a-entity>
-        <a-entity position="12.0 -7.5 -17.0" gltf-model="#lettuce-coral" scale="0.01 0.01 0.01" rotation="0  50 0"></a-entity>
-
-        <!-- coral far left background -->
-        <a-entity position="-11.0 -7.5 -15.0" gltf-model="#brain-coral"   scale="0.01 0.01 0.01" rotation="0 145 0"></a-entity>
-        <a-entity position="-12.5 -7.5 -14.5" gltf-model="#pavona-coral"  scale="0.01 0.01 0.01" rotation="0  85 0"></a-entity>
-        <a-entity position="-10.0 -7.5 -16.0" gltf-model="#rainbow-coral" scale="0.01 0.01 0.01" rotation="0 225 0"></a-entity>
-        <a-entity position="-13.0 -7.8 -15.5" gltf-model="#lambis-shell"  scale="0.01 0.01 0.01" rotation="0 335 0"></a-entity>
+        <!-- === SUNLIGHT ZONE SEABED === -->
+        <a-entity
+          gltf-model="#seabed-terrain"
+          position="0 -15 0"
+          scale="7 7 7"
+          rotation="0 0 0">
+        </a-entity>
 
         <!-- particles -->
         <a-entity particle-system="preset: dust; particleCount: 300;
           color: #90E0EF; size: 0.04; opacity: 0.3; velocityValue: 0 0.05 0">
         </a-entity>
 
-        <a-entity position="-2 3 -8" gltf-model="#clear-plastic-bag" scale="0.01 0.01 0.01" rotation="0 30 0"
-          animation="property: position; from: -2 3 -8; to: 2 4 -8; dur: 9000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
-        <a-entity position="6 4 -12" gltf-model="#black-plastic-bag" scale="0.01 0.01 0.01" rotation="0 120 0"
-          animation="property: position; from: 6 4 -12; to: 3 5 -12; dur: 11000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+        <!-- <a-entity position="-30 5 -20" gltf-model="#clear-plastic-bag" scale="1 1 1" rotation="0 -90 0"
+        animation-mixer 
+          animation="property: position; from: -30 5 -20; to: 30 7 -20; dur: 110000; loop: true; easing: linear; dir: alternate">
+        </a-entity> done-->
+        <!-- <a-entity position="-26 12 -20" gltf-model="#black-plastic-bag" scale="2 2 2" rotation="90 0 0"
+          animation="property: position; from: -26 12 -20; to: 23 10 -20; dur: 110000; loop: true; easing: linear">
+        </a-entity> done -->
 
-        <a-entity position=" 5.2 -7.3  -8.5" gltf-model="#dirty-plastic-bottle" scale="0.01 0.01 0.01" rotation="0  45 15"></a-entity>
-        <a-entity position="-4.0 -7.3  -6.8" gltf-model="#plastic-bottle"       scale="0.01 0.01 0.01" rotation="0 200 -10"></a-entity>
+        <!-- <a-entity position="-26 12 -20" gltf-model="#dirty-plastic-bottle" scale="12 12 12" rotation="-90 0 0"
+        animation="property: position; from: -26 12 -20; to: 23 10 -20; dur: 110000; loop: true; easing: linear"></a-entity>
+        <a-entity position="26 12 -20" gltf-model="#dirty-plastic-bottle" scale="12 12 12" rotation="0 30 0"
+        animation="property: position; from: 26 12 -20; to: -23 10 -20; dur: 110000; loop: true; easing: linear"></a-entity> done -->
 
-        <a-entity position="1.0 -6.5 -13.5" gltf-model="#fishing-net" scale="0.01 0.01 0.01" rotation="0 60 0"></a-entity>
+        <!-- <a-entity position="-4.0 -6 -6.8" gltf-model="#plastic-bottle" scale="20 20 20" rotation="0 0 -90"
+        animation="property: position; from: 26 12 -10; to: -23 10 -10; dur: 110000; loop: true; easing: linear"
+        ></a-entity> done-->
 
-        <a-entity
+        <!-- <a-entity position="1.0 -6.5 -13.5" gltf-model="#fishing-net" scale="0.03 0.03 0.03" rotation="0 0 50"
+        animation="property: position; from: -60 20 -20; to: 60 18 -20; dur: 100000; loop: true; dir: alternate; easing: easeInOutSine"></a-entity>  done-->
+
+        <!-- <a-entity
           position="-1.5 -5.8 -6.5"
           gltf-model="#sickly-clownfish"
-          scale="0.01 0.01 0.01" rotation="0 90 0"
+          scale="5 5 5" rotation="0 90 0"
           animation-mixer scanner
+          floating="amplitude: 0.2; speed: 0.0015; wobble: 3"
           data-name="Sickly Clownfish" data-sci="Amphiprioninae" data-fam="Pomacentridae"
           data-facts="Clownfish that survive coral bleaching are left exposed — their home gone, their immune systems weakened by chemical runoff."
           data-impact="Ocean acidification and chemical pollution bleach reefs and leave clownfish stranded without shelter or food."
           data-img="images/clownfish.png"
-          animation="property: position; from: -1.5 -5.8 -6.5; to: -2.5 -5.5 -6.5; dur: 5000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+          animation="property: position; from: -11.5 -5.8 -6.5; to: 12.5 -5.5 -6.5; dur: 110000; loop: true; dir: alternate; easing: linear">
+        </a-entity> fish to be changed-->
 
-        <a-entity
-          position="8 0 -11"
+        <!-- <a-entity
+          position="8 0 -1"
           gltf-model="#entangled-turtle"
-          scale="0.01 0.01 0.01" rotation="0 -30 10"
+          scale="50 50 50" rotation="0 -30 10"
           animation-mixer scanner
           data-name="Entangled Sea Turtle" data-sci="Cheloniidae" data-fam="Cheloniidae"
           data-facts="Sea turtles cannot surface to breathe when tangled in ghost fishing gear, causing them to drown."
           data-impact="An estimated 250,000 sea turtles are accidentally captured, injured or killed by fishing operations each year."
           data-img="images/hawksbill_sea_turtle.png"
           animation="property: position; from: 8 0 -11; to: 6 -1 -11; dur: 8000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+        </a-entity> turtle to be changed (can't find file)-->
 
-        <a-entity
-          position="-20 1 -10"
+        <!-- <a-entity
+          position="-20 1 30"
           gltf-model="#hammerhead-shark"
-          scale="0.01 0.01 0.01" rotation="0 90 0"
-          animation-mixer scanner
-          data-name="Hammerhead Shark" data-sci="Sphyrna mokarran" data-fam="Sphyrnidae"
+          scale="10 10 10"
+          rotation="0 90 0"
+          animation-mixer
+          scanner
+          data-name="Hammerhead Shark"
+          data-sci="Sphyrna mokarran"
+          data-fam="Sphyrnidae"
           data-facts="Hammerheads have 360-degree vision, letting them see above and below simultaneously."
           data-impact="Millions are killed yearly due to shark finning for shark fin soup."
           data-img="images/hammerhead.png"
-          animation="property: position; from: -20 1 -10; to: 28 1 -10; dur: 22000; loop: true; easing: linear">
-        </a-entity>
+          animation="property: position; from: -20 1 30; to: 28 1 30; dur: 22000; loop: true; easing: linear">
+        </a-entity> animation to be fixed-->
 
         <a-entity
-          position="18 -2 -12"
           gltf-model="#caribbean-reef-shark"
-          scale="0.01 0.01 0.01" rotation="0 -90 0"
+          scale="15 15 15" rotation="0 0 0"
           animation-mixer scanner
           data-name="Caribbean Reef Shark" data-sci="Carcharhinus perezi" data-fam="Carcharhinidae"
           data-facts="Caribbean reef sharks rest motionless on the seafloor — a rare behaviour among sharks that cannot stop swimming."
           data-impact="Reef degradation from bleaching and pollution reduces the prey available to reef sharks."
           data-img="images/hammerhead.png"
-          animation="property: position; from: 18 -2 -12; to: -18 -2 -12; dur: 20000; loop: true; easing: linear; delay: 4000">
+          animation="property: position; from: 30 12 -35; to: -30 12 -35; dur: 70000; loop: true; easing: linear; delay: 12000">
         </a-entity>
 
-        <a-entity
+        <!-- <a-entity
           position="30 2 -25"
           gltf-model="#great-white-shark"
           scale="0.01 0.01 0.01" rotation="0 -90 0"
@@ -239,9 +211,9 @@
           data-impact="Great whites are vulnerable to extinction due to bycatch, finning, and trophy hunting despite legal protections."
           data-img="images/hammerhead.png"
           animation="property: position; from: 30 2 -25; to: -30 2 -25; dur: 28000; loop: true; easing: linear; delay: 10000">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="-40 8 -30"
           gltf-model="#whale-shark"
           scale="0.01 0.01 0.01" rotation="0 90 0"
@@ -251,21 +223,21 @@
           data-impact="Boat strikes and ingestion of plastic microparticles are the leading threats to this gentle giant."
           data-img="images/blue_whale.png"
           animation="property: position; from: -40 8 -30; to: 40 8 -30; dur: 50000; loop: true; easing: linear">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
-          position="35 6 -28"
+        <!-- <a-entity
+          position="0 1.6 -5"
           gltf-model="#blue-whale"
-          scale="0.01 0.01 0.01" rotation="0 -90 0"
+          scale="10 10 10" rotation="0 -90 0"
           animation-mixer scanner
           data-name="Blue Whale" data-sci="Balaenoptera musculus" data-fam="Balaenopteridae"
           data-facts="Blue whales are the largest animals ever known to have lived on Earth, reaching up to 30 m long."
           data-impact="Ship strikes and entanglement in fishing gear are leading causes of death."
           data-img="images/blue_whale.png"
-          animation="property: position; from: 35 6 -28; to: -35 6 -28; dur: 45000; loop: true; easing: linear">
-        </a-entity>
+          animation="property: position; from: 0 1.6 -5; to: -35 12 -1; dur: 45000; loop: true; easing: linear">
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="-22 3 -18"
           gltf-model="#killer-whale"
           scale="0.01 0.01 0.01" rotation="0 90 0"
@@ -275,9 +247,9 @@
           data-impact="Noise pollution and prey depletion from overfishing disrupt orca hunting and communication."
           data-img="images/killer_whale.png"
           animation="property: position; from: -22 3 -18; to: 22 3 -18; dur: 24000; loop: true; easing: linear; delay: 3000">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="-14 4 -14"
           gltf-model="#bottlenose-dolphin"
           scale="0.01 0.01 0.01" rotation="0 90 0"
@@ -290,9 +262,9 @@
         </a-entity>
         <a-entity position="-14 5 -16" gltf-model="#bottlenose-dolphin" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
           animation="property: position; from: -14 5 -16; to: 14 5 -16; dur: 12500; loop: true; easing: linear; delay: 500">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="20 3 -16"
           gltf-model="#manta-ray"
           scale="0.01 0.01 0.01" rotation="0 -90 5"
@@ -302,12 +274,9 @@
           data-impact="Ghost fishing gear entangles manta rays' cephalic fins, causing drowning and starvation."
           data-img="images/blue_whale.png"
           animation="property: position; from: 20 3 -16; to: -20 3 -16; dur: 18000; loop: true; easing: linear; delay: 6000">
-        </a-entity>
+        </a-entity> -->
 
-        <!-- 
-         -->
-
-        <a-entity
+        <!-- <a-entity
           position="-8 -2 -8"
           gltf-model="#green-sea-turtle"
           scale="0.01 0.01 0.01" rotation="0 45 0"
@@ -317,9 +286,9 @@
           data-impact="Pollution and warming oceans are causing more female turtles to be born, threatening population balance."
           data-img="images/hawksbill_sea_turtle.png"
           animation="property: position; from: -8 -2 -8; to: 10 -1 -10; dur: 20000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="2.5 -5.5 -5"
           gltf-model="#clownfish"
           scale="0.01 0.01 0.01" rotation="0 45 0"
@@ -332,9 +301,9 @@
         </a-entity>
         <a-entity position="3.5 -6 -7" gltf-model="#clownfish" scale="0.01 0.01 0.01" rotation="0 -120 0" animation-mixer
           animation="property: position; from: 3.5 -6 -7; to: 4.5 -5.5 -7.5; dur: 3500; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="-3.5 -5.5 -6.5"
           gltf-model="#moorish-idol"
           scale="0.01 0.01 0.01" rotation="0 -30 0"
@@ -344,9 +313,9 @@
           data-impact="Coral reef bleaching destroys their habitat and food sources."
           data-img="images/moorish_idol.png"
           animation="property: position; from: -3.5 -5.5 -6.5; to: -5.5 -5 -6.5; dur: 5000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="5 -4 -8" gltf-model="#powder-blue-tang" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer scanner
           data-name="Powder Blue Tang" data-sci="Acanthurus leucosternon" data-fam="Acanthuridae"
           data-facts="The powder blue tang uses a scalpel-like spine near its tail as a defence against predators."
@@ -359,9 +328,9 @@
         </a-entity>
         <a-entity position="4 -4.5 -10"  gltf-model="#powder-blue-tang" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
           animation="property: position; from: 4 -4.5 -10; to: -4 -4.5 -10; dur: 13800; loop: true; easing: linear">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="-7 -3 -7" gltf-model="#yellow-tang" scale="0.01 0.01 0.01" rotation="0 -90 0" animation-mixer scanner
           data-name="Yellow Tang" data-sci="Zebrasoma flavescens" data-fam="Acanthuridae"
           data-facts="Yellow tangs lose their bright yellow colour at night and regain it when daylight returns."
@@ -371,18 +340,18 @@
         </a-entity>
         <a-entity position="-8 -2.5 -8.5" gltf-model="#yellow-tang" scale="0.01 0.01 0.01" rotation="0 -90 0" animation-mixer
           animation="property: position; from: -8 -2.5 -8.5; to: 8 -2.5 -8.5; dur: 15500; loop: true; easing: linear">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="6 -3 -9" gltf-model="#harbor-seal" scale="0.01 0.01 0.01" rotation="0 200 0" animation-mixer scanner
           data-name="Harbor Seal" data-sci="Phoca vitulina" data-fam="Phocidae"
           data-facts="Harbor seals can dive up to 500 m and hold their breath for up to 30 minutes."
           data-impact="Microplastics accumulate in seal tissue through the fish they eat, causing organ damage."
           data-img="images/harbor_seal.png"
           animation="property: position; from: 9 -2 -9; to: -6 -3.5 -7; dur: 14000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+        <!-- <a-entity
           position="5.8 -7.6 -9.5" gltf-model="#rock-crab" scale="0.01 0.01 0.01" rotation="0 30 0" animation-mixer scanner
           data-name="Rock Crab" data-sci="Cancer irroratus" data-fam="Cancridae"
           data-facts="Rock crabs moult their shells to grow, eating their old shell to recycle the calcium."
@@ -392,9 +361,21 @@
         </a-entity>
         <a-entity position="-5.5 -7.6 -10.5" gltf-model="#rock-crab" scale="0.01 0.01 0.01" rotation="0 200 0" animation-mixer
           animation="property: position; from: -5.5 -7.6 -10.5; to: -7 -7.6 -10; dur: 9000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+        </a-entity> -->
 
-        <a-entity
+         <!-- <a-entity
+          position="-6 3 -10"
+          gltf-model="#nofin-shark"
+          scale="10 10 10" rotation="0 0 o"
+          animation-mixer scanner
+          data-name="Finned Great White Shark" data-sci="Carcharodon carcharias" data-fam="Lamnidae"
+          data-facts="Without their dorsal and pectoral fins, sharks cannot control their movement and slowly sink to the ocean floor."
+          data-impact="Tens of millions of sharks are finned alive every year. The fins are sliced off and the living shark is thrown back to drown."
+          data-img="images/hammerhead.png"
+          animation="property: position; from: 26 12 -10; to: -23 10 -10; dur: 40000; loop: true; easing: linear">
+        </a-entity> -->
+
+        <!-- <a-entity
           position="-18 2 -16" gltf-model="#yellowfin-tuna" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer scanner
           data-name="Yellowfin Tuna" data-sci="Thunnus albacares" data-fam="Scombridae"
           data-facts="Yellowfin tuna can swim faster than 75 km/h, making them one of the fastest fish in the ocean."
@@ -407,7 +388,7 @@
         </a-entity>
         <a-entity position="-18 1 -14" gltf-model="#yellowfin-tuna" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
           animation="property: position; from: -18 1 -14; to: 18 1 -14; dur: 8200; loop: true; easing: linear; delay: 1200">
-        </a-entity>
+        </a-entity> -->
 
       </a-entity>
 
@@ -427,7 +408,7 @@
           color: #00FFFF; size: 0.06; opacity: 0.4; velocityValue: 0 0.03 0">
         </a-entity>
 
-        <a-entity position="-3 4 -9" gltf-model="#foam-pollution" scale="0.01 0.01 0.01" rotation="0 45 10"
+        <!-- <a-entity position="-3 4 -9" gltf-model="#foam-pollution" scale="0.01 0.01 0.01" rotation="0 45 10"
           animation="property: position; from: -3 8 -9; to: -3 -9 -9; dur: 30000; loop: true; easing: linear">
         </a-entity>
         <a-entity position="4 6 -12" gltf-model="#foam-pollution" scale="0.01 0.01 0.01" rotation="0 200 -5"
@@ -592,7 +573,7 @@
         </a-entity>
         <a-entity position=" 9 -9.5 -9"   gltf-model="#venus-basket" scale="0.01 0.01 0.01" rotation="0  70 0">
           <a-light type="point" color="#AADDFF" intensity="0.1" distance="1.5"></a-light>
-        </a-entity>
+        </a-entity> -->
 
       </a-entity>
 
@@ -611,7 +592,7 @@
           color: #CCCCFF; size: 0.03; opacity: 0.2; velocityValue: 0 -0.02 0">
         </a-entity>
 
-        <a-entity position="-4 -11.5 -13" gltf-model="#triangle-net" scale="0.01 0.01 0.01" rotation="0 120 5"></a-entity>
+        <!-- <a-entity position="-4 -11.5 -13" gltf-model="#triangle-net" scale="0.01 0.01 0.01" rotation="0 120 5"></a-entity>
 
         <a-entity position="6 -11.5 -10" gltf-model="#dirty-plastic-bottle" scale="0.01 0.01 0.01" rotation="0 80 -5"></a-entity>
 
@@ -708,7 +689,7 @@
         </a-entity>
         <a-entity position=" 3 -11.5 -18" gltf-model="#venus-basket" scale="0.01 0.01 0.01" rotation="0 145 0">
           <a-light type="point" color="#AAAAFF" intensity="0.12" distance="1.5"></a-light>
-        </a-entity>
+        </a-entity> -->
 
       </a-entity>
 
@@ -726,6 +707,6 @@
       </a-entity>
 
     </a-scene>
-
+    <script src="script.js"></script>
   </body>
 </html>

@@ -28,12 +28,12 @@ let currentZone = null;
 
 // transport player to diff zones
 function transport(zoneName) {
-  const config = ZONE_CONFIG[zoneName];
+const config = ZONE_CONFIG[zoneName];
   if (!config) return;
 
-  // hide menu, show back button
-  document.getElementById('main-menu').style.display = 'none';
+  document.getElementById('landing-page').style.display = 'none';
   document.getElementById('back-btn').style.display = 'block';
+  document.body.classList.add('vr-active');
 
   // hide previous zone
   if (currentZone) {
@@ -46,9 +46,18 @@ function transport(zoneName) {
   if (next) {
     next.setAttribute('visible', true);
 
+    const unloadedEntities = next.querySelectorAll('[data-src]');
+    unloadedEntities.forEach(el => {
+      const modelUrl = el.getAttribute('data-src');
+      el.setAttribute('gltf-model', modelUrl);
+      el.removeAttribute('data-src'); 
+    });
+
     // restart all animations in this zone
     next.querySelectorAll('[animation]').forEach(el => {
-      el.components.animation && el.components.animation.beginAnimation();
+      if(el.components.animation) {
+         el.components.animation.beginAnimation();
+      }
     });
   }
 
@@ -108,9 +117,12 @@ function backToMenu() {
     'type: spot; intensity: 0; distance: 25; angle: 25; penumbra: 0.8; decay: 1.5');
  
   // show main menu, hide back button and modal
-  document.getElementById('main-menu').style.display = 'flex';
+  document.getElementById('landing-page').style.display = 'block';
+  document.body.classList.remove('vr-active'); 
+  
   document.getElementById('back-btn').style.display  = 'none';
   document.getElementById('scanner-modal').style.display = 'none';
+
 }
 
 // close modal
@@ -134,12 +146,11 @@ AFRAME.registerComponent('floating', {
     wobble:    { type: 'number', default: 2 },
   },
   init: function () {
-    this.baseY    = null; // defer — position not ready yet in init
+    this.baseY    = null; 
     this.baseRotZ = null;
     this.t        = Math.random() * Math.PI * 2;
   },
   tick: function (time, delta) {
-    // capture base values on first tick, when position is actually set
     if (this.baseY === null) {
       this.baseY    = this.el.object3D.position.y;
       this.baseRotZ = this.el.object3D.rotation.z;
@@ -158,3 +169,20 @@ document.querySelector('a-assets').addEventListener('timeout', () => {
 document.querySelector('a-assets').addEventListener('loaded', () => {
   console.log('All assets loaded successfully.');
 });
+
+// modal func
+function openGuideModal() {
+  document.getElementById('guide-modal').style.display = 'flex';
+}
+
+function closeGuideModal() {
+  document.getElementById('guide-modal').style.display = 'none';
+}
+
+function openSurveyModal() {
+  document.getElementById('survey-modal').style.display = 'flex';
+}
+
+function closeSurveyModal() {
+  document.getElementById('survey-modal').style.display = 'none';
+}

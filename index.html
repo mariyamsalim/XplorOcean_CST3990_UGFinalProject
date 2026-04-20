@@ -91,6 +91,8 @@
             <p>Click on the marine life to learn more about it!</p>
             <p>Click on the back button to return to the main menu.</p>
           </div>
+          <h5>Tip:</h5>
+          <p>Turn up your volume for a fully immersive experience!</p>
       </div>
     </div>
 
@@ -134,8 +136,7 @@
     
 
     <!-- a-frame scene -->
-    <a-scene fog="type: exponential; color: #005F8A; density: 0.06" cursor="rayOrigin: mouse" flashlight-follow>
-
+    <a-scene fog="type: exponential; color: #005F8A; density: 0.06" cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .clickable" flashlight-follow>
       <!-- assets -->
       <a-assets timeout="10000">
         <!-- <a-asset-item id="seabed-terrain" src="assets/coral_reef.glb"></a-asset-item> -->
@@ -155,20 +156,9 @@
         <a-light type="directional" color="#CAF0F8" intensity="1.5" position="1 10 -2"></a-light>
         <a-light type="point"       color="#6B9E8C" intensity="0.8" position="0 5 0"></a-light>
 
-        <!-- light rays -->
-        <a-entity geometry="primitive: cone; height: 25; radiusBottom: 5; radiusTop: 0.2"
-          material="color: #ADE8F4; opacity: 0.07; transparent: true"
-          position="-2 12 -22" rotation="15 0 -10"></a-entity>
-        <a-entity geometry="primitive: cone; height: 20; radiusBottom: 3; radiusTop: 0.1"
-          material="color: #CAF0F8; opacity: 0.05; transparent: true"
-          position="3 10 -22" rotation="5 0 8"></a-entity>
-        <a-entity geometry="primitive: cone; height: 18; radiusBottom: 2.5; radiusTop: 0.1"
-          material="color: #CAF0F8; opacity: 0.04; transparent: true"
-          position="-5 9 -22" rotation="8 0 5"></a-entity>
-
         <!-- === SUNLIGHT ZONE SEABED === -->
         <a-entity
-          data-src="assets/coral_reef.glb"
+          data-src="assets/sunlight_zone/coral_reef.glb"
           position="0 -15 0"
           scale="7 7 7"
           rotation="0 0 0">
@@ -200,23 +190,11 @@
         animation="property: position; from: -60 20 -20; to: 60 18 -20; dur: 100000; loop: true; dir: alternate; easing: easeInOutSine"></a-entity>  
 
         <!-- <a-entity
-          position="-1.5 -5.8 -6.5"
-          data-src="assets/sickly_clownfish.glb"
-          scale="5 5 5" rotation="0 90 0"
-          animation-mixer scanner
-          floating="amplitude: 0.2; speed: 0.0015; wobble: 3"
-          data-name="Sickly Clownfish" data-sci="Amphiprioninae" data-fam="Pomacentridae"
-          data-facts="Clownfish that survive coral bleaching are left exposed — their home gone, their immune systems weakened by chemical runoff."
-          data-impact="Ocean acidification and chemical pollution bleach reefs and leave clownfish stranded without shelter or food."
-          data-img="images/clownfish.png"
-          animation="property: position; from: -11.5 -5.8 -6.5; to: 12.5 -5.5 -6.5; dur: 110000; loop: true; dir: alternate; easing: linear">
-        </a-entity> fish to be changed -->
-
-        <!-- <a-entity
           position="8 0 -1"
-          data-src="assets/entangled_turtle.glb"
+          data-src="assets/sunlight_zone/entangled_turtle.glb"
           scale="50 50 50" rotation="0 -30 10"
           animation-mixer scanner
+          class="clickable"
           data-name="Entangled Sea Turtle" data-sci="Cheloniidae" data-fam="Cheloniidae"
           data-facts="Sea turtles cannot surface to breathe when tangled in ghost fishing gear, causing them to drown."
           data-impact="An estimated 250,000 sea turtles are accidentally captured, injured or killed by fishing operations each year."
@@ -224,9 +202,9 @@
           animation="property: position; from: 8 0 -11; to: 6 -1 -11; dur: 8000; loop: true; dir: alternate; easing: easeInOutSine">
         </a-entity> turtle to be changed (can't find file) -->
 
-        <!-- <a-entity
+        <a-entity
           position="-20 1 30"
-          data-src="assets/hammerhead_shark.glb"
+          data-src="assets/sunlight_zone/hammerhead_shark.glb"
           scale="10 10 10"
           rotation="0 90 0"
           animation-mixer
@@ -238,10 +216,10 @@
           data-impact="Millions are killed yearly due to shark finning for shark fin soup."
           data-img="images/hammerhead.png"
           animation="property: position; from: -20 1 30; to: 28 1 30; dur: 22000; loop: true; easing: linear">
-        </a-entity> animation to be fixed-->
+        </a-entity> animation to be fixed
 
-        <!-- <a-entity
-          data-src="assets/caribbean_reef_shark.glb"
+        <a-entity
+          data-src="assets/sunlight_zone/caribbean_reef_shark.glb"
           scale="15 15 15" rotation="0 0 0"
           animation-mixer scanner
           data-name="Caribbean Reef Shark" data-sci="Carcharhinus perezi" data-fam="Carcharhinidae"
@@ -249,11 +227,11 @@
           data-impact="Reef degradation from bleaching and pollution reduces the prey available to reef sharks."
           data-img="images/hammerhead.png"
           animation="property: position; from: 30 12 -35; to: -30 12 -35; dur: 70000; loop: true; easing: linear; delay: 12000">
-        </a-entity>  -->
+        </a-entity> 
 
-        <!-- <a-entity
+        <a-entity
           position="30 2 -25"
-          data-src="assets/great_white_shark.glb"
+          data-src="assets/sunlight_zone/great_white_shark.glb"
           scale="10 10 10" rotation="0 -90 0"
           animation-mixer scanner
           data-name="Great White Shark" data-sci="Carcharodon carcharias" data-fam="Lamnidae"
@@ -261,23 +239,24 @@
           data-impact="Great whites are vulnerable to extinction due to bycatch, finning, and trophy hunting despite legal protections."
           data-img="images/hammerhead.png"
           animation="property: position; from: 30 2 -25; to: -30 2 -25; dur: 28000; loop: true; easing: linear; delay: 1000">
-        </a-entity>  -->
+        </a-entity> 
 
-        <!-- <a-entity
-          position="-40 12 30"
-          data-src="assets/whale_shark.glb"
-          scale="10 10 10" rotation="0 -120 0"
+        <a-entity
+          position="0 12 50"
+          data-src="assets/sunlight_zone/whale_shark.glb"
+          scale="25 25 25" rotation="0 -120 0"
           animation-mixer scanner
+          class="clickable"
           data-name="Whale Shark" data-sci="Rhincodon typus" data-fam="Rhincodontidae"
-          data-facts="The whale shark is the largest fish on Earth, yet feeds only on tiny plankton filtered through its enormous mouth."
+          data-facts="The whale shark is the largest fish on Earth, yet feeds only on tiny plankton filtered through its enormous mouth. | Just like human fingerprints, each whale shark has a unique pattern of spots. Researchers use these patterns to identify and track individual sharks using star-mapping software, the same technology used by NASA to map star constellations! | They have 30,000 tiny teeth, but they don't use them to eat. Instead, they filter feed by swimming with their mouths open, allowing water to pass through and trapping plankton and small fish on their gill rakers."
           data-impact="Boat strikes and ingestion of plastic microparticles are the leading threats to this gentle giant."
-          data-img="images/blue_whale.png"
-          animation="property: position; from: -40 12 30; to: -40 12 -30; dur: 50000; loop: true; easing: linear">
-        </a-entity> done -->
+          data-img="images/whale_shark.png"
+          animation="property: position; from: 70 12 60; to: -70 12 60; dur: 50000; loop: true; easing: linear">
+        </a-entity> done
 
-        <!-- <a-entity
+        <a-entity
           position="35 8 10"
-          data-src="assets/blue_whale.glb"
+          data-src="assets/sunlight_zone/blue_whale.glb"
           scale="10 10 10" rotation="0 -90 0"
           animation-mixer scanner
           data-name="Blue Whale" data-sci="Balaenoptera musculus" data-fam="Balaenopteridae"
@@ -285,24 +264,24 @@
           data-impact="Ship strikes and entanglement in fishing gear are leading causes of death."
           data-img="images/blue_whale.png"
           animation="property: position; from: 35 8 10; to: -35 8 -15; dur: 45000; loop: true; easing: linear">
-        </a-entity> no file found-->
+        </a-entity> no file found
 
-        <!-- <a-entity
+        <a-entity
           position="-22 3 -18"
-          data-src="assets/killer_whale.glb"
-          scale="0.7 0.7 0.7" rotation="0 90 0"
+          data-src="assets/sunlight_zone/killer_whale.glb"
+          scale="1 1 1" rotation="0 90 0"
           animation-mixer scanner
           data-name="Killer Whale (Orca)" data-sci="Orcinus orca" data-fam="Delphinidae"
           data-facts="Orcas are highly social and each pod has its own unique dialect of calls."
           data-impact="Noise pollution and prey depletion from overfishing disrupt orca hunting and communication."
           data-img="images/killer_whale.png"
           animation="property: position; from: -40 12 30; to: -40 12 -30; dur: 24000; loop: true; easing: linear; delay: 3000">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
+        <a-entity
           position="-14 4 -14"
-          data-src="assets/bottlenose_dolphin.glb"
-          scale="0.01 0.01 0.01" rotation="0 90 0"
+          data-src="assets/sunlight_zone/bottlenose_dolphin.glb"
+          scale="1 1 1" rotation="0 0 0"
           animation-mixer scanner
           data-name="Bottlenose Dolphin" data-sci="Tursiops truncatus" data-fam="Delphinidae"
           data-facts="Bottlenose dolphins have individual signature whistles that act like names — they call to each other by name."
@@ -310,135 +289,132 @@
           data-img="images/killer_whale.png"
           animation="property: position; from: -14 4 -14; to: 14 4 -14; dur: 12000; loop: true; easing: linear; delay: 2000">
         </a-entity>
-        <a-entity position="-14 5 -16" data-src="assets/bottlenose_dolphin.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-14 5 -16" data-src="assets/sunlight_zone/bottlenose_dolphin.glb" scale="1 1 1" rotation="0 0 0" animation-mixer
           animation="property: position; from: -14 5 -16; to: 14 5 -16; dur: 12500; loop: true; easing: linear; delay: 500">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
+        <a-entity
           position="20 3 -16"
-          data-src="assets/manta_ray.glb"
-          scale="0.01 0.01 0.01" rotation="0 -90 5"
+          data-src="assets/sunlight_zone/manta_ray.glb"
+          scale="1 1 1" rotation="0 0 0"
           animation-mixer scanner
           data-name="Manta Ray" data-sci="Mobula birostris" data-fam="Mobulidae"
           data-facts="Manta rays have the largest brain-to-body ratio of any fish and have been observed leaping clear of the water."
           data-impact="Ghost fishing gear entangles their cephalic fins, causing drowning and starvation."
           data-img="images/blue_whale.png"
           animation="property: position; from: 20 3 -16; to: -20 3 -16; dur: 18000; loop: true; easing: linear; delay: 6000">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
+        <a-entity
           position="-8 -2 -8"
-          data-src="assets/green_sea_turtle.glb"
-          scale="0.01 0.01 0.01" rotation="0 45 0"
+          data-src="assets/sunlight_zone/green_sea_turtle.glb"
+          scale="1 1 1" rotation="0 0 0"
           animation-mixer scanner
           data-name="Green Sea Turtle" data-sci="Chelonia mydas" data-fam="Cheloniidae"
           data-facts="Green sea turtles are the only herbivorous sea turtle; they graze on seagrass, keeping meadows healthy for many species."
           data-impact="Pollution and warming oceans are causing more female turtles to be born, threatening population balance."
           data-img="images/hawksbill_sea_turtle.png"
           animation="property: position; from: -8 -2 -8; to: 10 -1 -10; dur: 20000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
+        <a-entity
           position="2.5 -5.5 -5"
-          data-src="assets/clownfish.glb"
-          scale="0.01 0.01 0.01" rotation="0 45 0"
+          data-src="assets/sunlight_zone/school_of_fish.glb"
+          scale="1 1 1" rotation="0 0 0"
           animation-mixer scanner
-          data-name="Clownfish" data-sci="Amphiprioninae" data-fam="Pomacentridae"
-          data-facts="All clownfish are born male. The dominant fish in a group will change sex to become female."
+          data-name="Clownfish, Moorish Idol, Powder Blue Tang, Yellow Tang" data-sci="Amphiprioninae, Zanclus cornutus, Acanthurus leucosternon, Paracanthurus hepatus" data-fam="Pomacentridae, Zanclidae, Acanthuridae, Pomacentridae"
+          data-facts="These tropical fish are popular in the aquarium trade, but many species are difficult to keep in captivity and suffer high mortality rates."
           data-impact="Ocean acidification bleaches the coral reefs they depend on."
           data-img="images/clownfish.png"
           animation="property: position; from: 2.5 -5.5 -5; to: 4 -5 -5; dur: 4000; loop: true; dir: alternate; easing: easeInOutSine">
         </a-entity>
-        <a-entity position="3.5 -6 -7" data-src="assets/clownfish" scale="0.01 0.01 0.01" rotation="0 -120 0" animation-mixer
-          animation="property: position; from: 3.5 -6 -7; to: 4.5 -5.5 -7.5; dur: 3500; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> -->
 
-        <!-- <a-entity
+        <a-entity
           position="-3.5 -5.5 -6.5"
-          data-src="assets/moorish_idol.glb"
-          scale="0.01 0.01 0.01" rotation="0 -30 0"
+          data-src="assets/sunlight_zone/moorish_idol.glb"
+          scale="1 1 1" rotation="0 0 0"
           animation-mixer scanner
           data-name="Moorish Idol" data-sci="Zanclus cornutus" data-fam="Zanclidae"
           data-facts="The Moorish Idol inspired the character Gill in Finding Nemo. They are notoriously difficult to keep in captivity."
           data-impact="Coral reef bleaching destroys their habitat and food sources."
           data-img="images/moorish_idol.png"
           animation="property: position; from: -3.5 -5.5 -6.5; to: -5.5 -5 -6.5; dur: 5000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
-          position="5 -4 -8" data-src="assets/powder_blue_tang.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer scanner
+        <a-entity
+          position="5 -4 -8" data-src="assets/sunlight_zone/powder_blue_tang.glb" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Powder Blue Tang" data-sci="Acanthurus leucosternon" data-fam="Acanthuridae"
           data-facts="The powder blue tang uses a scalpel-like spine near its tail as a defence against predators."
           data-impact="Cyanide fishing for the aquarium trade poisons entire reefs."
           data-img="images/powder_blue_tang.png"
           animation="property: position; from: 5 -4 -8; to: -5 -4 -8; dur: 12000; loop: true; easing: linear">
         </a-entity>
-        <a-entity position="6 -3.5 -9"   data-src="assets/powder_blue_tang.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="6 -3.5 -9"   data-src="assets/sunlight_zone/powder_blue_tang.glb" scale="1 1 1" rotation="0 0 0" animation-mixer
           animation="property: position; from: 6 -3.5 -9; to: -6 -3.5 -9; dur: 13000; loop: true; easing: linear">
         </a-entity>
-        <a-entity position="4 -4.5 -10"  data-src="assets/powder_blue_tang.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="4 -4.5 -10"  data-src="assets/sunlight_zone/powder_blue_tang.glb" scale="1 1 1" rotation="0 0 0" animation-mixer
           animation="property: position; from: 4 -4.5 -10; to: -4 -4.5 -10; dur: 13800; loop: true; easing: linear">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
-          position="-7 -3 -7" data-src="assets/yellow_tang.glb" scale="0.01 0.01 0.01" rotation="0 -90 0" animation-mixer scanner
+        <a-entity
+          position="-7 -3 -7" data-src="assets/sunlight_zone/yellow_tang.glb" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Yellow Tang" data-sci="Zebrasoma flavescens" data-fam="Acanthuridae"
           data-facts="Yellow tangs lose their bright yellow colour at night and regain it when daylight returns."
           data-impact="Overharvesting for the aquarium trade has significantly reduced wild populations."
           data-img="images/yellow_tang.png"
           animation="property: position; from: -7 -3 -7; to: 7 -3 -7; dur: 14000; loop: true; easing: linear">
         </a-entity>
-        <a-entity position="-8 -2.5 -8.5" data-src="assets/yellow_tang.glb" scale="0.01 0.01 0.01" rotation="0 -90 0" animation-mixer
+        <a-entity position="-8 -2.5 -8.5" data-src="assets/sunlight_zone/yellow_tang.glb" scale="1 1 1" rotation="0 0 0" animation-mixer
           animation="property: position; from: -8 -2.5 -8.5; to: 8 -2.5 -8.5; dur: 15500; loop: true; easing: linear">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
-          position="6 -3 -9" data-src="assets/harbor_seal.glb" scale="0.01 0.01 0.01" rotation="0 200 0" animation-mixer scanner
+        <a-entity
+          position="6 -3 -9" data-src="assets/harbor_seal.glb" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Harbor Seal" data-sci="Phoca vitulina" data-fam="Phocidae"
           data-facts="Harbor seals can dive up to 500 m and hold their breath for up to 30 minutes."
           data-impact="Microplastics accumulate in seal tissue through the fish they eat, causing organ damage."
           data-img="images/harbor_seal.png"
           animation="property: position; from: 9 -2 -9; to: -6 -3.5 -7; dur: 14000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
-          position="5.8 -7.6 -9.5" data-src="assets/rock_crab.glb" scale="0.01 0.01 0.01" rotation="0 30 0" animation-mixer scanner
+        <a-entity
+          position="5.8 -7.6 -9.5" data-src="assets/sunlight_zone/rock_crab.glb" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Rock Crab" data-sci="Cancer irroratus" data-fam="Cancridae"
           data-facts="Rock crabs moult their shells to grow, eating their old shell to recycle the calcium."
           data-impact="Ocean acidification weakens the calcium carbonate shells of crabs, making them fragile and brittle."
           data-img="images/clownfish.png"
           animation="property: position; from: 5.8 -7.6 -9.5; to: 7.5 -7.6 -9.0; dur: 8000; loop: true; dir: alternate; easing: easeInOutSine">
         </a-entity>
-        <a-entity position="-5.5 -7.6 -10.5" data-src="assets/rock_crab.glb" scale="0.01 0.01 0.01" rotation="0 200 0" animation-mixer
+        <a-entity position="-5.5 -7.6 -10.5" data-src="assets/sunlight_zone/rock_crab.glb" scale="1 1 1" rotation="0 0 0" animation-mixer
           animation="property: position; from: -5.5 -7.6 -10.5; to: -7 -7.6 -10; dur: 9000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> -->
+        </a-entity>
 
-         <!-- <a-entity
+         <a-entity
           position="-6 3 -10"
-          data-src="assets/nofin_great_white_shark.glb"
+          data-src="assets/sunlight_zone/nofin_great_white_shark.glb"
           scale="10 10 10" rotation="0 0 0"
-          animation-mixer scanner
+          animation-mixer scanner sinking-fish
           data-name="Finned Great White Shark" data-sci="Carcharodon carcharias" data-fam="Lamnidae"
           data-facts="Without their dorsal and pectoral fins, sharks cannot control their movement and slowly sink to the ocean floor."
           data-impact="Tens of millions of sharks are finned alive every year. The fins are sliced off and the living shark is thrown back to drown."
           data-img="images/hammerhead.png"
           animation="property: position; from: 26 12 -10; to: -23 10 -10; dur: 40000; loop: true; easing: linear">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
-          position="-18 2 -16" data-src="assets/yellowfin_tuna.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer scanner
+        <a-entity
+          position="-18 2 -16" data-src="assets/sunlight_zone/yellowfin_tuna.glb" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Yellowfin Tuna" data-sci="Thunnus albacares" data-fam="Scombridae"
           data-facts="Yellowfin tuna can swim faster than 75 km/h, making them one of the fastest fish in the ocean."
           data-impact="Overfishing has caused significant population declines; many stocks are now considered vulnerable."
           data-img="images/yellowfin_tuna.png"
           animation="property: position; from: -18 2 -16; to: 18 2 -16; dur: 7500; loop: true; easing: linear">
         </a-entity>
-        <a-entity position="-18 3.5 -18" data-src="assets/yellowfin_tuna.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-18 3.5 -18" data-src="assets/sunlight_zone/yellowfin_tuna.glb" scale="1 1 1" rotation="0 0 0" animation-mixer
           animation="property: position; from: -18 3.5 -18; to: 18 3.5 -18; dur: 8000; loop: true; easing: linear; delay: 600">
         </a-entity>
-        <a-entity position="-18 1 -14" data-src="assets/yellowfin_tuna.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-18 1 -14" data-src="assets/sunlight_zone/yellowfin_tuna.glb" scale="1 1 1" rotation="0 0 0" animation-mixer
           animation="property: position; from: -18 1 -14; to: 18 1 -14; dur: 8200; loop: true; easing: linear; delay: 1200">
-        </a-entity> -->
+        </a-entity>
 
       </a-entity>
 
@@ -458,14 +434,14 @@
           color: #00FFFF; size: 0.06; opacity: 0.4; velocityValue: 0 0.03 0">
         </a-entity>
 
-        <a-entity position="-3 4 -9" data-src="assets/foam-pollution" scale="0.01 0.01 0.01" rotation="0 45 10"
+        <a-entity position="-3 4 -9" data-src="assets/foam-pollution" scale="1 1 1" rotation="0 45 10"
           animation="property: position; from: -3 8 -9; to: -3 -9 -9; dur: 30000; loop: true; easing: linear">
         </a-entity>
-        <a-entity position="4 6 -12" data-src="assets/foam-pollution" scale="0.01 0.01 0.01" rotation="0 200 -5"
+        <a-entity position="4 6 -12" data-src="assets/foam-pollution" scale="1 1 1" rotation="0 200 -5"
           animation="property: position; from: 4 8 -12; to: 4 -9 -12; dur: 25000; loop: true; easing: linear; delay: 8000">
         </a-entity>
 
-        <a-entity position="3 -9.5 -12" data-src="assets/triangle-net" scale="0.01 0.01 0.01" rotation="0 30 0"></a-entity>
+        <a-entity position="3 -9.5 -12" data-src="assets/triangle-net" scale="1 1 1" rotation="0 30 0"></a-entity>
 
         <a-entity
           position="-6 3 -10"
@@ -522,7 +498,7 @@
         </a-entity>
 
         <a-entity
-          position="0 5 -8" data-src="assets/jelly-blubber" scale="0.01 0.01 0.01" rotation="0 0 0" animation-mixer scanner
+          position="0 5 -8" data-src="assets/jelly-blubber" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Jelly Blubber" data-sci="Catostylus mosaicus" data-fam="Catostylidae"
           data-facts="Jelly blubbers have no brain, heart or bones — their body is 95% water."
           data-impact="Plastic bags floating in water are easily mistaken for jellyfish and cause fatal blockages in predators."
@@ -532,7 +508,7 @@
             animation="property: light.intensity; from: 0.2; to: 0.6; dir: alternate; dur: 2000; loop: true">
           </a-light>
         </a-entity>
-        <a-entity position="3 6 -11" data-src="assets/jelly-blubber" scale="0.01 0.01 0.01" rotation="0 45 0" animation-mixer
+        <a-entity position="3 6 -11" data-src="assets/jelly-blubber" scale="1 1 1" rotation="0 45 0" animation-mixer
           animation="property: position; from: 3 6 -11; to: 3 3 -11; dur: 6000; loop: true; dir: alternate; easing: easeInOutSine">
           <a-light type="point" color="#FF88FF" intensity="0.3" distance="2"
             animation="property: light.intensity; from: 0.1; to: 0.5; dir: alternate; dur: 2400; loop: true">
@@ -540,7 +516,7 @@
         </a-entity>
 
         <a-entity
-          position="-7 2 -9" data-src="assets/flower-hat-jellyfish" scale="0.01 0.01 0.01" rotation="0 0 0" animation-mixer scanner
+          position="-7 2 -9" data-src="assets/flower-hat-jellyfish" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Flower Hat Jellyfish" data-sci="Olindias formosus" data-fam="Olindiasidae"
           data-facts="The flower hat jellyfish has coiling multicoloured tentacles and a translucent bell with vivid neon pinstripes."
           data-impact="Warming oceans cause jellyfish blooms that disrupt marine food webs and clog power plant intakes."
@@ -550,7 +526,7 @@
             animation="property: light.intensity; from: 0.2; to: 0.7; dir: alternate; dur: 1600; loop: true">
           </a-light>
         </a-entity>
-        <a-entity position="8 3 -13" data-src="assets/flower-hat-jellyfish" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="8 3 -13" data-src="assets/flower-hat-jellyfish" scale="1 1 1" rotation="0 90 0" animation-mixer
           animation="property: position; from: 8 3 -13; to: 8 0 -13; dur: 6500; loop: true; dir: alternate; easing: easeInOutSine">
           <a-light type="point" color="#FF44AA" intensity="0.4" distance="3"
             animation="property: light.intensity; from: 0.1; to: 0.6; dir: alternate; dur: 2000; loop: true">
@@ -558,7 +534,7 @@
         </a-entity>
 
         <a-entity
-          position="-12 1 -14" data-src="assets/lanternfish" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer scanner
+          position="-12 1 -14" data-src="assets/lanternfish" scale="1 1 1" rotation="0 90 0" animation-mixer scanner
           data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
           data-facts="Lanternfish make up the largest portion of deep-sea fish biomass and perform the greatest daily migration in the ocean."
           data-impact="Deep-sea trawling destroys lanternfish populations that are critical to the carbon cycle of the ocean."
@@ -566,36 +542,21 @@
           animation="property: position; from: -12 1 -14; to: 12 1 -14; dur: 12000; loop: true; easing: linear">
           <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-12 2.2 -13" data-src="assets/lanternfish" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-12 2.2 -13" data-src="assets/lanternfish" scale="1 1 1" rotation="0 90 0" animation-mixer
           animation="property: position; from: -12 2.2 -13; to: 12 2.2 -13; dur: 12800; loop: true; easing: linear">
           <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-12 0 -15" data-src="assets/lanternfish" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-12 0 -15" data-src="assets/lanternfish" scale="1 1 1" rotation="0 90 0" animation-mixer
           animation="property: position; from: -12 0 -15; to: 12 0 -15; dur: 11500; loop: true; easing: linear">
           <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-12 3 -16" data-src="assets/lanternfish" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-12 3 -16" data-src="assets/lanternfish" scale="1 1 1" rotation="0 90 0" animation-mixer
           animation="property: position; from: -12 3 -16; to: 12 3 -16; dur: 13200; loop: true; easing: linear">
           <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
         </a-entity>
 
         <a-entity
-          position="3 4 -10" data-src="assets/salp" scale="0.01 0.01 0.01" rotation="0 0 0" animation-mixer scanner
-          data-name="Salp" data-sci="Thaliacea" data-fam="Salpidae"
-          data-facts="Salps pump water through their gelatinous bodies to move and are among the most efficient swimmers in the ocean."
-          data-impact="Microplastic pollution clogs their feeding apparatus, threatening their vital role in carbon sequestration."
-          data-img="images/salp.png"
-          animation="property: position; from: 3 4 -10; to: -3 2 -10; dur: 10000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
-        <a-entity position="4 4.5 -11" data-src="assets/salp" scale="0.01 0.01 0.01" rotation="0 20 0" animation-mixer
-          animation="property: position; from: 4 4.5 -11; to: -4 2.5 -11; dur: 11000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
-        <a-entity position="5 3.5 -9" data-src="assets/salp" scale="0.01 0.01 0.01" rotation="0 -20 0" animation-mixer
-          animation="property: position; from: 5 3.5 -9; to: -2 2 -9; dur: 9500; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
-
-        <a-entity
-          position="22 6 -22" data-src="assets/sperm-whale" scale="0.01 0.01 0.01" rotation="-10 -90 0" animation-mixer scanner
+          position="22 6 -22" data-src="assets/sperm-whale" scale="1 1 1" rotation="-10 -90 0" animation-mixer scanner
           data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
           data-facts="Sperm whales can dive to 3,000 m and hold their breath for over 90 minutes hunting giant squid."
           data-impact="Ingesting plastic debris causes intestinal blockages and starvation in sperm whales."
@@ -604,7 +565,7 @@
         </a-entity>
 
         <a-entity
-          position="-5 -9 -7" data-src="assets/octopus" scale="0.01 0.01 0.01" rotation="0 45 0" animation-mixer scanner
+          position="-5 -9 -7" data-src="assets/octopus" scale="1 1 1" rotation="0 45 0" animation-mixer scanner
           data-name="Giant Pacific Octopus" data-sci="Enteroctopus dofleini" data-fam="Octopodidae"
           data-facts="The giant Pacific octopus can change colour and texture in milliseconds, and has three hearts pumping blue blood."
           data-impact="Chemical pollution accumulates in octopus tissue and disrupts their reproduction."
@@ -612,16 +573,16 @@
           animation="property: position; from: -5 -9 -7; to: 5 -9 -7; dur: 10000; loop: true; dir: alternate; easing: easeInOutSine">
         </a-entity>
 
-        <a-entity position="-8 -9.5 -11"  data-src="assets/venus-basket" scale="0.01 0.01 0.01" rotation="0  30 0">
+        <a-entity position="-8 -9.5 -11"  data-src="assets/venus-basket" scale="1 1 1" rotation="0  30 0">
           <a-light type="point" color="#AADDFF" intensity="0.1" distance="1.5"></a-light>
         </a-entity>
-        <a-entity position=" 5 -9.5 -14"  data-src="assets/venus-basket" scale="0.01 0.01 0.01" rotation="0 160 0">
+        <a-entity position=" 5 -9.5 -14"  data-src="assets/venus-basket" scale="1 1 1" rotation="0 160 0">
           <a-light type="point" color="#AADDFF" intensity="0.1" distance="1.5"></a-light>
         </a-entity>
-        <a-entity position="-2 -9.5 -16"  data-src="assets/venus-basket" scale="0.01 0.01 0.01" rotation="0 280 0">
+        <a-entity position="-2 -9.5 -16"  data-src="assets/venus-basket" scale="1 1 1" rotation="0 280 0">
           <a-light type="point" color="#AADDFF" intensity="0.1" distance="1.5"></a-light>
         </a-entity>
-        <a-entity position=" 9 -9.5 -9"   data-src="assets/venus-basket" scale="0.01 0.01 0.01" rotation="0  70 0">
+        <a-entity position=" 9 -9.5 -9"   data-src="assets/venus-basket" scale="1 1 1" rotation="0  70 0">
           <a-light type="point" color="#AADDFF" intensity="0.1" distance="1.5"></a-light>
         </a-entity>
 
@@ -648,7 +609,7 @@
 
         <!-- seafloor -->
         <a-entity
-          data-src="assets/hydrothermal_vent.glb" 
+          data-src="assets/midnight_zone/hydrothermal_vent.glb" 
           position="3 -30 20"
           scale="3 3 3"
           rotation="0 0 0">
@@ -661,17 +622,9 @@
         </a-entity> -->
 
         <!-- marine snow -->
-        <!-- <a-entity particle-system="preset: snow; particleCount: 150;
+        <a-entity particle-system="preset: snow; particleCount: 150;
           color: #CCCCFF; size: 0.03; opacity: 0.2; velocityValue: 0 -0.02 0">
-        </a-entity> -->
-
-        <a-entity position="-4 -11.5 -13" data-src="assets/triangle_net.glb" scale="0.01 0.01 0.01" rotation="0 120 5"></a-entity>
-
-        <a-entity position="6 -11.5 -10" data-src="assets/dirty_plastic_bottle.glb" scale="0.01 0.01 0.01" rotation="0 80 -5"></a-entity>
-
-        <a-entity position="2 4 -11" data-src="assets/foam_pollution.glb" scale="0.01 0.01 0.01" rotation="0 60 8"
-          animation="property: position; from: 2 8 -11; to: 2 -11 -11; dur: 35000; loop: true; easing: linear">
-        </a-entity>
+        </a-entity> 
 
         <!-- <a-entity
           position="15 7 -10" data-src="assets/magnapinna_squid.glb" scale="10 10 10" rotation="0 0 0" animation-mixer scanner
@@ -697,7 +650,7 @@
         </a-entity> -->
 
         <!-- <a-entity
-          position="0 5 -8" data-src="assets/hammerhead_shark.glb" scale="0.01 0.01 0.01" rotation="15 0 5"
+          position="0 5 -8" data-src="assets/hammerhead_shark.glb" scale="1 1 1" rotation="15 0 5"
           sinking-fish scanner
           data-name="Finned Shark" data-sci="Sphyrna mokarran" data-fam="Sphyrnidae"
           data-facts="Sharks thrown back after finning cannot swim and slowly sink into the abyss, drowning or starving."
@@ -709,7 +662,7 @@
         </a-entity> -->
 
         <a-entity
-          position="7 3 -11" data-src="assets/jelly_blubber.glb" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
+          position="7 3 -11" data-src="assets/midnight_zone/jelly_blubber.glb" scale="1 1 1" rotation="0 0 0" animation-mixer scanner
           data-name="Jelly Blubber" data-sci="Catostylus mosaicus" data-fam="Catostylidae"
           data-facts="Some jellyfish species in the midnight zone are completely transparent and nearly invisible without light."
           data-impact="Jellyfish populations boom when overfishing removes their predators, destabilising entire ecosystems."
@@ -717,13 +670,13 @@
           animation="property: position; from: 7 3 -11; to: 7 0 -11; dur: 6000; loop: true; dir: alternate; easing: easeInOutSine">
           <a-light type="point" color="#FFFFFF" intensity="0.1" distance="3"></a-light>
         </a-entity>
-        <a-entity position="-9 4 -14" data-src="assets/jelly_blubber.glb" scale="1 1 1" rotation="0 60 0" animation-mixer
+        <a-entity position="-9 4 -14" data-src="assets/midnight_zone/jelly_blubber.glb" scale="1 1 1" rotation="0 60 0" animation-mixer
           animation="property: position; from: -9 4 -14; to: -9 1 -14; dur: 7000; loop: true; dir: alternate; easing: easeInOutSine">
           <a-light type="point" color="#FFFFFF" intensity="0.1" distance="3"></a-light>
         </a-entity>
 
         <!-- <a-entity
-          position="10 2 -15" data-src="assets/flower_hat_jellyfish.glb" scale="0.01 0.01 0.01" rotation="0 180 0" animation-mixer scanner
+          position="10 2 -15" data-src="assets/flower_hat_jellyfish.glb" scale="1 1 1" rotation="0 180 0" animation-mixer scanner
           data-name="Flower Hat Jellyfish" data-sci="Olindias formosus" data-fam="Olindiasidae"
           data-facts="Despite their beauty, flower hat jellyfish have paralysing tentacles and are considered dangerous to handle."
           data-impact="Their bloom frequency is increasing as warming oceans and overfishing reduce natural competition."
@@ -735,7 +688,7 @@
         </a-entity> -->
 
         <!-- <a-entity
-          position="-14 1 -16" data-src="assets/lanternfish.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer scanner
+          position="-14 1 -16" data-src="assets/lanternfish.glb" scale="1 1 1" rotation="0 90 0" animation-mixer scanner
           data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
           data-facts="At night lanternfish rise toward the surface to feed, then descend back into darkness before dawn."
           data-impact="Deep-sea trawling kills vast numbers of lanternfish, undermining their role in ocean carbon storage."
@@ -743,28 +696,29 @@
           animation="property: position; from: -14 1 -16; to: 14 1 -16; dur: 14000; loop: true; easing: linear">
           <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-14 2.5 -17" data-src="assets/lanternfish.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-14 2.5 -17" data-src="assets/lanternfish.glb" scale="1 1 1" rotation="0 90 0" animation-mixer
           animation="property: position; from: -14 2.5 -17; to: 14 2.5 -17; dur: 15000; loop: true; easing: linear">
           <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-14 0 -15" data-src="assets/lanternfish.glb" scale="0.01 0.01 0.01" rotation="0 90 0" animation-mixer
+        <a-entity position="-14 0 -15" data-src="assets/lanternfish.glb" scale="1 1 1" rotation="0 90 0" animation-mixer
           animation="property: position; from: -14 0 -15; to: 14 0 -15; dur: 13500; loop: true; easing: linear">
           <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
         </a-entity> -->
 
-        <!-- <a-entity position=" 8 -11.5 -12" data-src="assets/venus_flower_basket.glb" scale="0.01 0.01 0.01" rotation="0  90 0">
+        <!-- <a-entity position=" 8 -11.5 -12" data-src="assets/venus_flower_basket.glb" scale="1 1 1" rotation="0  90 0">
           <a-light type="point" color="#AAAAFF" intensity="0.15" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-6 -11.5 -15" data-src="assets/venus_flower_basket.glb" scale="0.01 0.01 0.01" rotation="0 220 0">
+        <a-entity position="-6 -11.5 -15" data-src="assets/venus_flower_basket.glb" scale="1 1 1" rotation="0 220 0">
           <a-light type="point" color="#AAAAFF" intensity="0.12" distance="1.5"></a-light>
         </a-entity>
-        <a-entity position=" 3 -11.5 -18" data-src="assets/venus_flower_basket.glb" scale="0.01 0.01 0.01" rotation="0 145 0">
+        <a-entity position=" 3 -11.5 -18" data-src="assets/venus_flower_basket.glb" scale="1 1 1" rotation="0 145 0">
           <a-light type="point" color="#AAAAFF" intensity="0.12" distance="1.5"></a-light>
         </a-entity> -->
       </a-entity>
 
 
       <!-- camera -->
+
       <a-entity id="rig" position="0 1.6 0">
         <a-entity id="cam" camera look-controls>
           <a-cursor color="cyan" fuse="false"></a-cursor>

@@ -5,7 +5,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
+    width: 700px;
     background-color: rgba(0, 43, 54, 0.9); 
     color: white;
     padding: 25px;
@@ -41,7 +41,7 @@
 }
 
 .modal-left img {
-  width:125%;
+  width:100%;
   border-radius: 8px;
   margin-bottom: 20px;
 }
@@ -64,6 +64,17 @@
 .modal-right h4 {
   margin: 0 0 5px 0;
   color: #4db8ff;
+}
+
+#modal-facts ul {
+  list-style-type: disc; /* Force visible bullets */
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+#modal-facts li {
+  margin-bottom: 10px;
+  line-height: 1.5;/* Light blue tint for underwater theme */
 }
 
 #back-btn {

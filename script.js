@@ -99,16 +99,30 @@ const config = ZONE_CONFIG[zoneName];
 AFRAME.registerComponent('scanner', {
   init: function () {
     this.el.addEventListener('click', () => {
-      const d = this.el.dataset;
-      document.getElementById('modal-name').textContent  = d.name   || '';
-      document.getElementById('modal-sci').textContent   = d.sci    || '';
-      document.getElementById('modal-fam').textContent   = d.fam    || '';
-      document.getElementById('modal-facts').textContent = d.facts  || '';
-      document.getElementById('modal-impact').textContent = d.impact || '';
+      const name = this.el.getAttribute('data-name');
+      const sci = this.el.getAttribute('data-sci');
+      const fam = this.el.getAttribute('data-fam');
+      const facts = this.el.getAttribute('data-facts');
+      const impact = this.el.getAttribute('data-impact');
+      const imgPath = this.el.getAttribute('data-img');
 
+      document.getElementById('modal-name').textContent  = name   || '';
+      document.getElementById('modal-sci').textContent   = sci    || '';
+      document.getElementById('modal-fam').textContent   = fam    || '';
+      document.getElementById('modal-facts').textContent = facts  || '';
+      document.getElementById('modal-impact').textContent = impact || '';
+      const factsArray = facts.split('|').filter(f => f.trim().length > 0);
+
+      // Wrap each part in <li> tags
+      const factsHTML = factsArray
+        .map(fact => `<li>${fact.trim()}</li>`)
+        .join('');
+
+      // Inject the list into your modal
+      document.getElementById('modal-facts').innerHTML = `<ul>${factsHTML}</ul>`;
       const img = document.getElementById('modal-img');
-      if (d.img) {
-        img.src = d.img;
+      if (imgPath) {
+        img.src = imgPath;
         img.style.display = 'block';
       } else {
         img.style.display = 'none';

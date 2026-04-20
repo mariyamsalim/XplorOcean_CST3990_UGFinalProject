@@ -17,14 +17,33 @@ const ZONE_CONFIG = {
   midnight: {
     skyColor:        '#000000',
     fogColor:        '#000000',
-    fogDensity:      0.12,
-    flashlight:      2.5,    
-    flashlightAngle: 22,
+    fogDensity:      0.08,
+    flashlight:      20,    
+    flashlightAngle: 35,
   },
 };
 
 // track active zone
 let currentZone = null;
+
+AFRAME.registerComponent('flashlight-follow', {
+  tick: function () {
+    const cam = document.getElementById('cam');
+    const flashlight = document.getElementById('flashlight');
+    const target = document.getElementById('flashlight-target');
+    if (!cam || !flashlight || !target) return;
+    const camWorldPos = new THREE.Vector3();
+    cam.object3D.getWorldPosition(camWorldPos);
+
+    const camWorldQuat = new THREE.Quaternion();
+    cam.object3D.getWorldQuaternion(camWorldQuat);
+    flashlight.object3D.position.copy(camWorldPos);
+    const forward = new THREE.Vector3(0, 0, -1);
+    forward.applyQuaternion(camWorldQuat);
+    forward.multiplyScalar(8);
+    target.object3D.position.copy(camWorldPos).add(forward);
+  }
+});
 
 // transport player to diff zones
 function transport(zoneName) {
@@ -45,20 +64,22 @@ const config = ZONE_CONFIG[zoneName];
   const next = document.getElementById(zoneName + '-zone');
   if (next) {
     next.setAttribute('visible', true);
+    setTimeout(() => {
+      const unloadedEntities = next.querySelectorAll('[data-src]');
+      console.log('Found entities to load:', unloadedEntities.length);
+      unloadedEntities.forEach(el => {
+        const modelUrl = el.getAttribute('data-src');
+        el.setAttribute('gltf-model', modelUrl);
+        el.removeAttribute('data-src'); 
+      });
 
-    const unloadedEntities = next.querySelectorAll('[data-src]');
-    unloadedEntities.forEach(el => {
-      const modelUrl = el.getAttribute('data-src');
-      el.setAttribute('gltf-model', modelUrl);
-      el.removeAttribute('data-src'); 
-    });
-
-    // restart all animations in this zone
-    next.querySelectorAll('[animation]').forEach(el => {
-      if(el.components.animation) {
-         el.components.animation.beginAnimation();
-      }
-    });
+      // restart all animations in this zone
+      next.querySelectorAll('[animation]').forEach(el => {
+        if(el.components.animation) {
+          el.components.animation.beginAnimation();
+        }
+      });
+    }, 100);
   }
 
   // sky colour
@@ -69,9 +90,8 @@ const config = ZONE_CONFIG[zoneName];
   scene.setAttribute('fog', `type: exponential; color: ${config.fogColor}; density: ${config.fogDensity}`);
 
   // flashlight
-  const flashlight = document.getElementById('flashlight');
-  flashlight.setAttribute('light', `type: spot; intensity: ${config.flashlight}; distance: 25; angle: ${config.flashlightAngle}; penumbra: 0.8; decay: 1.5`);
-
+  flashlight.setAttribute('light',
+  `type: spot; color: #FFF5E0; intensity: ${config.flashlight}; distance: 40; angle: ${config.flashlightAngle}; penumbra: 0.1; decay: 1.5; target: #flashlight-target`);
   currentZone = zoneName;
 }
 
@@ -114,7 +134,7 @@ function backToMenu() {
  
   // turn off flashlight
   document.getElementById('flashlight').setAttribute('light',
-    'type: spot; intensity: 0; distance: 25; angle: 25; penumbra: 0.8; decay: 1.5');
+    'type: spot; intensity: 0; distance: 25; angle: 55; penumbra: 0.8; decay: 1.5');
  
   // show main menu, hide back button and modal
   document.getElementById('landing-page').style.display = 'block';

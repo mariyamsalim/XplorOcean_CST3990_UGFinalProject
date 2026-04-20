@@ -146,6 +146,7 @@ body.vr-active .a-canvas {
   font-size: 1.25rem;
   color: #9ca3af;
   line-height: 1.6;
+  max-width: 70ch;
 }
 
 @keyframes pulse {
@@ -270,9 +271,9 @@ body.vr-active {
   color: #9ca3af; 
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.15em;
   font-weight: 600;
   cursor: pointer;

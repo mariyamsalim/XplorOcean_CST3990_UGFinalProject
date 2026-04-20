@@ -41,7 +41,9 @@
 }
 
 .modal-left img {
-  width:100%;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 8px;
   margin-bottom: 20px;
 }
@@ -150,7 +152,7 @@ body.vr-active .a-canvas {
   align-items: center;
   text-align: center;
   padding: 0 20px;
-  background: url("images/hero-section_bg.jpg") no-repeat center center;
+  background: url("images/landing_page/hero-section_bg.jpg") no-repeat center center;
   background-size: cover;
 }
 .hero-desc {
@@ -192,15 +194,15 @@ body.vr-active .a-canvas {
   position: relative;
 }
 .placeholder-sunlight {
-  background-image: url('images/sunlight-zone.jpg'); 
+  background-image: url('images/landing_page/sunlight-zone.jpg'); 
 }
 
 .placeholder-twilight {
-  background-image: url('images/twilight-zone.jpg');
+  background-image: url('images/landing_page/twilight-zone.jpg');
 }
 
 .placeholder-midnight {
-  background-image: url('images/midnight-zone.jpg');
+  background-image: url('images/landing_page/midnight-zone.jpg');
 }
 
 .depth-badge {

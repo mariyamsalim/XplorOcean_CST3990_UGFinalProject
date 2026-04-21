@@ -605,124 +605,142 @@
       </a-entity>
 
 
-      <!-- midnight zone -->
       <a-entity id="midnight-zone" visible="false">
 
-        <!-- lighting -->
-        <a-light type="ambient" color="#000005" intensity="0.02"></a-light>
+  <a-light type="ambient" color="#000005" intensity="0.02"></a-light>
 
-          <a-entity environment="preset: midnight; 
-            active: true; 
-            dressing: dust; 
-            dressingAmount: 500; 
-            dressingColor: #fff; 
-            dressingScale: 0.05;
-            grid: none;
-            skyType: color;
-            skyColor: #000"
-            position="0 -10 0">
-          </a-entity>
+  <a-entity environment="preset: midnight; 
+    active: true; 
+    dressing: dust; 
+    dressingAmount: 500; 
+    dressingColor: #fff; 
+    dressingScale: 0.05;
+    grid: none;
+    skyType: color;
+    skyColor: #000"
+    position="0 -10 0">
+  </a-entity>
 
-        <!-- seafloor -->
-        <a-entity
-          data-src="assets/midnight_zone/hydrothermal_vent.glb" 
-          position="3 -30 20"
-          scale="3 3 3"
-          rotation="0 0 0">
-          <a-light type="point" color="#808080" intensity="0.3" position="0 2 0"></a-light>
-        </a-entity>
+  <a-entity
+    data-src="assets/midnight_zone/hydrothermal_vent.glb" 
+    position="3 -30 10"
+    scale="3 3 3"
+    rotation="0 0 0">
+    <a-light type="point" color="#808080" intensity="0.3" position="0 2 0"></a-light>
+  </a-entity>
 
-        <!-- <a-entity
-          light="type: point; color: #ffe8c0; intensity: 0.6; distance: 8; decay: 2"
-          position="0 -10 -10">
-        </a-entity> -->
+  <a-entity
+    data-src="assets/midnight_zone/hydrothermal_vent.glb" 
+    position="-30 -30 -50"
+    scale="3 3 3"
+    rotation="0 180 0">
+    <a-light type="point" color="#808080" intensity="0.3" position="0 2 0"></a-light>
+  </a-entity>
 
-        <!-- marine snow -->
-        <a-entity particle-system="preset: snow; particleCount: 150;
-          color: #CCCCFF; size: 0.03; opacity: 0.2; velocityValue: 0 -0.02 0">
-        </a-entity> 
+  <a-entity
+    position="8 -3 15" data-src="assets/midnight_zone/mining_robot.glb" scale="1 1 1" rotation="0 180 0" 
+    animation-mixer scanner
+    class="clickable"
+    data-name="Mining Robot" data-sci="Industrial Machine" data-fam="N/A"
+    data-facts="These robots are used to extract precious minerals from the seafloor. | They weigh several tons and can operate under extreme pressure. | Their movement creates sediment plumes that can stay suspended for weeks."
+    data-impact="Deep-sea mining destroys slow-growing ecosystems and can cause irreversible damage to undiscovered species.">
+  </a-entity>
 
-        <a-entity
-          position="15 7 -10" data-src="assets/midnight_zone/magnapinna_squid.glb" scale="10 10 10" rotation="0 0 0" 
-          animation-mixer scanner
-          class="clickable"
-          data-name="Magnapinna Squid" data-sci="Magnapinna sp." data-fam="Magnapinnidae"
-          data-facts="Magnapinna squids have elbowed tentacles that can be 15 times their own body length. | They were first filmed in 2001. | They are rarely seen and very little is known about their behaviour and ecology."
-          data-impact="Deep-sea mining destroys the habitat they live in, an environment that takes thousands of years to form."
-          data-img="images/midnight_zone/magnapinna_squid.png"
-          animation="property: position; from: 15 7 -10; to: -15 7 -10; dur: 22000; loop: true; dir: alternate; easing: easeInOutSine">
-          <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
+  <a-entity particle-system="preset: snow; particleCount: 150;
+    color: #CCCCFF; size: 0.03; opacity: 0.2; velocityValue: 0 -0.02 0">
+  </a-entity> 
 
-          <!-- <a-light type="point" color="#FF00FF" intensity="1.2" distance="5"
-            animation="property: light.intensity; from: 0.2; to: 0.7; dir: alternate; dur: 2500; loop: true">
-          </a-light> -->
-        </a-entity> 
+  <a-entity
+    position="30 25 -20" data-src="assets/midnight_zone/magnapinna_squid.glb" scale="10 10 10" rotation="90 0 50" 
+    animation-mixer scanner
+    class="clickable"
+    data-name="Magnapinna Squid" data-sci="Magnapinna sp." data-fam="Magnapinnidae"
+    data-facts="Magnapinna squids have elbowed tentacles that can be 15 times their own body length. | They were first filmed in 2001. | They are rarely seen and very little is known about their behaviour."
+    data-impact="Deep-sea mining destroys the habitat they live in, an environment that takes thousands of years to form."
+    data-img="images/midnight_zone/magnapinna_squid.png"
+    animation="property: position; from: 30 25 -20; to: -75 25 75; dur: 50000; loop: true; easing: linear">
+    <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
+  </a-entity> 
 
-        <a-entity
-          position="-5 -9 -7" data-src="assets/midnight_zone/giant_pacific_octopus.glb" scale="1 1 1" rotation="0 45 0" 
-          animation-mixer scanner
-          class="clickable"
-          data-name="Giant Pacific Octopus" data-sci="Enteroctopus dofleini" data-fam="Octopodidae"
-          data-facts="The giant Pacific octopus can change colour and texture in milliseconds, and has three hearts pumping blue blood. | They are highly intelligent and can solve complex problems. | They are found in the waters around Alaska, Canada, and Japan."
-          data-impact="Chemical pollution accumulates in octopus tissue and disrupts their reproduction."
-          data-img="images/midnight_zone/giant_pacific_octopus.png"
-          animation="property: position; from: -5 -9 -7; to: 5 -9 -7; dur: 10000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+  <a-entity
+    position="20 -4 -5" data-src="assets/midnight_zone/giant_isopod.glb" scale="0.5 0.5 0.5" rotation="0 0 0" 
+    scanner
+    class="clickable"
+    data-name="Giant Isopod" data-sci="Cirolana sp." data-fam="Cirolanidae"
+    data-facts="Giant isopods are scavengers that feed on dead organic matter on the seafloor. | They can live for several decades and grow quite large. | They are important for nutrient cycling in deep-sea ecosystems."
+    data-impact="Deep-sea mining disrupts the seafloor habitat where giant isopods live and feed."
+    data-img="images/midnight_zone/giant_isopod.png">
+    <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
+  </a-entity>
 
-        <a-entity
-          position="-5 -9 -7" data-src="assets/midnight_zone/dumbo_octopus.glb" scale="1 1 1" rotation="0 45 0" 
-          animation-mixer scanner
-          class="clickable"
-          data-name="Dumbo Octopus" data-sci="Meganychoteuthis hamiltoni" data-fam="Octopodidae"
-          data-facts="Dumbo octopuses are named for their large, ear-like fins and are found in the deep waters of the Antarctic. | They are known for their slow, graceful movements and unique appearance. | They are filter feeders and primarily consume small crustaceans and other marine organisms."
-          data-impact="Climate change and ocean acidification threaten the survival of dumbo octopuses in their deep-sea habitat."
-          data-img="images/midnight_zone/dumbo_octopus.png"
-          animation="property: position; from: -5 -9 -7; to: 5 -9 -7; dur: 10000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity>
+  <a-entity
+    position="-15 -6 -7" data-src="assets/midnight_zone/giant_isopod.glb" scale="0.5 0.5 0.5" rotation="0 90 0" 
+    animation_mixer
+    scanner
+    class="clickable"
+    data-name="Giant Isopod" data-sci="Cirolana sp." data-fam="Cirolanidae"
+    data-facts="Giant isopods are scavengers that feed on dead organic matter on the seafloor. | They can live for several decades and grow quite large. | They are important for nutrient cycling in deep-sea ecosystems."
+    data-impact="Deep-sea mining disrupts the seafloor habitat where giant isopods live and feed."
+    data-img="images/midnight_zone/giant_isopod.png"
+    animation="property: position; from: -15 -6 -7; to: -30 -6 30; dur: 50000; loop: true; easing: linear">
+    <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
+  </a-entity>
 
-        <a-entity
-          position="18 12 -20" data-src="assets/midnight_zone/sperm_whale.glb" scale="10 10 10" rotation="0 -90 -5" 
-          animation-mixer scanner
-          class="clickable"
-          data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
-          data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They are the largest toothed predators and can dive up to 2,000 meters in search of squid. | They have a complex social structure and communicate using a variety of clicks and vocalizations."
-          data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
-          data-img="images/midnight_zone/sperm_whale.png"
-          animation="property: position; from: 18 12 -20; to: -18 12 -20; dur: 38000; loop: true; easing: linear">
-        </a-entity>
+  <a-entity
+    position="5 -5 -7" data-src="assets/midnight_zone/dumbo_octopus.glb" scale="5 5 5" rotation="0 -30 50" 
+    animation-mixer scanner
+    class="clickable"
+    data-name="Dumbo Octopus" data-sci="Grimpoteuthis sp." data-fam="Opisthoteuthidae"
+    data-facts="Dumbo octopuses are named for their large, ear-like fins and are found in the deepest parts of the ocean. | They are known for their slow, graceful movements. | They feed on small crustaceans and worms by hovering above the seafloor and using their arms to capture prey."
+    data-impact="Climate change and ocean acidification threaten the survival of dumbo octopuses in their deep-sea habitat."
+    data-img="images/midnight_zone/dumbo_octopus.png"
+    animation="property: position; from: 15 -5 -7; to: -35 25 -7; dur: 70000; loop: true; easing: linear">
+  </a-entity>
 
-        <a-entity
-          position="-14 1 -16" data-src="assets/midnight_zone/anglerfish.glb" scale="1 1 1" rotation="0 90 0" animation-mixer scanner
-          class="clickable"
-          data-name="Anglerfish" data-sci="Melanocetus johnsoni" data-fam="Melanocetidae"
-          data-facts="Anglerfish use a bioluminescent lure to attract prey in the dark depths of the ocean. | They have large mouths and expandable stomachs that allow them to consume prey larger than themselves. | They are found in the deep sea and are known for their unique adaptations to survive in extreme conditions."
-          data-impact="Overfishing and habitat destruction threaten anglerfish populations in deep-sea ecosystems."
-          data-img="images/midnight_zone/anglerfish.png"
-          animation="property: position; from: -14 1 -16; to: 14 1 -16; dur: 14000; loop: true; easing: linear">
-          <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
-        </a-entity>
-        <a-entity position="-14 2.5 -17" data-src="assets/midnight_zone/anglerfish.glb" scale="1 1 1" rotation="0 90 0" 
-        animation-mixer scanner
-          class="clickable"
-          data-name="Anglerfish" data-sci="Melanocetus johnsoni" data-fam="Melanocetidae"
-          data-facts="Anglerfish use a bioluminescent lure to attract prey in the dark depths of the ocean. | They have large mouths and expandable stomachs that allow them to consume prey larger than themselves. | They are found in the deep sea and are known for their unique adaptations to survive in extreme conditions."
-          data-impact="Overfishing and habitat destruction threaten anglerfish populations in deep-sea ecosystems."
-          data-img="images/midnight_zone/anglerfish.png"
-          animation="property: position; from: -14 2.5 -17; to: 14 2.5 -17; dur: 15000; loop: true; easing: linear">
-          <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
-        </a-entity>
-        <a-entity position="-14 0 -15" data-src="assets/midnight_zone/anglerfish.glb" scale="1 1 1" rotation="0 90 0" 
-        animation-mixer scanner
-          class="clickable"
-          data-name="Anglerfish" data-sci="Melanocetus johnsoni" data-fam="Melanocetidae"
-          data-facts="Anglerfish use a bioluminescent lure to attract prey in the dark depths of the ocean. | They have large mouths and expandable stomachs that allow them to consume prey larger than themselves. | They are found in the deep sea and are known for their unique adaptations to survive in extreme conditions."
-          data-impact="Overfishing and habitat destruction threaten anglerfish populations in deep-sea ecosystems."
-          data-img="images/midnight_zone/anglerfish.png"
-          animation="property: position; from: -14 0 -15; to: 14 0 -15; dur: 13500; loop: true; easing: linear">
-          <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
-        </a-entity>
+  <a-entity
+    position="60 100 -100" data-src="assets/twilight_zone/sperm_whale.glb" scale="10 10 10" rotation="0 -90 -5" 
+    animation-mixer scanner
+    class="clickable"
+    data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+    data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
+    data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
+    data-img="images/midnight_zone/sperm_whale.png"
+    animation="property: position; from: 60 100 -100; to: -60 100 -100; dur: 38000; loop: true; easing: linear">
+  </a-entity>
+  <a-entity
+    position="30 60 -70" data-src="assets/twilight_zone/sperm_whale.glb" scale="2 2 2" rotation="0 -90 -5" 
+    animation-mixer scanner
+    class="clickable"
+    data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+    data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
+    data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
+    data-img="images/midnight_zone/sperm_whale.png"
+    animation="property: position; from: 30 60 -70; to: -90 60 -70; dur: 38000; loop: true; easing: linear">
+  </a-entity>
 
-      </a-entity>
+  <a-entity
+    position="-60 25 -30" data-src="assets/twilight_zone/sperm_whale.glb" scale="10 10 10" rotation="0 90 -5" 
+    animation-mixer scanner
+    class="clickable"
+    data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+    data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
+    data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
+    data-img="images/midnight_zone/sperm_whale.png"
+    animation="property: position; from: -60 100 100; to: 60 100 100; dur: 38000; loop: true; easing: linear">
+  </a-entity>
+
+  <a-entity
+    position="-30 1 30" data-src="assets/midnight_zone/anglerfish.glb" scale="5 5 5" rotation="0 -90 0" animation-mixer scanner
+    class="clickable"
+    data-name="Anglerfish" data-sci="Melanocetus johnsoni" data-fam="Melanocetidae"
+    data-facts="Anglerfish use a bioluminescent lure to attract prey in the dark depths of the ocean. | They have expandable stomachs to consume large prey. | They are solitary creatures and have a lifespan of several decades."
+    data-impact="Overfishing and habitat destruction threaten anglerfish populations in deep-sea ecosystems."
+    data-img="images/midnight_zone/anglerfish.png"
+    animation="property: position; from: -30 1 30; to: -30 5 -25; dur: 55000; loop: true; easing: linear">
+    <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
+  </a-entity>
+
+</a-entity>
 
 
       <!-- camera -->

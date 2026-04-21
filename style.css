@@ -41,9 +41,7 @@
 }
 
 .modal-left img {
-  width: 300px;
-  height: 200px;
-  object-fit: cover;
+  width: 100%;
   border-radius: 8px;
   margin-bottom: 20px;
 }

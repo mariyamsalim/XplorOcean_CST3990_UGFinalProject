@@ -207,7 +207,7 @@ body.vr-active .a-canvas {
   position: absolute;
   bottom: 20px;
   left: 20px;
-  background-color: rgba(4, 8, 20, 0.6);
+  background-color: #04081499;
   backdrop-filter: blur(4px); 
   color: #9ca3af; 
   padding: 8px 16px;

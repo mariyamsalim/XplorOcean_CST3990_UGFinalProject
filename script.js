@@ -6,6 +6,7 @@ const ZONE_CONFIG = {
     fogDensity:      0.04,
     flashlight:      0,     
     flashlightAngle: 25,
+    audioId:        'sunlight-audio',
   },
   twilight: {
     skyColor:        '#021028',
@@ -13,6 +14,7 @@ const ZONE_CONFIG = {
     fogDensity:      0.07,
     flashlight:      1.5,   
     flashlightAngle: 30,
+    audioId:        'twilight-audio',
   },
   midnight: {
     skyColor:        '#000000',
@@ -20,6 +22,7 @@ const ZONE_CONFIG = {
     fogDensity:      0.08,
     flashlight:      20,    
     flashlightAngle: 35,
+    audioId:        'midnight-audio',
   },
 };
 
@@ -45,35 +48,74 @@ AFRAME.registerComponent('flashlight-follow', {
   }
 });
 
-// transport player to diff zones
 function transport(zoneName) {
-const config = ZONE_CONFIG[zoneName];
+  const config = ZONE_CONFIG[zoneName];
   if (!config) return;
 
+  // UI and State
   document.getElementById('landing-page').style.display = 'none';
   document.getElementById('back-btn').style.display = 'block';
   document.body.classList.add('vr-active');
 
-  // hide previous zone
-  if (currentZone) {
-    const prev = document.getElementById(currentZone + '-zone');
-    if (prev) prev.setAttribute('visible', false);
+  const scene = document.querySelector('a-scene');
+
+  // 1. Unified Fog Logic (Prevents overwriting the Midnight fix)
+  if (zoneName === 'midnight') {
+    scene.setAttribute('fog', {
+      type: 'exponential',
+      color: '#000000',
+      density: 0.01 // Keep this low so distant assets are visible
+    });
+  } else if (zoneName === 'twilight') {
+    // Twilight fix: lowering density from 0.07 to 0.02 so assets stay visible
+    scene.setAttribute('fog', {
+      type: 'exponential',
+      color: config.fogColor,
+      density: 0.02 
+    });
+} else {
+    scene.setAttribute('fog', `type: exponential; color: ${config.fogColor}; density: ${config.fogDensity}`);
+}
+
+  // 2. Camera Refresh
+  const camera = document.getElementById('cam');
+  if (camera && camera.components.camera) {
+    camera.components.camera.camera.updateProjectionMatrix();
   }
 
-  // show new zone
+  // 3. Hide previous zone
+  if (currentZone) {
+    const prev = document.getElementById(currentZone + '-zone');
+    if (prev) {
+      prev.setAttribute('visible', false);
+      prev.querySelectorAll('[animation-mixer]').forEach(el => el.pause());
+    }
+  }
+
+  // 4. Show new zone and Load Assets
   const next = document.getElementById(zoneName + '-zone');
   if (next) {
     next.setAttribute('visible', true);
+    next.play();
+
+    // Activate environment component if present
+    const env = next.querySelector('[environment]');
+    if (env) {
+      env.setAttribute('environment', 'active', true);
+    }
+
     setTimeout(() => {
-      const unloadedEntities = next.querySelectorAll('[data-src]');
-      console.log('Found entities to load:', unloadedEntities.length);
-      unloadedEntities.forEach(el => {
+      const entities = next.querySelectorAll('[data-src]');
+      entities.forEach(el => {
         const modelUrl = el.getAttribute('data-src');
-        el.setAttribute('gltf-model', modelUrl);
-        el.removeAttribute('data-src'); 
+        if (!el.getAttribute('gltf-model')) {
+          el.setAttribute('gltf-model', modelUrl);
+        }
+        if (el.components['animation-mixer']) {
+          el.components['animation-mixer'].play();
+        }
       });
 
-      // restart all animations in this zone
       next.querySelectorAll('[animation]').forEach(el => {
         if(el.components.animation) {
           el.components.animation.beginAnimation();
@@ -82,19 +124,27 @@ const config = ZONE_CONFIG[zoneName];
     }, 100);
   }
 
-  // sky colour
+  // 5. Sky Color
   document.getElementById('main-sky').setAttribute('color', config.skyColor);
 
-  // fog
-  const scene = document.querySelector('a-scene');
-  scene.setAttribute('fog', `type: exponential; color: ${config.fogColor}; density: ${config.fogDensity}`);
+  // 6. Flashlight (Using surgical setAttribute)
+  const flashlight = document.getElementById('flashlight');
+  flashlight.setAttribute('light', 'type', 'spot'); 
+  flashlight.setAttribute('light', 'intensity', config.flashlight);
+  flashlight.setAttribute('light', 'distance', 100); 
+  flashlight.setAttribute('light', 'angle', config.flashlightAngle);
+  flashlight.setAttribute('light', 'target', '#flashlight-target');
 
-  // flashlight
-  flashlight.setAttribute('light',
-  `type: spot; color: #FFF5E0; intensity: ${config.flashlight}; distance: 40; angle: ${config.flashlightAngle}; penumbra: 0.1; decay: 1.5; target: #flashlight-target`);
+  // 7. Audio
+  const ambientSound = document.getElementById('ambient-sound');
+  if (ambientSound && ambientSound.components.sound) {
+    ambientSound.components.sound.stopSound();
+    ambientSound.setAttribute('sound', 'src', '#' + config.audioId);
+    ambientSound.components.sound.playSound();
+  }
+
   currentZone = zoneName;
 }
-
 // testing scanner
 AFRAME.registerComponent('scanner', {
   init: function () {
@@ -118,7 +168,7 @@ AFRAME.registerComponent('scanner', {
         .map(fact => `<li>${fact.trim()}</li>`)
         .join('');
 
-      // Inject the list into your modal
+      // Inject the list into modal
       document.getElementById('modal-facts').innerHTML = `<ul>${factsHTML}</ul>`;
       const img = document.getElementById('modal-img');
       if (imgPath) {
@@ -137,9 +187,16 @@ AFRAME.registerComponent('scanner', {
 function backToMenu() {
   if (currentZone) {
     const prev = document.getElementById(currentZone + '-zone');
-    if (prev) prev.setAttribute('visible', false);
+    if (prev) {
+      prev.setAttribute('visible', false);
+      // Pause animations to save performance
+      prev.querySelectorAll('[animation-mixer]').forEach(el => el.pause());
+    }
     currentZone = null;
   }
+  document.querySelectorAll('[environment]').forEach(env => {
+    env.setAttribute('environment', 'active', false);
+  });
  
   // reset sky and fog 
   document.getElementById('main-sky').setAttribute('color', '#004C6D');
@@ -147,8 +204,7 @@ function backToMenu() {
   scene.setAttribute('fog', 'type: exponential; color: #0077B6; density: 0.04');
  
   // turn off flashlight
-  document.getElementById('flashlight').setAttribute('light',
-    'type: spot; intensity: 0; distance: 25; angle: 55; penumbra: 0.8; decay: 1.5');
+  document.getElementById('flashlight').setAttribute('light', 'intensity: 0');
  
   // show main menu, hide back button and modal
   document.getElementById('landing-page').style.display = 'block';
@@ -156,6 +212,11 @@ function backToMenu() {
   
   document.getElementById('back-btn').style.display  = 'none';
   document.getElementById('scanner-modal').style.display = 'none';
+
+  const ambientSound = document.getElementById('ambient-sound');
+  if (ambientSound && ambientSound.components.sound) {
+    ambientSound.components.sound.stopSound();
+  }
 
 }
 

@@ -88,9 +88,10 @@
           </div>
           <div class="modal-right">
             <h4>Controls:</h4>
-            <p>Drag your mouse to look around the 360° environment.</p>
+            <p>Drag your mouse to look around the 360-degree environment.</p>
             <p>Click on the marine life to learn more about it!</p>
             <p>Click on the back button to return to the main menu.</p>
+            <p>Please wait for a few seconds for the environment to load.</p>
             <h4>Tip:</h4>
             <p>Turn up your volume for a fully immersive experience!</p>
           </div>
@@ -142,10 +143,9 @@
       <!-- assets -->
       <a-assets timeout="10000">
         <!-- <a-asset-item id="seabed-terrain" src="assets/coral_reef.glb"></a-asset-item> -->
-        <audio id="underwater-sound" src="audio/underwater.mp3" preload="auto" loop></audio>
-        <audio id="sunlight-audio" src="audio/sunlight_zone.mp3" preload="auto" loop></audio>
-        <audio id="twilight-audio" src="audio/twilight_zone.mp3" preload="auto" loop></audio>
-        <audio id="midnight-audio" src="audio/midnight_zone.mp3" preload="auto" loop></audio>
+        <audio id="#sunlight-audio" src="audio/sunlight_zone.mp3" preload="auto" loop></audio>
+        <audio id="#twilight-audio" src="audio/twilight_zone.mp3" preload="auto" loop></audio>
+        <audio id="#midnight-audio" src="audio/midnight_zone.mp3" preload="auto" loop></audio>
       </a-assets>
 
       <a-sound id="ambient-sound" src="" loop="true" positional="false" volume="0.5"></a-sound>
@@ -161,7 +161,7 @@
         <a-light type="ambient"     color="#0096C7" intensity="0.6"></a-light>
         <a-light type="directional" color="#CAF0F8" intensity="1.5" position="1 10 -2"></a-light>
         <a-light type="point"       color="#6B9E8C" intensity="0.8" position="0 5 0"></a-light>
-
+        <audio id="sunlight-audio" src="audio/sunlight_zone.mp3" preload="auto" loop></audio>
         <a-entity id="rays-anchor" position="0 40 -50">
   
           <a-entity geometry="primitive: cone; radiusBottom: 12; radiusTop: 0.5; height: 120"
@@ -216,20 +216,7 @@
         <a-entity position="-40 20 -20" data-src="assets/pollutants/fishing_net.glb" scale="0.03 0.03 0.03" rotation="0 0 50"
         animation="property: position; from: -40 20 -20; to: 60 18 -20; dur: 100000; loop: true; dir: alternate; easing: easeInOutSine"></a-entity>  
 
-        <!-- <a-entity
-          position="8 0 -1"
-          data-src="assets/sunlight_zone/entangled_turtle.glb"
-          scale="50 50 50" rotation="0 -30 10"
-          animation-mixer scanner
-          class="clickable"
-          data-name="Entangled Sea Turtle" data-sci="Cheloniidae" data-fam="Cheloniidae"
-          data-facts="Sea turtles cannot surface to breathe when tangled in ghost fishing gear, causing them to drown."
-          data-impact="An estimated 250,000 sea turtles are accidentally captured, injured or killed by fishing operations each year."
-          data-img="images/sunlight_zone/green_sea_turtle.png"
-          animation="property: position; from: 8 0 -11; to: 6 -1 -11; dur: 8000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> turtle to be changed (can't find file) -->
-
-        <!-- <a-entity
+        <a-entity
           position="-20 1 30"
           data-src="assets/sunlight_zone/hammerhead_shark.glb"
           scale="10 10 10"
@@ -243,8 +230,8 @@
           data-facts="Hammerheads have 360-degree vision, letting them see above and below simultaneously. | They have a unique head shape called a cephalofoil that enhances their sensory perception and maneuverability. | Some species of hammerhead sharks can form schools during the day, sometimes numbering over 100 individuals, which is unusual for typically solitary sharks."
           data-impact="Millions are killed yearly due to shark finning for shark fin soup."
           data-img="images/sunlight_zone/hammerhead_shark.png"
-          animation="property: position; from: -20 1 30; to: 28 1 30; dur: 22000; loop: true; easing: linear">
-        </a-entity> animation to be fixed -->
+          animation="property: position; from: 20 10 -30; to: 28 10 30; dur: 22000; loop: true; easing: linear">
+        </a-entity> animation to be fixed
 
         <a-entity
           data-src="assets/sunlight_zone/caribbean_reef_shark.glb"
@@ -297,10 +284,10 @@
           animation="property: position; from: -30 35 10; to: 40 35 -15; dur: 45000; loop: true; easing: linear">
         </a-entity> no file found
 
-        <!-- <a-entity
+        <a-entity
           position="-22 3 -18"
           data-src="assets/sunlight_zone/killer_whale.glb"
-          scale="1 1 1" rotation="0 90 0"
+          scale="0.1 0.1 0.1" rotation="0 180 0"
           animation-mixer scanner
           class="clickable"
           data-name="Killer Whale (Orca)" data-sci="Orcinus orca" data-fam="Delphinidae"
@@ -308,9 +295,9 @@
           data-impact="Noise pollution and prey depletion from overfishing disrupt orca hunting and communication."
           data-img="images/sunlight_zone/killer_whale.png"
           animation="property: position; from: -40 12 30; to: -40 12 -30; dur: 24000; loop: true; easing: linear; delay: 3000">
-        </a-entity> -->
+        </a-entity>
 
-        <!-- <a-entity
+        <a-entity
           position="-14 4 -14"
           data-src="assets/sunlight_zone/bottlenose_dolphin.glb"
           scale="1 1 1" rotation="0 0 0"
@@ -331,7 +318,7 @@
           data-impact="Sonar from military exercises and shipping causes strandings and haemorrhaging in dolphins."
           data-img="images/sunlight_zone/bottlenose_dolphin.png"
           animation="property: position; from: -14 5 -16; to: 14 5 -16; dur: 12500; loop: true; easing: linear; delay: 500">
-        </a-entity> -->
+        </a-entity>
 
         <a-entity
           position="-30 15 -16"
@@ -369,40 +356,20 @@
           data-facts="These tropical fish are popular in the aquarium trade, but many species are difficult to keep in captivity and suffer high mortality rates. | They are known for their vibrant colors and playful behavior. | They play important roles in coral reef ecosystems, such as controlling algae growth and providing food for predators."
           data-impact="Ocean acidification bleaches the coral reefs they depend on.">
         </a-entity>
-<!-- 
+
         <a-entity
-          position="6 -3 -9" data-src="assets/sunlight_zone/harbor_seal.glb" scale="1 1 1" rotation="0 0 0" 
+          position="6 -3 -9" data-src="assets/sunlight_zone/harbor_seal.glb" scale="1 1 1" rotation="0 90 0" 
           animation-mixer scanner
           class="clickable"
           data-name="Harbor Seal" data-sci="Phoca vitulina" data-fam="Phocidae"
           data-facts="Harbor seals can dive up to 500 m and hold their breath for up to 30 minutes. | They have a diverse diet, feeding on fish, squid, and crustaceans. | They are important indicators of ocean health due to their position in the food web."
           data-impact="Microplastics accumulate in seal tissue through the fish they eat, causing organ damage."
           data-img="images/sunlight_zone/harbor_seal.png"
-          animation="property: position; from: 9 -2 -9; to: -6 -3.5 -7; dur: 14000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> -->
-
-        <!-- <a-entity
-          position="5.8 -7.6 -9.5" data-src="assets/sunlight_zone/rock_crab.glb" scale="1 1 1" rotation="0 0 0" 
-          animation-mixer scanner
-          class="clickable"
-          data-name="Rock Crab" data-sci="Cancer irroratus" data-fam="Cancridae"
-          data-facts="Rock crabs moult their shells to grow, eating their old shell to recycle the calcium. | They are important for maintaining the balance of marine ecosystems by controlling the populations of other organisms. | They have a hard exoskeleton that provides protection from predators and environmental hazards."
-          data-impact="Ocean acidification weakens the calcium carbonate shells of crabs, making them fragile and brittle."
-          data-img="images/sunlight_zone/rock_crab.png"
-          animation="property: position; from: 5.8 -7.6 -9.5; to: 7.5 -7.6 -9.0; dur: 8000; loop: true; dir: alternate; easing: easeInOutSine">
+          animation="property: position;from: 30 12 40; to: -30 12 -40; dur: 14000; loop: true;; easing: linear">
         </a-entity>
-        <a-entity position="-5.5 -7.6 -10.5" data-src="assets/sunlight_zone/rock_crab.glb" scale="1 1 1" rotation="0 0 0"
-         animation-mixer scanner
-          class="clickable"
-           data-name="Rock Crab" data-sci="Cancer irroratus" data-fam="Cancridae"
-          data-facts="Rock crabs moult their shells to grow, eating their old shell to recycle the calcium. | They are important for maintaining the balance of marine ecosystems by controlling the populations of other organisms. | They have a hard exoskeleton that provides protection from predators and environmental hazards."
-          data-impact="Ocean acidification weakens the calcium carbonate shells of crabs, making them fragile and brittle."
-          data-img="images/sunlight_zone/rock_crab.png"
-          animation="property: position; from: -5.5 -7.6 -10.5; to: -7 -7.6 -10; dur: 9000; loop: true; dir: alternate; easing: easeInOutSine">
-        </a-entity> -->
 
-         <!-- <a-entity
-          position="-6 3 -10"
+         <a-entity
+          position="40 40 -40"
           data-src="assets/sunlight_zone/nofin_great_white_shark.glb"
           scale="10 10 10" rotation="0 0 0"
           animation-mixer scanner sinking-fish
@@ -411,19 +378,10 @@
           data-facts="Shark finning is the practice of cutting off a shark's fins and discarding the rest of the body at sea, often while the shark is still alive. | Without their dorsal and pectoral fins, sharks cannot control their movement and slowly sink to the ocean floor. |  The fins are highly valued for shark fin soup, a delicacy in some cultures, leading to the brutal practice of finning."
           data-impact="Tens of millions of sharks are finned alive every year. The fins are sliced off and the living shark is thrown back to drown."
           data-img="images/sunlight_zone/great_white_shark.png"
-          animation="property: position; from: 26 12 -10; to: -23 10 -10; dur: 40000; loop: true; easing: linear">
-        </a-entity> -->
+          animation="property: position; from: 40 40 -40; to: 40 -40 -40; dur: 30000; loop: true; easing: linear">
+        </a-entity>
 
-        <!-- <a-entity
-          position="-18 12 -30" data-src="assets/sunlight_zone/yellowfin_tuna.glb" scale="7 7 7" rotation="0 90 0" 
-          animation-mixer scanner
-          class="clickable"
-          data-name="Yellowfin Tuna" data-sci="Thunnus albacares" data-fam="Scombridae"
-          data-facts="Yellowfin tuna can swim faster than 75 km/h, making them one of the fastest fish in the ocean. | They are highly migratory and can be found in tropical and subtropical oceans worldwide. | They play an important role in marine ecosystems as both predators and prey, feeding on smaller fish and squid while being hunted by larger predators like sharks and billfish."
-          data-impact="Overfishing has caused significant population declines; many stocks are now considered vulnerable."
-          data-img="images/sunlight_zone/yellowfin_tuna.png"
-          animation="property: position; from: -18 12 -30; to: 18 12 -30; dur: 10000; loop: true; easing: linear">
-        </a-entity> -->
+        
         <a-entity position="18 3.5 -18" data-src="assets/sunlight_zone/yellowfin_tuna.glb" scale="2 2 2" rotation="0 0 0" 
         animation-mixer scanner
           class="clickable"
@@ -460,6 +418,7 @@
         <a-entity particle-system="preset: dust; particleCount: 200;
           color: #FFFFFF; size: 10; opacity: 0.4; velocityValue: 0 0.03 0">
         </a-entity>
+        <audio id="twilight-audio" src="audio/twilight_zone.mp3" preload="auto" loop></audio>
 
         <a-entity position="-3 4 -9" data-src="assets/pollutants/foam_pollution.glb" scale="7 7 7" rotation="0 45 10"
           animation="property: position; from: -3 8 -9; to: -3 -9 -9; dur: 30000; loop: true; easing: linear">
@@ -486,7 +445,7 @@
             animation="property: light.intensity; from: 0.3; to: 0.9; dir: alternate; dur: 1500; loop: true">
           </a-light>
         </a-entity>
-        <!-- <a-entity position="3 1.2 -6" data-src="assets/twilight_zone/bobtail_squid.glb" scale="10 10 10" rotation="0 -60 0"
+        <a-entity position="3 1.2 -6" data-src="assets/twilight_zone/bobtail_squid.glb" scale="10 10 10" rotation="0 -60 0"
           animation-mixer scanner
           class="clickable"
           data-name="Bobtail Squid" data-sci="Sthenoteuthis oualaniensis" data-fam="Sthenoteuthidae"
@@ -497,7 +456,7 @@
           <a-light type="point" color="#00FFEE" intensity="0.5" distance="3"
             animation="property: light.intensity; from: 0.2; to: 0.7; dir: alternate; dur: 1800; loop: true">
           </a-light>
-        </a-entity> -->
+        </a-entity>
 
         <a-entity
           position="4 -0.5 -5" data-src="assets/twilight_zone/firefly_squid.glb" scale="10 10 10" rotation="0 -60 0" 
@@ -512,7 +471,7 @@
             animation="property: light.intensity; from: 0.2; to: 0.8; dir: alternate; dur: 800; loop: true">
           </a-light>
         </a-entity>
-        <!-- <a-entity position="-6 1 -10" data-src="assets/twilight_zone/firefly_squid.glb" scale="10 10 10" rotation="0 30 0" 
+        <a-entity position="-6 1 -10" data-src="assets/twilight_zone/firefly_squid.glb" scale="10 10 10" rotation="0 30 0" 
         animation-mixer scanner
         class="clickable"
         data-name="Firefly Squid" data-sci="Watasenia scintillans" data-fam="Enoploteuthidae"
@@ -535,7 +494,7 @@
           <a-light type="point" color="#7DF9FF" intensity="0.4" distance="2"
             animation="property: light.intensity; from: 0.1; to: 0.5; dir: alternate; dur: 900; loop: true">
           </a-light>
-        </a-entity> -->
+        </a-entity>
 
         <a-entity
           position="0 5 -8" data-src="assets/twilight_zone/jelly_blubber.glb" scale="1 1 1" rotation="0 0 0" 
@@ -600,7 +559,7 @@
           animation="property: position; from: -12 1 -24; to: 12 1 -14; dur: 10000; loop: true; easing: linear">
           <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <!-- <a-entity position="-12 2.2 -13" data-src="assets/twilight_zone/lanternfish.glb" scale="1 1 1" rotation="0 90 0" 
+        <a-entity position="-12 2.2 -13" data-src="assets/twilight_zone/lanternfish.glb" scale="1 1 1" rotation="0 90 0" 
         animation-mixer scanner
           class="clickable"
           data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
@@ -610,26 +569,6 @@
           animation="property: position; from: -12 2.2 -13; to: 12 2.2 -13; dur: 12800; loop: true; easing: linear">
           <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-12 0 -15" data-src="assets/twilight_zone/lanternfish.glb" scale="1 1 1" rotation="0 90 0" 
-        animation-mixer scanner
-          class="clickable"
-          data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
-          data-facts="Lanternfish make up the largest portion of deep-sea fish biomass and perform the greatest daily migration in the ocean. | They have photophores that produce bioluminescent light, which they use for camouflage, communication, and attracting prey. | They play a crucial role in the ocean's carbon cycle by migrating to the surface at night to feed on plankton and then returning to the depths during the day, transporting carbon from the surface to the deep sea."
-          data-impact="Deep-sea trawling destroys lanternfish populations that are critical to the carbon cycle of the ocean."
-          data-img="images/twilight_zone/lanternfish.png"
-          animation="property: position; from: -12 0 -15; to: 12 0 -15; dur: 11500; loop: true; easing: linear">
-          <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
-        </a-entity>
-        <a-entity position="-12 3 -16" data-src="assets/twilight_zone/lanternfish.glb" scale="1 1 1" rotation="0 90 0" 
-        animation-mixer scanner
-          class="clickable"
-          data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
-          data-facts="Lanternfish make up the largest portion of deep-sea fish biomass and perform the greatest daily migration in the ocean. | They have photophores that produce bioluminescent light, which they use for camouflage, communication, and attracting prey. | They play a crucial role in the ocean's carbon cycle by migrating to the surface at night to feed on plankton and then returning to the depths during the day, transporting carbon from the surface to the deep sea."
-          data-impact="Deep-sea trawling destroys lanternfish populations that are critical to the carbon cycle of the ocean."
-          data-img="images/twilight_zone/lanternfish.png"
-          animation="property: position; from: -12 3 -16; to: 12 3 -16; dur: 13200; loop: true; easing: linear">
-          <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
-        </a-entity> -->
 
       </a-entity>
 
@@ -637,6 +576,7 @@
       <a-entity id="midnight-zone" visible="false">
 
   <a-light type="ambient" color="#000005" intensity="0.02"></a-light>
+  <audio id="midnight-audio" src="audio/midnight_zone.mp3" preload="auto" loop></audio>
 
   <a-entity id="midnight-environment" environment="preset: midnight; 
   active: false; 

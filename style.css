@@ -1,115 +1,57 @@
-#scanner-modal {
-    display: none; 
-    position: fixed;
-    z-index: 9999;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px;
-    background-color: rgba(0, 43, 54, 0.9); 
-    color: white;
-    padding: 25px;
-    border: 4px solid #4db8ff;
-    border-radius: 15px;
-    font-family: sans-serif;
-    pointer-events: auto;
-}
+/* ============================================================
+   XplorOcean — style.css
+   Global styles for the landing page, modals, and VR scene UI.
 
-#modal-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: #4db8ff;
-    border: none;
-    padding: 8px 15px;
-    cursor: pointer;
-    color: #002b36;
-    font-weight: bold;
-    border-radius: 5px;
-}
+   Sections:
+     1.  Base & Reset
+     2.  A-Frame Canvas Layering
+     3.  Landing Page
+     4.  Hero Section
+     5.  Zone Cards
+     6.  Bottom Navigation Bar
+     7.  Buttons
+     8.  Modals (shared structure)
+     9.  Scanner Modal (creature info)
+     10. Guide Modal
+     11. Survey Modal
+     12. Back-to-Menu Button
+     13. Utility Classes
+     14. Animations
+============================================================ */
 
-.modal-content {
-  display: flex;
-  gap: 20px; 
-  margin-top: 10px;
-}
 
-.modal-left {
-  flex: 1; 
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-left img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.modal-left p {
-  margin: 5px 0;
-  font-size: 14px;
-}
-
-.modal-right {
-  flex: 1.5;
-  text-align: left;
-}
-
-.modal-right p {
-  margin: 5px 0 15px 0;
-  font-size: 14px;
-}
-
-.modal-right h4 {
-  margin: 0 0 5px 0;
-  color: #4db8ff;
-}
-
-#modal-facts ul {
-  list-style-type: disc; /* Force visible bullets */
-  padding-left: 20px;
-  margin: 10px 0;
-}
-
-#modal-facts li {
-  margin-bottom: 10px;
-  line-height: 1.5;/* Light blue tint for underwater theme */
-}
-
-#back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 999;
-
-  background: rgba(0, 20, 40, 0.75);
-  color: #90E0EF;
-  border: 1px solid #0096C7;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-size: 0.85rem;
-  font-family: inherit;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-
-  backdrop-filter: blur(6px);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-
-#back-btn:hover {
-  background: rgba(0, 150, 199, 0.3);
-  color: #CAF0F8;
-  border-color: #CAF0F8;
-}
-
+/* ============================================================
+   1. BASE & RESET
+============================================================ */
 body {
   margin: 0;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   background-color: #040814;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Prevent A-Frame's fullscreen mode from breaking the page layout */
+html.a-fullscreen,
+body.a-fullscreen {
+  position: static   !important;
+  overflow-y: auto   !important;
+  height: auto       !important;
+}
+
+/* Lock scroll when inside the VR scene */
+body.vr-active {
+  overflow: hidden !important;
+  position: fixed  !important;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ============================================================
+   2. A-FRAME CANVAS LAYERING
+   The canvas sits behind the landing page by default.
+   When vr-active is applied, it comes to the front.
+============================================================ */
 .a-canvas {
   z-index: -1 !important;
 }
@@ -117,6 +59,11 @@ body.vr-active .a-canvas {
   z-index: 1 !important;
 }
 
+
+/* ============================================================
+   3. LANDING PAGE
+   Full-page overlay that sits above the A-Frame scene.
+============================================================ */
 #landing-page {
   position: absolute;
   top: 0;
@@ -124,24 +71,14 @@ body.vr-active .a-canvas {
   width: 100%;
   background-color: #040814;
   color: white;
-  z-index: 10000; 
+  z-index: 10000;
 }
 
-.text-blue { color: #70bfff; }
-.bg-blue { background-color: #70bfff !important; }
 
-.subtitle {
-  letter-spacing: 0.2em;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-.main-title {
-  font-size: 5rem;
-  line-height: 1.1;
-  margin: 0 0 24px 0;
-}
-
+/* ============================================================
+   4. HERO SECTION
+   Full-viewport-height intro with centred text over abackground photo.
+============================================================ */
 .hero-section {
   height: 100vh;
   display: flex;
@@ -150,9 +87,16 @@ body.vr-active .a-canvas {
   align-items: center;
   text-align: center;
   padding: 0 20px;
-  background: url("images/landing_page/hero-section_bg.jpg") no-repeat center center;
+  background: url('images/landing_page/hero-section_bg.jpg') no-repeat center center;
   background-size: cover;
 }
+
+.main-title {
+  font-size: 5rem;
+  line-height: 1.1;
+  margin: 0 0 24px 0;
+}
+
 .hero-desc {
   font-size: 1.25rem;
   color: #9ca3af;
@@ -160,19 +104,39 @@ body.vr-active .a-canvas {
   max-width: 70ch;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+.subtitle {
+  letter-spacing: 0.2em;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 
+
+/* ============================================================
+   5. ZONE CARDS
+   Three alternating image + text cards on the landing page, one per ocean zone.
+============================================================ */
 .zones-section {
   max-width: 1100px;
   margin: 0 auto;
   padding: 100px 20px;
 }
-.section-header { margin-bottom: 80px; }
-.section-header h2 { font-size: 3rem; margin: 0; }
-.accent-line { height: 4px; width: 50px; background: #70bfff; margin-top: 24px; }
+
+.section-header {
+  margin-bottom: 80px;
+}
+.section-header h2 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+/* Short decorative bar under the section heading */
+.accent-line {
+  height: 4px;
+  width: 50px;
+  background: #70bfff;
+  margin-top: 24px;
+}
 
 .zone-card {
   display: flex;
@@ -180,36 +144,34 @@ body.vr-active .a-canvas {
   gap: 60px;
   margin-bottom: 120px;
 }
-.zone-card.reverse { flex-direction: row-reverse; }
+/* Every other card flips image and text sides */
+.zone-card.reverse {
+  flex-direction: row-reverse;
+}
 
+/* Zone image panel — filled by the placeholder classes below */
 .zone-image {
   flex: 1;
   height: 400px;
   background-color: #111827;
   border-radius: 16px;
-  background-size: cover; 
+  background-size: cover;
   background-position: center;
   position: relative;
 }
-.placeholder-sunlight {
-  background-image: url('images/landing_page/sunlight-zone.jpg'); 
-}
 
-.placeholder-twilight {
-  background-image: url('images/landing_page/twilight-zone.jpg');
-}
+.placeholder-sunlight { background-image: url('images/landing_page/sunlight-zone.jpg'); }
+.placeholder-twilight  { background-image: url('images/landing_page/twilight-zone.jpg'); }
+.placeholder-midnight  { background-image: url('images/landing_page/midnight-zone.jpg'); }
 
-.placeholder-midnight {
-  background-image: url('images/landing_page/midnight-zone.jpg');
-}
-
+/* Depth range label overlaid on the bottom-left of each zone image */
 .depth-badge {
   position: absolute;
   bottom: 20px;
   left: 20px;
   background-color: #04081499;
-  backdrop-filter: blur(4px); 
-  color: #9ca3af; 
+  backdrop-filter: blur(4px);
+  color: #9ca3af;
   padding: 8px 16px;
   border-radius: 6px;
   font-family: monospace;
@@ -221,8 +183,64 @@ body.vr-active .a-canvas {
 
 .zone-info { flex: 1; }
 .zone-info h3 { font-size: 3rem; margin: 0 0 24px 0; }
-.zone-info p { font-size: 1.1rem; color: #9ca3af; line-height: 1.6; margin-bottom: 32px; }
+.zone-info p  { font-size: 1.1rem; color: #9ca3af; line-height: 1.6; margin-bottom: 32px; }
 
+
+/* ============================================================
+   6. BOTTOM NAVIGATION BAR
+   Fixed bar at the bottom of the landing page with
+   User Guide and Survey buttons.
+============================================================ */
+.bottom-nav {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background-color: rgba(10, 17, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px 40px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0;
+}
+.nav-btn:hover {
+  color: #0096C7;
+}
+
+.nav-divider {
+  width: 1px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+
+/* ============================================================
+   7. BUTTONS
+   Base button reset applied to all <button> elements, plus the secondary (outlined) variant used on zone cards.
+============================================================ */
 button {
   cursor: pointer;
   font-family: inherit;
@@ -243,117 +261,162 @@ button {
   color: #0096C7;
 }
 
-html.a-fullscreen, body.a-fullscreen {
-    position: static !important;
-    overflow-y: auto !important;
-    height: auto !important;
-}
 
-body.vr-active {
-    overflow: hidden !important;
-    position: fixed !important;
-    width: 100%;
-    height: 100%;
-}
+/* ============================================================
+   8. MODALS — SHARED STRUCTURE
+   Shared layout used by the scanner, guide, and survey modals.
+   Each modal positions itself as a centred fixed overlay.
+============================================================ */
 
-.bottom-nav {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10001; 
-}
-
-.nav-container {
+/* Two-column layout inside a modal */
+.modal-content {
   display: flex;
-  align-items: center;
-  gap: 32px;
-  background-color: rgba(10, 17, 34, 0.7);
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08); 
+  gap: 20px;
+  margin-top: 10px;
+}
+
+/* Left column: image + taxonomy info */
+.modal-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.modal-left img {
+  width: 100%;
   border-radius: 8px;
-  padding: 16px 40px;
+  margin-bottom: 20px;
 }
-
-.nav-btn {
-  background: none;
-  border: none;
-  color: #9ca3af; 
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-family: inherit;
+.modal-left p {
+  margin: 5px 0;
   font-size: 14px;
-  letter-spacing: 0.15em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  padding: 0;
 }
 
-.nav-btn:hover {
-  color: #0096C7; 
+/* Right column: facts and pollution impact */
+.modal-right {
+  flex: 1.5;
+  text-align: left;
+}
+.modal-right p {
+  margin: 5px 0 15px 0;
+  font-size: 14px;
+}
+.modal-right h4 {
+  margin: 0 0 5px 0;
+  color: #4db8ff;
 }
 
-.nav-divider {
-  width: 1px;
-  height: 20px;
-  background-color: rgba(255, 255, 255, 0.15); 
-}
-
-#guide-modal {
-    display: none; 
-    position: fixed;
-    z-index: 9999;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    background-color: rgba(0, 43, 54, 0.9); 
-    color: white;
-    padding: 25px;
-    border: 4px solid #4db8ff;
-    border-radius: 15px;
-    font-family: sans-serif;
-    pointer-events: auto;
-}
-
-#survey-modal {
-    display: none; 
-    position: fixed;
-    z-index: 9999;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    background-color: rgba(0, 43, 54, 0.9); 
-    color: white;
-    padding: 25px;
-    border: 4px solid #4db8ff;
-    border-radius: 15px;
-    font-family: sans-serif;
-    pointer-events: auto;
-}
-
+/* Shared close button style (used in guide and survey modals) */
 .modal-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: #4db8ff;
-    border: none;
-    padding: 8px 15px;
-    cursor: pointer;
-    color: #002b36;
-    font-weight: bold;
-    border-radius: 5px;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #4db8ff;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  color: #002b36;
+  font-weight: bold;
+  border-radius: 5px;
 }
+
+
+/* ============================================================
+   9. SCANNER MODAL
+   Displays creature name, taxonomy, fun facts, and pollution impact when the player clicks a marine life entity.
+============================================================ */
+#scanner-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  background-color: rgba(0, 43, 54, 0.9);
+  color: white;
+  padding: 25px;
+  border: 4px solid #4db8ff;
+  border-radius: 15px;
+  font-family: sans-serif;
+  pointer-events: auto;
+}
+
+/* Close button specific to the scanner modal */
+#modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #4db8ff;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  color: #002b36;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/* Fun facts list — populated dynamically as a <ul> by scanner component */
+#modal-facts ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 10px 0;
+}
+#modal-facts li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   10. GUIDE MODAL
+   Shown when the user clicks "User Guide" in the bottom nav.
+============================================================ */
+#guide-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: rgba(0, 43, 54, 0.9);
+  color: white;
+  padding: 25px;
+  border: 4px solid #4db8ff;
+  border-radius: 15px;
+  font-family: sans-serif;
+  pointer-events: auto;
+}
+
+
+/* ============================================================
+   11. SURVEY MODAL
+   Shown when the user clicks "Survey" in the bottom nav.
+   Contains links to the pre- and post-simulation Google Forms.
+============================================================ */
+#survey-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: rgba(0, 43, 54, 0.9);
+  color: white;
+  padding: 25px;
+  border: 4px solid #4db8ff;
+  border-radius: 15px;
+  font-family: sans-serif;
+  pointer-events: auto;
+}
+
 .survey-btn {
   display: inline-block;
   padding: 12px 24px;
-  background-color: transparent; 
+  background-color: transparent;
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: background 0.3s ease;
@@ -361,8 +424,54 @@ body.vr-active {
   border: none;
   cursor: pointer;
 }
-
 .survey-btn:hover {
-  background-color: #0096C7; 
-  transform: translateY(-2px); 
+  background-color: #0096C7;
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   12. BACK-TO-MENU BUTTON
+   Fixed top-left button visible while inside the VR scene.
+   Uses a frosted-glass style to sit cleanly over the 3D view.
+============================================================ */
+#back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+
+  background: rgba(0, 20, 40, 0.75);
+  color: #90E0EF;
+  border: 1px solid #0096C7;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+#back-btn:hover {
+  background: rgba(0, 150, 199, 0.3);
+  color: #CAF0F8;
+  border-color: #CAF0F8;
+}
+
+
+/* ============================================================
+   13. UTILITY CLASSES
+============================================================ */
+.text-blue { color: #70bfff; }
+.bg-blue    { background-color: #70bfff !important; }
+
+
+/* ============================================================
+   14. ANIMATIONS
+============================================================ */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
 }

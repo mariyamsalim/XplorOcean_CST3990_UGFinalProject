@@ -2,25 +2,39 @@
 <html>
   <head>
     <title>XplorOcean - Marine Exploration</title>
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- A-Frame core + extras -->
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.rawgit.com/takahirox/aframe-outline/master/dist/aframe-outline.min.js"></script>
-    <!-- <script src="https://unpkg.com/aframe-particle-system-component@1.1.3/dist/aframe-particle-system-component.min.js"></script>
-     -->
+    <script src="https://unpkg.com/aframe-particle-system-component@1.1.3/dist/aframe-particle-system-component.min.js"></script>
+   
   </head>
 
   <body>
+
+    <!-- ============================================================
+         Landing page
+         Shown on load; hidden when user enters a zone via transport()
+    ============================================================ -->
     <div id="landing-page">
-    
+
+      <!-- Hero / title section -->
       <section class="hero-section">
         <h4 class="subtitle text-blue">XPLOROCEAN: WEBVR OCEAN SIMULATION</h4>
         <h1 class="main-title">Descend Into <br><span class="text-blue">the Deep</span></h1>
-        <p class="hero-desc">Experience the most mysterious zones of the ocean through immersive virtual reality. From sunlit coral gardens to the crushing silence of the midnight abyss, every meter tells a story.</p>
+        <p class="hero-desc">
+          Experience the most mysterious zones of the ocean through immersive virtual reality.
+          From sunlit coral gardens to the crushing silence of the midnight abyss, every meter tells a story.
+        </p>
       </section>
 
+      <!-- Zone selection cards -->
       <section class="zones-section">
         <div class="section-header">
           <h4 class="subtitle">MISSION ZONES</h4>
@@ -28,18 +42,25 @@
           <div class="accent-line"></div>
         </div>
 
+        <!-- Zone 01: Sunlight Zone (0–200m) -->
         <div class="zone-card">
           <div class="zone-image placeholder-sunlight">
-            <div class="depth-badge">0 - 200M</div> 
+            <div class="depth-badge">0 - 200M</div>
           </div>
           <div class="zone-info">
             <h4 class="subtitle text-blue">ZONE 01</h4>
             <h3>Sunlight Zone</h3>
-            <p>This part of the ocean is full of life because sunlight allows plants to grow, but it is also the most at risk. When you look at the coral reefs and schools of tropical fish, you can see the impact of human activity, from plastic waste in the water to coral bleaching caused by rising sea temperatures. XplorOcean starts in the Sunlight Zone, where survival and sunlight meet.</p>
+            <p>
+              This part of the ocean is full of life because sunlight allows plants to grow, but it is also the most at risk.
+              When you look at the coral reefs and schools of tropical fish, you can see the impact of human activity,
+              from plastic waste in the water to coral bleaching caused by rising sea temperatures.
+              XplorOcean starts in the Sunlight Zone, where survival and sunlight meet.
+            </p>
             <button class="btn-secondary" onclick="transport('sunlight')">ENTER SUNLIGHT ZONE</button>
           </div>
         </div>
 
+        <!-- Zone 02: Twilight Zone (200–1000m) -->
         <div class="zone-card reverse">
           <div class="zone-image placeholder-twilight">
             <div class="depth-badge">200 - 1000M</div>
@@ -47,11 +68,17 @@
           <div class="zone-info">
             <h4 class="subtitle text-blue">ZONE 02</h4>
             <h3>Twilight Zone</h3>
-            <p>Travel deeper into a dim world, where the largest animal migration on Earth takes place. In this darker zone, glowing jellyfish and lanternfish are important for the carbon cycle of the ocean. But even here, microplastics have started to enter the food web. Learn how what we do on the surface can upset the balance of this mysterious zone.</p>
+            <p>
+              Travel deeper into a dim world, where the largest animal migration on Earth takes place.
+              In this darker zone, glowing jellyfish and lanternfish are important for the carbon cycle of the ocean.
+              But even here, microplastics have started to enter the food web.
+              Learn how what we do on the surface can upset the balance of this mysterious zone.
+            </p>
             <button class="btn-secondary" onclick="transport('twilight')">ENTER TWILIGHT ZONE</button>
           </div>
         </div>
 
+        <!-- Zone 03: Midnight Zone (1000–4000m) -->
         <div class="zone-card">
           <div class="zone-image placeholder-midnight">
             <div class="depth-badge">1000 - 4000M</div>
@@ -59,11 +86,17 @@
           <div class="zone-info">
             <h4 class="subtitle text-blue">ZONE 03</h4>
             <h3>Midnight Zone</h3>
-            <p>Discover a place of complete darkness and intense pressure, where life survives in tough conditions. Although it seems far away, the Midnight Zone collects many of the pollutants. Meet unique predators and learn how deep-sea mining and pollution threaten a habitat we are only starting to explore.</p>
+            <p>
+              Discover a place of complete darkness and intense pressure, where life survives in tough conditions.
+              Although it seems far away, the Midnight Zone collects many of the pollutants.
+              Meet unique predators and learn how deep-sea mining and pollution threaten a habitat we are only starting to explore.
+            </p>
             <button class="btn-secondary" onclick="transport('midnight')">ENTER MIDNIGHT ZONE</button>
           </div>
         </div>
       </section>
+
+      <!-- Bottom navigation bar -->
       <div class="bottom-nav">
         <div class="nav-container">
           <button class="nav-btn" onclick="openGuideModal()">
@@ -71,14 +104,16 @@
             USER GUIDE
           </button>
 
-        <div class="nav-divider"></div>
+          <div class="nav-divider"></div>
 
-        <button class="nav-btn" onclick="openSurveyModal()">
-          <i class="fa-solid fa-clipboard-list"></i>
-          SURVEY
-        </button>
+          <button class="nav-btn" onclick="openSurveyModal()">
+            <i class="fa-solid fa-clipboard-list"></i>
+            SURVEY
+          </button>
         </div>
       </div>
+
+      <!-- User Guide modal -->
       <div id="guide-modal">
         <button class="modal-close-btn" onclick="closeGuideModal()">X</button>
         <div class="modal-content">
@@ -95,28 +130,34 @@
             <h4>Tip:</h4>
             <p>Turn up your volume for a fully immersive experience!</p>
           </div>
-          
-      </div>
-    </div>
-
-    <div id="survey-modal">
-      <button class="modal-close-btn" onclick="closeSurveyModal()">X</button>
-      <div class="modal-content" style="flex-direction: column;">
-        <h3 style="color: #4db8ff; margin-top: 0; margin-bottom: 15px;">Experience Survey</h3>
-        <p style="margin-bottom: 15px;">Please complete the surveys below to help in the research!</p>
-        <div class="survey-links">
-          <a href="https://forms.gle/eYrDT88RgmcwupcV7" target="_blank" class="survey-btn">Pre-Simulation Survey</a>
-          <a href="https://forms.gle/CgnMu3Q7tjPkZmUq6" target="_blank" class="survey-btn">Post-Simulation Survey</a>
         </div>
-    </div>
       </div>
-    </div>
+
+      <!-- Survey modal -->
+      <div id="survey-modal">
+        <button class="modal-close-btn" onclick="closeSurveyModal()">X</button>
+        <div class="modal-content" style="flex-direction: column;">
+          <h3 style="color: #4db8ff; margin-top: 0; margin-bottom: 15px;">Experience Survey</h3>
+          <p style="margin-bottom: 15px;">Please complete the surveys below to help in the research!</p>
+          <div class="survey-links">
+            <a href="https://forms.gle/eYrDT88RgmcwupcV7" target="_blank" class="survey-btn">Pre-Simulation Survey</a>
+            <a href="https://forms.gle/CgnMu3Q7tjPkZmUq6" target="_blank" class="survey-btn">Post-Simulation Survey</a>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- back to menu button -->
+
+    <!-- ============================================================
+         Global UI Elements
+         Visible inside the A-Frame scene (not zone-specific)
+    ============================================================ -->
+
+    <!-- Back-to-menu button (hidden until user enters a zone) -->
     <button id="back-btn" onclick="backToMenu()" style="display:none">&#8592; MAIN MENU</button>
 
-    <!-- scanner modal -->
+    <!-- Marine life info modal (opened when player clicks an animal) -->
     <div id="scanner-modal">
       <button id="modal-close" onclick="closeModal()">X</button>
       <div class="modal-content">
@@ -136,56 +177,75 @@
         </div>
       </div>
     </div>
-    
 
-    <!-- a-frame scene -->
-    <a-scene fog="type: exponential; color: #005F8A; density: 0.06" cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .clickable" flashlight-follow>
-      <!-- assets -->
+
+    <!-- ============================================================
+         A-Frame Scene
+         Main WebVR environment. Fog simulates underwater depth. Raycaster targets elements with class="clickable".
+    ============================================================ -->
+    <a-scene
+      fog="type: exponential; color: #005F8A; density: 0.06"
+      cursor="rayOrigin: mouse; fuse: false"
+      raycaster="objects: .clickable"
+      flashlight-follow>
+
+      <!-- --------------------------------------------------------
+           Assets
+           Preloaded audio tracks for each zone.
+      -------------------------------------------------------- -->
       <a-assets timeout="10000">
-        <!-- <a-asset-item id="seabed-terrain" src="assets/coral_reef.glb"></a-asset-item> -->
-        <audio id="#sunlight-audio" src="audio/sunlight_zone.mp3" preload="auto" loop></audio>
-        <audio id="#twilight-audio" src="audio/twilight_zone.mp3" preload="auto" loop></audio>
-        <audio id="#midnight-audio" src="audio/midnight_zone.mp3" preload="auto" loop></audio>
+        <audio id="sunlight-audio" src="audio/sunlight_zone.mp3" preload="auto" loop></audio>
+        <audio id="twilight-audio" src="audio/twilight_zone.mp3" preload="auto" loop></audio>
+        <audio id="midnight-audio" src="audio/midnight_zone.mp3" preload="auto" loop></audio>
       </a-assets>
 
+      <!-- Ambient sound entity — src is set dynamically by script.js on zone change -->
       <a-sound id="ambient-sound" src="" loop="true" positional="false" volume="0.5"></a-sound>
 
-      <!-- sky -->
+      <!-- Background sky colour (deep ocean blue) -->
       <a-sky id="main-sky" color="#003A52"></a-sky>
 
 
-      <!-- sunlight zone -->
+      <!-- ============================================================
+           SUNLIGHT ZONE  (0–200m)
+           Bright, colourful coral reef environment.
+           Hidden by default; shown via script.js transport('sunlight').
+      ============================================================ -->
       <a-entity id="sunlight-zone" visible="false">
 
-        <!-- lighting -->
+        <!-- Lighting: simulates light filtering down from the surface -->
         <a-light type="ambient"     color="#0096C7" intensity="0.6"></a-light>
         <a-light type="directional" color="#CAF0F8" intensity="1.5" position="1 10 -2"></a-light>
         <a-light type="point"       color="#6B9E8C" intensity="0.8" position="0 5 0"></a-light>
+
+        <!-- Zone audio -->
         <audio id="sunlight-audio" src="audio/sunlight_zone.mp3" preload="auto" loop></audio>
+
+        <!-- God-rays: overlapping translucent cones that mimic shafts of sunlight -->
         <a-entity id="rays-anchor" position="0 40 -50">
-  
-          <a-entity geometry="primitive: cone; radiusBottom: 12; radiusTop: 0.5; height: 120"
-                    position="0 -10 0"
-                    material="shader: flat; color: #CAF0F8; opacity: 0.02; transparent: true; blending: additive; side: double">
+          <a-entity 
+            geometry="primitive: cone; radiusBottom: 12; radiusTop: 0.5; height: 120"
+            position="0 -10 0"
+            material="shader: flat; color: #CAF0F8; opacity: 0.02; transparent: true; blending: additive; side: double">
           </a-entity>
-
-          <a-entity geometry="primitive: cone; radiusBottom: 10; radiusTop: 0.1; height: 120"
-                    position="32 -10 0" rotation="5 0 10"
-                    material="shader: flat; color: #E0FBFF; opacity: 0.02; transparent: true; blending: additive">
+          <a-entity 
+            geometry="primitive: cone; radiusBottom: 10; radiusTop: 0.1; height: 120"
+            position="32 -10 0" rotation="5 0 10"
+            material="shader: flat; color: #E0FBFF; opacity: 0.02; transparent: true; blending: additive">
           </a-entity>
-
-          <a-entity geometry="primitive: cone; radiusBottom: 8; radiusTop: 0.1; height: 120"
-                    position="-32 -10 -0" rotation="-5 0 -8"
-                    material="shader: flat; color: #E0FBFF; opacity: 0.05; transparent: true; blending: additive">
+          <a-entity 
+            geometry="primitive: cone; radiusBottom: 8; radiusTop: 0.1; height: 120"
+            position="-32 -10 0" rotation="-5 0 -8"
+            material="shader: flat; color: #E0FBFF; opacity: 0.05; transparent: true; blending: additive">
           </a-entity>
-
-          <a-entity geometry="primitive: cone; radiusBottom: 8.5; radiusTop: 0.1; height: 120 "
-                    position="21 0 -10" rotation="2 0 -15"
-                    material="shader: flat; color: #ffffff; opacity: 0.01; transparent: true; blending: additive">
+          <a-entity 
+            geometry="primitive: cone; radiusBottom: 8.5; radiusTop: 0.1; height: 120"
+            position="21 0 -10" rotation="2 0 -15"
+            material="shader: flat; color: #ffffff; opacity: 0.01; transparent: true; blending: additive">
           </a-entity>
         </a-entity>
 
-        <!-- === SUNLIGHT ZONE SEABED === -->
+        <!-- Seabed: coral reef model -->
         <a-entity
           data-src="assets/sunlight_zone/coral_reef.glb"
           position="0 -15 0"
@@ -193,36 +253,59 @@
           rotation="0 0 0">
         </a-entity>
 
-        <!-- particles -->
+        <!-- Particles: rising plankton/motes effect -->
         <a-entity particle-system="preset: dust; particleCount: 300;
           color: #90E0EF; size: 0.04; opacity: 0.3; velocityValue: 0 0.05 0">
         </a-entity>
 
-        <a-image position="-30 5 -20" data-src="assets/pollutants/pngtree-black-plastic-bag-image_2234773-removebg-preview.png" scale="1 1 1" look-at="#cam"
-        ></a-image> 
-        <a-entity position="-26 12 -20" data-src="assets/pollutants/pngtree-black-plastic-bag-image_2234773-removebg-preview.png" scale="2 2 2" rotation="90 0 0"
-          animation="property: position; from: -26 12 -20; to: 23 10 -20; dur: 110000; loop: true; easing: linear">
-        </a-entity> 
-
-        <a-entity position="-26 15 -20" data-src="assets/pollutants/dirty_plastic_bottle.glb" scale="12 12 12" rotation="-90 0 0"
-        animation="property: position; from: -26 15 -20; to: 23 15 -20; dur: 110000; loop: true; easing: linear"></a-entity>
-        <a-entity position="26 7 -20" data-src="assets/pollutants/dirty_plastic_bottle.glb" scale="12 12 12" rotation="0 30 0"
-        animation="property: position; from: 26 7 -20; to: -23 10 -20; dur: 110000; loop: true; easing: linear"></a-entity> 
-
-        <a-entity position="-26 12 -10" data-src="assets/pollutants/plastic_bottle.glb" scale="20 20 20" rotation="0 0 -90"
-        animation="property: position; from: 26 12 -10; to: -23 10 -10; dur: 110000; loop: true; easing: linear"
-        ></a-entity> 
-
-        <a-entity position="-40 20 -20" data-src="assets/pollutants/fishing_net.glb" scale="0.03 0.03 0.03" rotation="0 0 50"
-        animation="property: position; from: -40 20 -20; to: 60 18 -20; dur: 100000; loop: true; dir: alternate; easing: easeInOutSine"></a-entity>  
-
+        <!-- Pollution: drifting plastic bags -->
+        <a-image
+          position="-30 5 -20"
+          data-src="assets/pollutants/pngtree-black-plastic-bag-image_2234773-removebg-preview.png"
+          scale="1 1 1"
+          look-at="#cam">
+        </a-image>
         <a-entity
-          position="-20 1 30"
+          position="-26 12 -20"
+          data-src="assets/pollutants/pngtree-black-plastic-bag-image_2234773-removebg-preview.png"
+          scale="2 2 2" rotation="90 0 0"
+          animation="property: position; from: -26 12 -20; to: 23 10 -20; dur: 110000; loop: true; easing: linear">
+        </a-entity>
+
+        <!-- Pollution: dirty plastic bottles drifting left and right -->
+        <a-entity
+          position="-26 15 -20"
+          data-src="assets/pollutants/dirty_plastic_bottle.glb"
+          scale="12 12 12" rotation="-90 0 0"
+          animation="property: position; from: -26 15 -20; to: 23 15 -20; dur: 110000; loop: true; easing: linear">
+        </a-entity>
+        <a-entity
+          position="26 7 -20"
+          data-src="assets/pollutants/dirty_plastic_bottle.glb"
+          scale="12 12 12" rotation="0 30 0"
+          animation="property: position; from: 26 7 -20; to: -23 10 -20; dur: 110000; loop: true; easing: linear">
+        </a-entity>
+        <a-entity
+          position="-26 12 -10"
+          data-src="assets/pollutants/plastic_bottle.glb"
+          scale="20 20 20" rotation="0 0 -90"
+          animation="property: position; from: 26 12 -10; to: -23 10 -10; dur: 110000; loop: true; easing: linear">
+        </a-entity>
+
+        <!-- Pollution: ghost fishing net drifting across the scene -->
+        <a-entity
+          position="-40 20 -20"
+          data-src="assets/pollutants/fishing_net.glb"
+          scale="0.03 0.03 0.03" rotation="0 0 50"
+          animation="property: position; from: -40 20 -20; to: 60 18 -20; dur: 100000; loop: true; dir: alternate; easing: easeInOutSine">
+        </a-entity>
+
+        <!-- Marine life: Hammerhead Shark -->
+        <a-entity
+          position="20 10 -30"
           data-src="assets/sunlight_zone/hammerhead_shark.glb"
-          scale="10 10 10"
-          rotation="0 90 0"
-          animation-mixer
-          scanner
+          scale="10 10 10" rotation="0 90 0"
+          animation-mixer scanner
           class="clickable"
           data-name="Hammerhead Shark"
           data-sci="Sphyrna mokarran"
@@ -231,8 +314,9 @@
           data-impact="Millions are killed yearly due to shark finning for shark fin soup."
           data-img="images/sunlight_zone/hammerhead_shark.png"
           animation="property: position; from: 20 10 -30; to: 28 10 30; dur: 22000; loop: true; easing: linear">
-        </a-entity> animation to be fixed
+        </a-entity>
 
+        <!-- Marine life: Caribbean Reef Shark -->
         <a-entity
           data-src="assets/sunlight_zone/caribbean_reef_shark.glb"
           scale="15 15 15" rotation="0 0 0"
@@ -243,8 +327,9 @@
           data-impact="Reef degradation from bleaching and pollution reduces the prey available to reef sharks."
           data-img="images/sunlight_zone/caribbean_reef_shark.png"
           animation="property: position; from: 30 12 -35; to: -30 12 -35; dur: 70000; loop: true; easing: linear; delay: 12000">
-        </a-entity> 
+        </a-entity>
 
+        <!-- Marine life: Great White Shark -->
         <a-entity
           position="-30 10 -25"
           data-src="assets/sunlight_zone/great_white_shark.glb"
@@ -256,8 +341,9 @@
           data-impact="Great whites are vulnerable to extinction due to bycatch, finning, and trophy hunting despite legal protections."
           data-img="images/sunlight_zone/great_white_shark.png"
           animation="property: position; from: -30 10 -25; to: 30 2 -25; dur: 28000; loop: true; easing: linear; delay: 1000">
-        </a-entity> 
+        </a-entity>
 
+        <!-- Marine life: Whale Shark -->
         <a-entity
           position="0 12 50"
           data-src="assets/sunlight_zone/whale_shark.glb"
@@ -269,8 +355,9 @@
           data-impact="Boat strikes and ingestion of plastic microparticles are the leading threats to this gentle giant."
           data-img="images/sunlight_zone/whale_shark.png"
           animation="property: position; from: 70 12 60; to: -70 12 60; dur: 50000; loop: true; easing: linear">
-        </a-entity> 
+        </a-entity>
 
+        <!-- Marine life: Blue Whale -->
         <a-entity
           position="-30 35 10"
           data-src="assets/sunlight_zone/blue_whale.glb"
@@ -282,8 +369,9 @@
           data-impact="Ship strikes and entanglement in fishing gear are leading causes of death."
           data-img="images/sunlight_zone/blue_whale.png"
           animation="property: position; from: -30 35 10; to: 40 35 -15; dur: 45000; loop: true; easing: linear">
-        </a-entity> no file found
+        </a-entity>
 
+        <!-- Marine life: Killer Whale (Orca) -->
         <a-entity
           position="-22 3 -18"
           data-src="assets/sunlight_zone/killer_whale.glb"
@@ -297,29 +385,7 @@
           animation="property: position; from: -40 12 30; to: -40 12 -30; dur: 24000; loop: true; easing: linear; delay: 3000">
         </a-entity>
 
-        <a-entity
-          position="-14 4 -14"
-          data-src="assets/sunlight_zone/bottlenose_dolphin.glb"
-          scale="1 1 1" rotation="0 0 0"
-          animation-mixer scanner
-          class="clickable"
-          data-name="Bottlenose Dolphin" data-sci="Tursiops truncatus" data-fam="Delphinidae"
-          data-facts="Bottlenose dolphins have individual signature whistles that act like names. They call to each other by name. | They are highly intelligent and have been observed using tools, such as sponges to protect their snouts while foraging on the seafloor. | Dolphins have a complex social structure and can form strong bonds with other dolphins, often living in groups called pods."
-          data-impact="Sonar from military exercises and shipping causes strandings and haemorrhaging in dolphins."
-          data-img="images/sunlight_zone/bottlenose_dolphin.png"
-          animation="property: position; from: -14 4 -14; to: 14 4 -14; dur: 12000; loop: true; easing: linear; delay: 2000">
-        </a-entity>
-        <a-entity position="-14 5 -16" data-src="assets/sunlight_zone/bottlenose_dolphin.glb" 
-        scale="1 1 1" rotation="0 0 0" 
-        animation-mixer scanner
-        class="clickable"
-        data-name="Bottlenose Dolphin" data-sci="Tursiops truncatus" data-fam="Delphinidae"
-          data-facts="Bottlenose dolphins have individual signature whistles that act like names. They call to each other by name. | They are highly intelligent and have been observed using tools, such as sponges to protect their snouts while foraging on the seafloor. | Dolphins have a complex social structure and can form strong bonds with other dolphins, often living in groups called pods."
-          data-impact="Sonar from military exercises and shipping causes strandings and haemorrhaging in dolphins."
-          data-img="images/sunlight_zone/bottlenose_dolphin.png"
-          animation="property: position; from: -14 5 -16; to: 14 5 -16; dur: 12500; loop: true; easing: linear; delay: 500">
-        </a-entity>
-
+        <!-- Marine life: Manta Ray -->
         <a-entity
           position="-30 15 -16"
           data-src="assets/sunlight_zone/manta_ray.glb"
@@ -333,6 +399,7 @@
           animation="property: position; from: -30 15 -16; to: -20 15 16; dur: 18000; loop: true; easing: linear; delay: 6000">
         </a-entity>
 
+        <!-- Marine life: Green Sea Turtle -->
         <a-entity
           position="8 -2 -18"
           data-src="assets/sunlight_zone/green_sea_turtle.glb"
@@ -346,44 +413,55 @@
           animation="property: position; from: 8 -2 -18; to: 10 -1 20; dur: 20000; loop: true; easing: linear">
         </a-entity>
 
+        <!-- Marine life: School of Tropical Fish -->
         <a-entity
           position="-1 -5 -15"
           data-src="assets/sunlight_zone/school_of_fish.glb"
           scale="3 3 3" rotation="0 0 0"
           animation-mixer scanner
           class="clickable"
-          data-name="Clownfish, Moorish Idol, Powder Blue Tang, Yellow Tang" data-sci="Amphiprioninae, Zanclus cornutus, Acanthurus leucosternon, Paracanthurus hepatus" data-fam="Pomacentridae, Zanclidae, Acanthuridae, Pomacentridae"
+          data-name="Clownfish, Moorish Idol, Powder Blue Tang, Yellow Tang"
+          data-sci="Amphiprioninae, Zanclus cornutus, Acanthurus leucosternon, Paracanthurus hepatus"
+          data-fam="Pomacentridae, Zanclidae, Acanthuridae, Pomacentridae"
           data-facts="These tropical fish are popular in the aquarium trade, but many species are difficult to keep in captivity and suffer high mortality rates. | They are known for their vibrant colors and playful behavior. | They play important roles in coral reef ecosystems, such as controlling algae growth and providing food for predators."
           data-impact="Ocean acidification bleaches the coral reefs they depend on.">
         </a-entity>
 
+        <!-- Marine life: Harbor Seal -->
         <a-entity
-          position="6 -3 -9" data-src="assets/sunlight_zone/harbor_seal.glb" scale="1 1 1" rotation="0 90 0" 
+          position="6 -3 -9"
+          data-src="assets/sunlight_zone/harbor_seal.glb"
+          scale="1 1 1" rotation="0 90 0"
           animation-mixer scanner
           class="clickable"
           data-name="Harbor Seal" data-sci="Phoca vitulina" data-fam="Phocidae"
           data-facts="Harbor seals can dive up to 500 m and hold their breath for up to 30 minutes. | They have a diverse diet, feeding on fish, squid, and crustaceans. | They are important indicators of ocean health due to their position in the food web."
           data-impact="Microplastics accumulate in seal tissue through the fish they eat, causing organ damage."
           data-img="images/sunlight_zone/harbor_seal.png"
-          animation="property: position;from: 30 12 40; to: -30 12 -40; dur: 14000; loop: true;; easing: linear">
+          animation="property: position; from: 30 12 40; to: -30 12 -40; dur: 14000; loop: true; easing: linear">
         </a-entity>
 
-         <a-entity
+        <!-- Marine life: Finned Great White Shark (shark finning awareness) -->
+        <!-- Uses the custom 'sinking-fish' component to simulate sinking after finning -->
+        <a-entity
           position="40 40 -40"
           data-src="assets/sunlight_zone/nofin_great_white_shark.glb"
           scale="10 10 10" rotation="0 0 0"
           animation-mixer scanner sinking-fish
           class="clickable"
           data-name="Finned Great White Shark" data-sci="Carcharodon carcharias" data-fam="Lamnidae"
-          data-facts="Shark finning is the practice of cutting off a shark's fins and discarding the rest of the body at sea, often while the shark is still alive. | Without their dorsal and pectoral fins, sharks cannot control their movement and slowly sink to the ocean floor. |  The fins are highly valued for shark fin soup, a delicacy in some cultures, leading to the brutal practice of finning."
+          data-facts="Shark finning is the practice of cutting off a shark's fins and discarding the rest of the body at sea, often while the shark is still alive. | Without their dorsal and pectoral fins, sharks cannot control their movement and slowly sink to the ocean floor. | The fins are highly valued for shark fin soup, a delicacy in some cultures, leading to the brutal practice of finning."
           data-impact="Tens of millions of sharks are finned alive every year. The fins are sliced off and the living shark is thrown back to drown."
           data-img="images/sunlight_zone/great_white_shark.png"
           animation="property: position; from: 40 40 -40; to: 40 -40 -40; dur: 30000; loop: true; easing: linear">
         </a-entity>
 
-        
-        <a-entity position="18 3.5 -18" data-src="assets/sunlight_zone/yellowfin_tuna.glb" scale="2 2 2" rotation="0 0 0" 
-        animation-mixer scanner
+        <!-- Marine life: Yellowfin Tuna (pair) -->
+        <a-entity
+          position="18 3.5 -18"
+          data-src="assets/sunlight_zone/yellowfin_tuna.glb"
+          scale="2 2 2" rotation="0 0 0"
+          animation-mixer scanner
           class="clickable"
           data-name="Yellowfin Tuna" data-sci="Thunnus albacares" data-fam="Scombridae"
           data-facts="Yellowfin tuna can swim faster than 75 km/h, making them one of the fastest fish in the ocean. | They are highly migratory and can be found in tropical and subtropical oceans worldwide. | They play an important role in marine ecosystems as both predators and prey, feeding on smaller fish and squid while being hunted by larger predators like sharks and billfish."
@@ -391,8 +469,11 @@
           data-img="images/sunlight_zone/yellowfin_tuna.png"
           animation="property: position; from: 18 3.5 -18; to: 18 3.5 18; dur: 8000; loop: true; easing: linear; delay: 600">
         </a-entity>
-        <a-entity position="18 1 -14" data-src="assets/sunlight_zone/yellowfin_tuna.glb" scale="2 2 2" rotation="0 0 0" 
-        animation-mixer scanner
+        <a-entity
+          position="18 1 -14"
+          data-src="assets/sunlight_zone/yellowfin_tuna.glb"
+          scale="2 2 2" rotation="0 0 0"
+          animation-mixer scanner
           class="clickable"
           data-name="Yellowfin Tuna" data-sci="Thunnus albacares" data-fam="Scombridae"
           data-facts="Yellowfin tuna can swim faster than 75 km/h, making them one of the fastest fish in the ocean. | They are highly migratory and can be found in tropical and subtropical oceans worldwide. | They play an important role in marine ecosystems as both predators and prey, feeding on smaller fish and squid while being hunted by larger predators like sharks and billfish."
@@ -404,36 +485,60 @@
       </a-entity>
 
 
-      <!-- twilight zone -->
+      <!-- ============================================================
+           TWILIGHT ZONE  (200–1000m)
+           Dim bioluminescent environment. Flat dark seabed plane.
+           Hidden by default; shown via script.js transport('twilight').
+      ============================================================ -->
       <a-entity id="twilight-zone" visible="false">
 
-        <!-- lighting -->
+        <!-- Lighting: dim blue to simulate minimal light penetration -->
         <a-light type="ambient" color="#0A2240" intensity="0.2"></a-light>
         <a-light type="point"   color="#003366" intensity="0.4" position="0 5 0"></a-light>
 
-        <!-- seafloor -->
-        <a-plane width="200" id="twilight-seabed" height="200" rotation="-90 0 0" position="0 -10 0" color="#000103"></a-plane>
+        <!-- Seabed: flat dark plane -->
+        <a-plane
+          id="twilight-seabed"
+          width="200" height="200"
+          rotation="-90 0 0" position="0 -10 0"
+          color="#000103">
+        </a-plane>
 
-        <!-- particles -->
+        <!-- Particles: marine snow (slowly descending organic matter) -->
         <a-entity particle-system="preset: dust; particleCount: 200;
           color: #FFFFFF; size: 10; opacity: 0.4; velocityValue: 0 0.03 0">
         </a-entity>
+
+        <!-- Zone audio -->
         <audio id="twilight-audio" src="audio/twilight_zone.mp3" preload="auto" loop></audio>
 
-        <a-entity position="-3 4 -9" data-src="assets/pollutants/foam_pollution.glb" scale="7 7 7" rotation="0 45 10"
+        <!-- Pollution: foam/microplastic clusters sinking through water column -->
+        <a-entity
+          position="-3 4 -9"
+          data-src="assets/pollutants/foam_pollution.glb"
+          scale="7 7 7" rotation="0 45 10"
           animation="property: position; from: -3 8 -9; to: -3 -9 -9; dur: 30000; loop: true; easing: linear">
         </a-entity>
-        <a-entity position="4 6 -12" data-src="assets/pollutants/foam_pollution.glb" scale="7 7 7" rotation="0 200 -5"
+        <a-entity
+          position="4 6 -12"
+          data-src="assets/pollutants/foam_pollution.glb"
+          scale="7 7 7" rotation="0 200 -5"
           animation="property: position; from: 4 8 -12; to: 4 -9 -12; dur: 25000; loop: true; easing: linear; delay: 8000">
         </a-entity>
 
-        <a-entity position="-13 9.5 -22" data-src="assets/pollutants/triangle_net.glb" scale="0.5 0.5 0.5" rotation="0 0 0"
+        <!-- Pollution: drifting fishing net -->
+        <a-entity
+          position="-13 9.5 -22"
+          data-src="assets/pollutants/triangle_net.glb"
+          scale="0.5 0.5 0.5" rotation="0 0 0"
           animation="property: position; from: -13 9.5 -22; to: 30 8 -22; dur: 35000; loop: true; easing: linear; delay: 5000">
-
         </a-entity>
 
+        <!-- Marine life: Bobtail Squids (pair) -->
         <a-entity
-          position="15 0.5 -4" data-src="assets/twilight_zone/bobtail_squid.glb" scale="10 10 10" rotation="0 90 0" 
+          position="15 0.5 -4"
+          data-src="assets/twilight_zone/bobtail_squid.glb"
+          scale="10 10 10" rotation="0 90 0"
           animation-mixer scanner
           class="clickable"
           data-name="Bobtail Squid" data-sci="Sthenoteuthis oualaniensis" data-fam="Sthenoteuthidae"
@@ -445,7 +550,10 @@
             animation="property: light.intensity; from: 0.3; to: 0.9; dir: alternate; dur: 1500; loop: true">
           </a-light>
         </a-entity>
-        <a-entity position="3 1.2 -6" data-src="assets/twilight_zone/bobtail_squid.glb" scale="10 10 10" rotation="0 -60 0"
+        <a-entity
+          position="3 1.2 -6"
+          data-src="assets/twilight_zone/bobtail_squid.glb"
+          scale="10 10 10" rotation="0 -60 0"
           animation-mixer scanner
           class="clickable"
           data-name="Bobtail Squid" data-sci="Sthenoteuthis oualaniensis" data-fam="Sthenoteuthidae"
@@ -458,8 +566,11 @@
           </a-light>
         </a-entity>
 
+        <!-- Marine life: Firefly Squids (trio) -->
         <a-entity
-          position="4 -0.5 -5" data-src="assets/twilight_zone/firefly_squid.glb" scale="10 10 10" rotation="0 -60 0" 
+          position="4 -0.5 -5"
+          data-src="assets/twilight_zone/firefly_squid.glb"
+          scale="10 10 10" rotation="0 -60 0"
           animation-mixer scanner
           class="clickable"
           data-name="Firefly Squid" data-sci="Watasenia scintillans" data-fam="Enoploteuthidae"
@@ -471,10 +582,13 @@
             animation="property: light.intensity; from: 0.2; to: 0.8; dir: alternate; dur: 800; loop: true">
           </a-light>
         </a-entity>
-        <a-entity position="-6 1 -10" data-src="assets/twilight_zone/firefly_squid.glb" scale="10 10 10" rotation="0 30 0" 
-        animation-mixer scanner
-        class="clickable"
-        data-name="Firefly Squid" data-sci="Watasenia scintillans" data-fam="Enoploteuthidae"
+        <a-entity
+          position="-6 1 -10"
+          data-src="assets/twilight_zone/firefly_squid.glb"
+          scale="10 10 10" rotation="0 30 0"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Firefly Squid" data-sci="Watasenia scintillans" data-fam="Enoploteuthidae"
           data-facts="Firefly squids are the only cephalopod known to have true colour vision, despite being colour-blind in daylight. | They use their bioluminescence to attract mates and prey, creating mesmerizing light displays in the twilight zone. | They have photophores on their bodies that can produce different colors of light, allowing them to communicate and camouflage in the dimly lit environment."
           data-impact="Light pollution near the surface disrupts their migration patterns."
           data-img="images/twilight_zone/firefly_squid.png"
@@ -483,10 +597,13 @@
             animation="property: light.intensity; from: 0.1; to: 0.6; dir: alternate; dur: 1000; loop: true">
           </a-light>
         </a-entity>
-        <a-entity position="2 2 -12" data-src="assets/twilight_zone/firefly_squid.glb" scale="10 10 10" rotation="0 150 0" 
-        animation-mixer scanner
-        class="clickable"
-        data-name="Firefly Squid" data-sci="Watasenia scintillans" data-fam="Enoploteuthidae"
+        <a-entity
+          position="2 2 -12"
+          data-src="assets/twilight_zone/firefly_squid.glb"
+          scale="10 10 10" rotation="0 150 0"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Firefly Squid" data-sci="Watasenia scintillans" data-fam="Enoploteuthidae"
           data-facts="Firefly squids are the only cephalopod known to have true colour vision, despite being colour-blind in daylight. | They use their bioluminescence to attract mates and prey, creating mesmerizing light displays in the twilight zone. | They have photophores on their bodies that can produce different colors of light, allowing them to communicate and camouflage in the dimly lit environment."
           data-impact="Light pollution near the surface disrupts their migration patterns."
           data-img="images/twilight_zone/firefly_squid.png"
@@ -496,12 +613,15 @@
           </a-light>
         </a-entity>
 
+        <!-- Marine life: Jelly Blubbers (pair) -->
         <a-entity
-          position="0 5 -8" data-src="assets/twilight_zone/jelly_blubber.glb" scale="1 1 1" rotation="0 0 0" 
+          position="0 5 -8"
+          data-src="assets/twilight_zone/jelly_blubber.glb"
+          scale="1 1 1" rotation="0 0 0"
           animation-mixer scanner
           class="clickable"
           data-name="Jelly Blubber" data-sci="Catostylus mosaicus" data-fam="Catostylidae"
-          data-facts="Jelly blubbers have no brain, heart or bones. Their body is 95% water. |  They feed on plankton and small fish by drifting with the currents and using their tentacles to capture prey. | They play an important role in marine ecosystems by providing food for predators and helping to cycle nutrients in the ocean."
+          data-facts="Jelly blubbers have no brain, heart or bones. Their body is 95% water. | They feed on plankton and small fish by drifting with the currents and using their tentacles to capture prey. | They play an important role in marine ecosystems by providing food for predators and helping to cycle nutrients in the ocean."
           data-impact="Plastic bags floating in water are easily mistaken for jellyfish and cause fatal blockages in predators."
           data-img="images/twilight_zone/jelly_blubber.png"
           animation="property: position; from: 0 4 -8; to: 0 12 -8; dur: 10000; loop: true; dir: alternate; easing: easeInOutSine">
@@ -509,11 +629,14 @@
             animation="property: light.intensity; from: 0.2; to: 0.6; dir: alternate; dur: 2000; loop: true">
           </a-light>
         </a-entity>
-        <a-entity position="3 6 -11" data-src="assets/twilight_zone/jelly_blubber.glb" scale="1 1 1" rotation="0 45 0" 
+        <a-entity
+          position="3 6 -11"
+          data-src="assets/twilight_zone/jelly_blubber.glb"
+          scale="1 1 1" rotation="0 45 0"
           animation-mixer scanner
           class="clickable"
           data-name="Jelly Blubber" data-sci="Catostylus mosaicus" data-fam="Catostylidae"
-          data-facts="Jelly blubbers have no brain, heart or bones. Their body is 95% water. |  They feed on plankton and small fish by drifting with the currents and using their tentacles to capture prey. | They play an important role in marine ecosystems by providing food for predators and helping to cycle nutrients in the ocean."
+          data-facts="Jelly blubbers have no brain, heart or bones. Their body is 95% water. | They feed on plankton and small fish by drifting with the currents and using their tentacles to capture prey. | They play an important role in marine ecosystems by providing food for predators and helping to cycle nutrients in the ocean."
           data-impact="Plastic bags floating in water are easily mistaken for jellyfish and cause fatal blockages in predators."
           data-img="images/twilight_zone/jelly_blubber.png"
           animation="property: position; from: 3 6 -11; to: 3 13 -11; dur: 10000; loop: true; dir: alternate; easing: easeInOutSine">
@@ -522,8 +645,11 @@
           </a-light>
         </a-entity>
 
+        <!-- Marine life: Flower Hat Jellyfish (pair) -->
         <a-entity
-          position="-17 2 -12" data-src="assets/twilight_zone/flower_hat_jellyfish.glb" scale="1 1 1" rotation="0 0 0" 
+          position="-17 2 -12"
+          data-src="assets/twilight_zone/flower_hat_jellyfish.glb"
+          scale="1 1 1" rotation="0 0 0"
           animation-mixer scanner
           class="clickable"
           data-name="Flower Hat Jellyfish" data-sci="Olindias formosus" data-fam="Olindiasidae"
@@ -535,7 +661,10 @@
             animation="property: light.intensity; from: 0.2; to: 0.7; dir: alternate; dur: 1600; loop: true">
           </a-light>
         </a-entity>
-        <a-entity position="-20 3 -13" data-src="assets/twilight_zone/flower_hat_jellyfish.glb" scale="1 1 1" rotation="0 90 0" 
+        <a-entity
+          position="-20 3 -13"
+          data-src="assets/twilight_zone/flower_hat_jellyfish.glb"
+          scale="1 1 1" rotation="0 90 0"
           animation-mixer scanner
           class="clickable"
           data-name="Flower Hat Jellyfish" data-sci="Olindias formosus" data-fam="Olindiasidae"
@@ -548,8 +677,11 @@
           </a-light>
         </a-entity>
 
+        <!-- Marine life: Lanternfish (pair) -->
         <a-entity
-          position="-12 1 -24" data-src="assets/twilight_zone/lanternfish.glb" scale="1 1 1" rotation="0 90 0" 
+          position="-12 1 -24"
+          data-src="assets/twilight_zone/lanternfish.glb"
+          scale="1 1 1" rotation="0 90 0"
           animation-mixer scanner
           class="clickable"
           data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
@@ -559,8 +691,11 @@
           animation="property: position; from: -12 1 -24; to: 12 1 -14; dur: 10000; loop: true; easing: linear">
           <a-light type="point" color="#88FF44" intensity="0.3" distance="2"></a-light>
         </a-entity>
-        <a-entity position="-12 2.2 -13" data-src="assets/twilight_zone/lanternfish.glb" scale="1 1 1" rotation="0 90 0" 
-        animation-mixer scanner
+        <a-entity
+          position="-12 2.2 -13"
+          data-src="assets/twilight_zone/lanternfish.glb"
+          scale="1 1 1" rotation="0 90 0"
+          animation-mixer scanner
           class="clickable"
           data-name="Lanternfish" data-sci="Myctophum punctatum" data-fam="Myctophidae"
           data-facts="Lanternfish make up the largest portion of deep-sea fish biomass and perform the greatest daily migration in the ocean. | They have photophores that produce bioluminescent light, which they use for camouflage, communication, and attracting prey. | They play a crucial role in the ocean's carbon cycle by migrating to the surface at night to feed on plankton and then returning to the depths during the day, transporting carbon from the surface to the deep sea."
@@ -573,171 +708,219 @@
       </a-entity>
 
 
+      <!-- ============================================================
+           MIDNIGHT ZONE  (1000–4000m)
+           Near-total darkness. Only bioluminescence and vent glow.
+           Hidden by default; shown via script.js transport('midnight').
+      ============================================================ -->
       <a-entity id="midnight-zone" visible="false">
 
-  <a-light type="ambient" color="#000005" intensity="0.02"></a-light>
-  <audio id="midnight-audio" src="audio/midnight_zone.mp3" preload="auto" loop></audio>
+        <!-- Lighting: almost no ambient light to simulate total darkness -->
+        <a-light type="ambient" color="#000005" intensity="0.02"></a-light>
 
-  <a-entity id="midnight-environment" environment="preset: midnight; 
-  active: false; 
-  dressing: dust; 
-  dressingAmount: 500; 
-  dressingColor: #fff; 
-  dressingScale: 0.05;
-  grid: none;
-  skyType: color;
-  skyColor: #000"
-  position="0 -10 0">
-</a-entity>
+        <!-- Zone audio -->
+        <audio id="midnight-audio" src="audio/midnight_zone.mp3" preload="auto" loop></audio>
 
-  <a-entity
-    data-src="assets/midnight_zone/hydrothermal_vent.glb" 
-    position="3 -30 10"
-    scale="3 3 3"
-    rotation="0 0 0">
-    <a-light type="point" color="#808080" intensity="0.3" position="0 2 0"></a-light>
-  </a-entity>
+        <!-- Environment: midnight preset with floating dust particles for marine snow effect -->
+        <a-entity
+          id="midnight-environment"
+          environment="preset: midnight;
+            active: false;
+            dressing: dust;
+            dressingAmount: 500;
+            dressingColor: #fff;
+            dressingScale: 0.05;
+            grid: none;
+            skyType: color;
+            skyColor: #000"
+          position="0 -10 0">
+        </a-entity>
 
-  <a-entity
-    data-src="assets/midnight_zone/hydrothermal_vent.glb" 
-    position="-30 -30 -50"
-    scale="3 3 3"
-    rotation="0 180 0">
-    <a-light type="point" color="#808080" intensity="0.3" position="0 2 0"></a-light>
-  </a-entity>
+        <!-- Scenery: Hydrothermal vents (non-interactive) -->
+        <a-entity
+          data-src="assets/midnight_zone/hydrothermal_vent.glb"
+          position="3 -30 10"
+          scale="3 3 3"
+          rotation="0 0 0">
+          <a-light type="point" color="#808080" intensity="0.3" position="0 2 0"></a-light>
+        </a-entity>
+        <a-entity
+          data-src="assets/midnight_zone/hydrothermal_vent.glb"
+          position="-30 -30 -50"
+          scale="3 3 3"
+          rotation="0 180 0">
+          <a-light type="point" color="#808080" intensity="0.3" position="0 2 0"></a-light>
+        </a-entity>
 
-  <a-entity
-    position="8 -3 15" data-src="assets/midnight_zone/mining_robot.glb" scale="1 1 1" rotation="0 180 0" 
-    animation-mixer scanner
-    class="clickable"
-    data-name="Mining Robot" data-sci="Industrial Machine" data-fam="N/A"
-    data-facts="These robots are used to extract precious minerals from the seafloor. | They weigh several tons and can operate under extreme pressure. | Their movement creates sediment plumes that can stay suspended for weeks."
-    data-impact="Deep-sea mining destroys slow-growing ecosystems and can cause irreversible damage to undiscovered species.">
-  </a-entity>
+        <!-- Marine life: Mining Robot (human impact exhibit) -->
+        <a-entity
+          position="8 -3 15"
+          data-src="assets/midnight_zone/mining_robot.glb"
+          scale="1 1 1" rotation="0 180 0"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Mining Robot" data-sci="Industrial Machine" data-fam="N/A"
+          data-facts="These robots are used to extract precious minerals from the seafloor. | They weigh several tons and can operate under extreme pressure. | Their movement creates sediment plumes that can stay suspended for weeks."
+          data-impact="Deep-sea mining destroys slow-growing ecosystems and can cause irreversible damage to undiscovered species.">
+        </a-entity>
 
-  <a-entity particle-system="preset: snow; particleCount: 150;
-    color: #CCCCFF; size: 0.03; opacity: 0.2; velocityValue: 0 -0.02 0">
-  </a-entity> 
+        <!-- Particles: marine snow (slow descent of organic particles) -->
+        <a-entity particle-system="preset: snow; particleCount: 150;
+          color: #CCCCFF; size: 0.03; opacity: 0.2; velocityValue: 0 -0.02 0">
+        </a-entity>
 
-  <a-entity
-    position="30 25 -20" data-src="assets/midnight_zone/magnapinna_squid.glb" scale="10 10 10" rotation="90 0 50" 
-    animation-mixer scanner
-    class="clickable"
-    data-name="Magnapinna Squid" data-sci="Magnapinna sp." data-fam="Magnapinnidae"
-    data-facts="Magnapinna squids have elbowed tentacles that can be 15 times their own body length. | They were first filmed in 2001. | They are rarely seen and very little is known about their behaviour."
-    data-impact="Deep-sea mining destroys the habitat they live in, an environment that takes thousands of years to form."
-    data-img="images/midnight_zone/magnapinna_squid.png"
-    animation="property: position; from: 30 25 -20; to: -75 25 75; dur: 50000; loop: true; easing: linear">
-    <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
-  </a-entity> 
+        <!-- Marine life: Magnapinna Squid (large, slowly traversing the scene) -->
+        <a-entity
+          position="30 25 -20"
+          data-src="assets/midnight_zone/magnapinna_squid.glb"
+          scale="10 10 10" rotation="90 0 50"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Magnapinna Squid" data-sci="Magnapinna sp." data-fam="Magnapinnidae"
+          data-facts="Magnapinna squids have elbowed tentacles that can be 15 times their own body length. | They were first filmed in 2001. | They are rarely seen and very little is known about their behaviour."
+          data-impact="Deep-sea mining destroys the habitat they live in, an environment that takes thousands of years to form."
+          data-img="images/midnight_zone/magnapinna_squid.png"
+          animation="property: position; from: 30 25 -20; to: -75 25 75; dur: 50000; loop: true; easing: linear">
+          <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
+        </a-entity>
 
-  <a-entity
-    position="20 -4 -5" data-src="assets/midnight_zone/giant_isopod.glb" scale="0.5 0.5 0.5" rotation="0 0 0" 
-    scanner
-    class="clickable"
-    data-name="Giant Isopod" data-sci="Cirolana sp." data-fam="Cirolanidae"
-    data-facts="Giant isopods are scavengers that feed on dead organic matter on the seafloor. | They can live for several decades and grow quite large. | They are important for nutrient cycling in deep-sea ecosystems."
-    data-impact="Deep-sea mining disrupts the seafloor habitat where giant isopods live and feed."
-    data-img="images/midnight_zone/giant_isopod.png">
-    <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
-  </a-entity>
+        <!-- Marine life: Giant Isopods (pair — one static, one moving) -->
+        <a-entity
+          position="20 -4 -5"
+          data-src="assets/midnight_zone/giant_isopod.glb"
+          scale="0.5 0.5 0.5" rotation="0 0 0"
+          scanner
+          class="clickable"
+          data-name="Giant Isopod" data-sci="Cirolana sp." data-fam="Cirolanidae"
+          data-facts="Giant isopods are scavengers that feed on dead organic matter on the seafloor. | They can live for several decades and grow quite large. | They are important for nutrient cycling in deep-sea ecosystems."
+          data-impact="Deep-sea mining disrupts the seafloor habitat where giant isopods live and feed."
+          data-img="images/midnight_zone/giant_isopod.png">
+          <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
+        </a-entity>
+        <a-entity
+          position="-15 -6 -7"
+          data-src="assets/midnight_zone/giant_isopod.glb"
+          scale="0.5 0.5 0.5" rotation="0 90 0"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Giant Isopod" data-sci="Cirolana sp." data-fam="Cirolanidae"
+          data-facts="Giant isopods are scavengers that feed on dead organic matter on the seafloor. | They can live for several decades and grow quite large. | They are important for nutrient cycling in deep-sea ecosystems."
+          data-impact="Deep-sea mining disrupts the seafloor habitat where giant isopods live and feed."
+          data-img="images/midnight_zone/giant_isopod.png"
+          animation="property: position; from: -15 -6 -7; to: -30 -6 30; dur: 50000; loop: true; easing: linear">
+          <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
+        </a-entity>
 
-  <a-entity
-    position="-15 -6 -7" data-src="assets/midnight_zone/giant_isopod.glb" scale="0.5 0.5 0.5" rotation="0 90 0" 
-    animation_mixer
-    scanner
-    class="clickable"
-    data-name="Giant Isopod" data-sci="Cirolana sp." data-fam="Cirolanidae"
-    data-facts="Giant isopods are scavengers that feed on dead organic matter on the seafloor. | They can live for several decades and grow quite large. | They are important for nutrient cycling in deep-sea ecosystems."
-    data-impact="Deep-sea mining disrupts the seafloor habitat where giant isopods live and feed."
-    data-img="images/midnight_zone/giant_isopod.png"
-    animation="property: position; from: -15 -6 -7; to: -30 -6 30; dur: 50000; loop: true; easing: linear">
-    <a-light type="point" color="#C8A882" intensity="3" distance="8" decay="2"></a-light>
-  </a-entity>
+        <!-- Marine life: Dumbo Octopus -->
+        <a-entity
+          position="5 -5 -7"
+          data-src="assets/midnight_zone/dumbo_octopus.glb"
+          scale="5 5 5" rotation="0 -30 50"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Dumbo Octopus" data-sci="Grimpoteuthis sp." data-fam="Opisthoteuthidae"
+          data-facts="Dumbo octopuses are named for their large, ear-like fins and are found in the deepest parts of the ocean. | They are known for their slow, graceful movements. | They feed on small crustaceans and worms by hovering above the seafloor and using their arms to capture prey."
+          data-impact="Climate change and ocean acidification threaten the survival of dumbo octopuses in their deep-sea habitat."
+          data-img="images/midnight_zone/dumbo_octopus.png"
+          animation="property: position; from: 15 -5 -7; to: -35 25 -7; dur: 70000; loop: true; easing: linear">
+        </a-entity>
 
-  <a-entity
-    position="5 -5 -7" data-src="assets/midnight_zone/dumbo_octopus.glb" scale="5 5 5" rotation="0 -30 50" 
-    animation-mixer scanner
-    class="clickable"
-    data-name="Dumbo Octopus" data-sci="Grimpoteuthis sp." data-fam="Opisthoteuthidae"
-    data-facts="Dumbo octopuses are named for their large, ear-like fins and are found in the deepest parts of the ocean. | They are known for their slow, graceful movements. | They feed on small crustaceans and worms by hovering above the seafloor and using their arms to capture prey."
-    data-impact="Climate change and ocean acidification threaten the survival of dumbo octopuses in their deep-sea habitat."
-    data-img="images/midnight_zone/dumbo_octopus.png"
-    animation="property: position; from: 15 -5 -7; to: -35 25 -7; dur: 70000; loop: true; easing: linear">
-  </a-entity>
+        <!-- Marine life: Sperm Whales (three, at different depths/scales) -->
+        <a-entity
+          position="60 100 -100"
+          data-src="assets/twilight_zone/sperm_whale.glb"
+          scale="10 10 10" rotation="0 -90 -5"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+          data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
+          data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
+          data-img="images/twilight_zone/sperm_whale.png"
+          animation="property: position; from: 60 100 -100; to: -60 100 -100; dur: 38000; loop: true; easing: linear">
+        </a-entity>
+        <a-entity
+          position="30 60 -70"
+          data-src="assets/twilight_zone/sperm_whale.glb"
+          scale="2 2 2" rotation="0 -90 -5"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+          data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
+          data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
+          data-img="images/midnight_zone/sperm_whale.png"
+          animation="property: position; from: 30 60 -70; to: -90 60 -70; dur: 38000; loop: true; easing: linear">
+        </a-entity>
+        <a-entity
+          position="-60 25 -30"
+          data-src="assets/twilight_zone/sperm_whale.glb"
+          scale="10 10 10" rotation="0 90 -5"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
+          data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
+          data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
+          data-img="images/midnight_zone/sperm_whale.png"
+          animation="property: position; from: -60 100 100; to: 60 100 100; dur: 38000; loop: true; easing: linear">
+        </a-entity>
 
-  <a-entity
-    position="60 100 -100" data-src="assets/twilight_zone/sperm_whale.glb" scale="10 10 10" rotation="0 -90 -5" 
-    animation-mixer scanner
-    class="clickable"
-    data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
-    data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
-    data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
-    data-img="images/midnight_zone/sperm_whale.png"
-    animation="property: position; from: 60 100 -100; to: -60 100 -100; dur: 38000; loop: true; easing: linear">
-  </a-entity>
-  <a-entity
-    position="30 60 -70" data-src="assets/twilight_zone/sperm_whale.glb" scale="2 2 2" rotation="0 -90 -5" 
-    animation-mixer scanner
-    class="clickable"
-    data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
-    data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
-    data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
-    data-img="images/midnight_zone/sperm_whale.png"
-    animation="property: position; from: 30 60 -70; to: -90 60 -70; dur: 38000; loop: true; easing: linear">
-  </a-entity>
+        <!-- Marine life: Anglerfish -->
+        <a-entity
+          position="-30 1 30"
+          data-src="assets/midnight_zone/anglerfish.glb"
+          scale="5 5 5" rotation="0 -90 0"
+          animation-mixer scanner
+          class="clickable"
+          data-name="Anglerfish" data-sci="Melanocetus johnsoni" data-fam="Melanocetidae"
+          data-facts="Anglerfish use a bioluminescent lure to attract prey in the dark depths of the ocean. | They have expandable stomachs to consume large prey. | They are solitary creatures and have a lifespan of several decades."
+          data-impact="Overfishing and habitat destruction threaten anglerfish populations in deep-sea ecosystems."
+          data-img="images/midnight_zone/anglerfish.png"
+          animation="property: position; from: -30 1 30; to: -30 5 -25; dur: 55000; loop: true; easing: linear">
+          <!-- Green point light simulates the anglerfish's bioluminescent lure -->
+          <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
+        </a-entity>
 
-  <a-entity
-    position="-60 25 -30" data-src="assets/twilight_zone/sperm_whale.glb" scale="10 10 10" rotation="0 90 -5" 
-    animation-mixer scanner
-    class="clickable"
-    data-name="Sperm Whale" data-sci="Physeter macrocephalus" data-fam="Physeteridae"
-    data-facts="Sperm whales navigate total darkness using echolocation clicks loud enough to stun prey. | They can dive up to 2,000 meters. | They have the largest brain of any animal, but are vulnerable to noise pollution."
-    data-impact="Naval sonar and shipping noise drowns out whale communication, causing fatal disorientation."
-    data-img="images/midnight_zone/sperm_whale.png"
-    animation="property: position; from: -60 100 100; to: 60 100 100; dur: 38000; loop: true; easing: linear">
-  </a-entity>
-
-  <a-entity
-    position="-30 1 30" data-src="assets/midnight_zone/anglerfish.glb" scale="5 5 5" rotation="0 -90 0" animation-mixer scanner
-    class="clickable"
-    data-name="Anglerfish" data-sci="Melanocetus johnsoni" data-fam="Melanocetidae"
-    data-facts="Anglerfish use a bioluminescent lure to attract prey in the dark depths of the ocean. | They have expandable stomachs to consume large prey. | They are solitary creatures and have a lifespan of several decades."
-    data-impact="Overfishing and habitat destruction threaten anglerfish populations in deep-sea ecosystems."
-    data-img="images/midnight_zone/anglerfish.png"
-    animation="property: position; from: -30 1 30; to: -30 5 -25; dur: 55000; loop: true; easing: linear">
-    <a-light type="point" color="#44FF88" intensity="0.3" distance="2"></a-light>
-  </a-entity>
-
-</a-entity>
+      </a-entity><!-- /#midnight-zone -->
 
 
-      <!-- camera -->
-
+      <!-- ============================================================
+           CAMERA RIG
+           Player character. Position at eye height (y=1.6).
+           Includes a spotlight "flashlight" and a visible cone beam
+           that activates in the midnight zone via script.js.
+      ============================================================ -->
       <a-entity id="rig" position="0 1.6 0">
         <a-entity id="cam" camera="far: 1000; near: 0.1" look-controls>
+
+          <!-- Cursor for raycasting click interactions -->
           <a-cursor color="cyan" fuse="false"></a-cursor>
 
-          <a-light id="flashlight" 
-                  type="spot" 
-                  color="#fff" 
-                  intensity="0" 
-                  distance="30" 
-                  angle="35" 
-                  penumbra="0.5">
+          <!-- Spotlight: acts as a flashlight; intensity set by script.js per zone -->
+          <a-light
+            id="flashlight"
+            type="spot"
+            color="#fff"
+            intensity="0"
+            distance="30"
+            angle="35"
+            penumbra="0.5">
           </a-light>
 
-          <a-entity id="light-beam"
-                    geometry="primitive: cone; radiusTop: 0.1; radiusBottom: 5; height: 15"
-                    material="shader: flat; color: #fff; opacity: 0.1; transparent: true; side: double"
-                    position="0 0 -7.5"
-                    rotation="-90 0 0"
-                    visible="false">
+          <!-- Visual cone representing the flashlight beam (hidden until midnight zone) -->
+          <a-entity
+            id="light-beam"
+            geometry="primitive: cone; radiusTop: 0.1; radiusBottom: 5; height: 15"
+            material="shader: flat; color: #fff; opacity: 0.1; transparent: true; side: double"
+            position="0 0 -7.5"
+            rotation="-90 0 0"
+            visible="false">
           </a-entity>
+
         </a-entity>
       </a-entity>
 
     </a-scene>
+
+    <!-- Main application logic -->
     <script src="script.js"></script>
   </body>
 </html>
